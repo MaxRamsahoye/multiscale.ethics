@@ -187,7 +187,7 @@
       /* the golden yellow, as with the white theme's default band */
       --inverse-bg: #e8b10e;
       --inverse-ink: #1a1400;
-      --inverse-link: #1a3a9c;
+      --inverse-link: #ffffff;
     }
 
     /* b (white theme only) cycles the Overview and footer: golden yellow
@@ -199,7 +199,7 @@
       --note-highlight: #fbefc4;
       --inverse-bg: #e8b10e;
       --inverse-ink: #1a1400;
-      --inverse-link: #1a3a9c;
+      --inverse-link: #ffffff;
     }
 
     html.band-green:not([data-theme]) {
@@ -268,6 +268,12 @@
        sites turn the band's blue with c, above) */
     :is(#overview, .in-band) a:not(.heading-link) {
       color: inherit;
+    }
+
+    /* on the golden yellow band, every link is white */
+    html.band-gold:not([data-theme]) :is(#overview, .in-band, .site-footer) a,
+    html[data-theme="dark"] :is(#overview, .in-band, .site-footer) a {
+      color: #ffffff;
     }
 
     /* the author's name stays in the text colour, at the top and in the footer */
@@ -1789,6 +1795,23 @@
       margin-left: 0;
     }
 
+    /* the quote to the right of the title, wrapping within its own column
+       rather than dropping beneath (phones keep it beneath) */
+    @media (min-width: 701px) {
+      .footer-head {
+        flex-wrap: nowrap;
+      }
+
+      .site-footer .footer-inner .footer-title {
+        flex: none;
+      }
+
+      .site-footer .footer-inner .footer-subtitle {
+        flex: 1 1 auto;
+        min-width: 0;
+      }
+    }
+
     .site-footer .footer-inner .footer-url {
       margin-top: 56px;
     }
@@ -2231,93 +2254,9 @@
             <p class="article-author"><a class="author-link" href="https://maxramsahoye.github.io/max/" target="_blank" rel="noopener">Max Ramsahoye</a></p>
             <h1 class="article-title"><a class="heading-link title-top" href="#"><span class="title-line">Multi-Scale Ethics:</span> <span class="title-line">The Cultural Evolution of</span> <span class="title-line">Major Ethical Theories</span></a></h1>
             <p class="article-subtitle">Reconciling theories of normative action <em>across scales, systems and societies</em></p>
-            <button class="next-screen" type="button" data-target="overview" aria-label="Continue to the overview">
-              <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1" stroke-linejoin="round">
-                <polygon points="14,19.469 21.031,8.531 14,11.813 6.969,8.531"/>
-              </svg>
-            </button>
           </div>
 
           <div class="article-body">
-            <section id="overview">
-              <button class="next-screen next-screen-overview" type="button" data-target="structure" aria-label="Continue to the next section">
-                <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1" stroke-linejoin="round">
-                <polygon points="14,19.469 21.031,8.531 14,11.813 6.969,8.531"/>
-              </svg>
-              </button>
-
-              <h2><a class="heading-link" href="#overview">Overview</a></h2>
-
-              <p>In 2020, The <a href="https://civilizationresearchinstitute.org/" target="_blank" rel="noopener">Civilization Research Institute</a> (CRI) was founded by Daniel Schmachtenberger. Prior to this in 2017, Schmachtenberger had published a series of notes on civilisation design and transition criteria with a focus on New Economics. As a leading theorist of the metacrisis he has also spoken at length on the search for the third attractor: a civilisation design that avoids decentralised destruction by default &ndash; from multi-polar dynamics &ndash; and centralised control as counter-reaction &ndash; coercively managing catastrophic risks.</p>
-
-              <p>At this point in time, civilisation research &ndash; under the paradigm Schmachtenberger has pioneered &ndash; is not formally developed, even by CRI itself (at least from the outside). From a cursory investigation online, &lsquo;civilisation research&rsquo;, &lsquo;civilisation studies&rsquo; and &lsquo;civilisation science&rsquo; mostly yield results with an anthropology or complex systems emphasis &ndash; which are of course major components, but not sufficiently holistic. Similarly, whilst I have previously written on starting a new field and movement for the Metacrisis, Civilisation Alignment or Coordination (Studies), Civilisation Research subsumes these as the highest-level or most foundational frame possible.</p>
-
-              <p>My goal with this document is to give a conceptual structure to the paradigm of Civilisation Research and set out a preliminary research agenda: to be undertaken outside of and beyond CRI &ndash; across a wider (generative cooperative) research network. Essentially this document serves an onboarding function (assembling everything in one place) for those who are new to this extremely large-scale and complex domain of thought.</p>
-            </section>
-
-            <section id="structure" class="in-band band-alt">
-              <h2><a class="heading-link" href="#structure">Structure</a></h2>
-
-              <p>In my conceptual model of civilisation research, it is subdivided into nine subframes: three civilisational&ndash;, three meta&ndash; and three macro&ndash;. These latter clusters inform and are conceptually subordinate to the Civilisational framework. I set out each of these in the sections below.</p>
-            </section>
-
-            <section id="contents" class="in-band" data-toc="off">
-              <h2><a class="heading-link" href="#contents">Contents</a></h2>
-
-              <ul class="dash-list live-list">
-                <li>Civilisational
-                  <ul class="dash-list live-sub">
-                    <li>Civilisational Mechanics</li>
-                    <li>Civilisation Design</li>
-                    <li>Civilisational Transition</li>
-                  </ul>
-                </li>
-                <li>Meta
-                  <ul class="dash-list live-sub">
-                    <li>Metacrisis</li>
-                    <li>Metamodernism</li>
-                    <li>Metatheory</li>
-                  </ul>
-                </li>
-                <li>Macro
-                  <ul class="dash-list live-sub">
-                    <li>Macrohistory</li>
-                    <li>Macrosociology</li>
-                    <li>Macrostrategy</li>
-                  </ul>
-                </li>
-              </ul>
-            </section>
-
-            <section id="civilisational">
-              <h2><a class="heading-link" href="#civilisational">Civilisational</a></h2>
-
-              <h3 id="civilisational-mechanics"><a class="heading-link" href="#civilisational-mechanics">Civilisational Mechanics</a></h3>
-
-              <h3 id="civilisation-design"><a class="heading-link" href="#civilisation-design">Civilisation Design</a></h3>
-
-              <h3 id="civilisational-transition"><a class="heading-link" href="#civilisational-transition">Civilisational Transition</a></h3>
-            </section>
-
-            <section id="meta" class="divided">
-              <h2><a class="heading-link" href="#meta">Meta</a></h2>
-
-              <h3 id="metacrisis"><a class="heading-link" href="#metacrisis">Metacrisis</a></h3>
-
-              <h3 id="metamodernism"><a class="heading-link" href="#metamodernism">Metamodernism</a></h3>
-
-              <h3 id="metatheory"><a class="heading-link" href="#metatheory">Metatheory</a></h3>
-            </section>
-
-            <section id="macro" class="divided">
-              <h2><a class="heading-link" href="#macro">Macro</a></h2>
-
-              <h3 id="macrohistory"><a class="heading-link" href="#macrohistory">Macrohistory</a></h3>
-
-              <h3 id="macrosociology"><a class="heading-link" href="#macrosociology">Macrosociology</a></h3>
-
-              <h3 id="macrostrategy"><a class="heading-link" href="#macrostrategy">Macrostrategy</a></h3>
-            </section>
           </div>
         </article>
       </main>
@@ -2382,6 +2321,7 @@
       // last of the sections that follow it there
       function bandEnd() {
         var e = document.getElementById('overview');
+        if (!e) return document.querySelector('.article-header');
         while (e && e.nextElementSibling && e.nextElementSibling.classList.contains('in-band')) e = e.nextElementSibling;
         return e;
       }
@@ -2809,6 +2749,7 @@
       var firstArrow = firstHeader.querySelector('.next-screen');
       var overviewEl = document.getElementById('overview');
       function placeOverview() {
+        if (!overviewEl || !firstArrow) return;
         overviewEl.style.marginTop = '';
         if (!isDesign2()) return;
         // the Overview band starts 750px down the page (never higher than
@@ -2824,13 +2765,14 @@
       placeOverview();
 
       function goTo(btn) {
-        if (btn.dataset.target === 'overview' && isDesign2()) {
+        if (btn.dataset.target === 'overview' && isDesign2() && overviewEl) {
           // fade the Overview in and move down to the top of its band
           showOverview();
           animateScrollTo(overviewEl.getBoundingClientRect().top + window.scrollY, 900);
           return;
         }
         var target = document.getElementById(btn.dataset.target);
+        if (!target) return;
         var offset = btn.dataset.target === 'overview' ? 0 : 72;
         animateScrollTo(target.getBoundingClientRect().top + window.scrollY - offset, 900);
       }
