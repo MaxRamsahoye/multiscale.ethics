@@ -1137,12 +1137,28 @@
     .fig-label-ring {
       text-anchor: middle;
       font-weight: 600;
-      font-size: 25px;
+      font-size: 34px;
     }
 
     .article-body .fig-rings {
-      max-width: 560px;
+      max-width: 380px;
       margin: 0 auto;
+    }
+
+    /* the two diagrams smaller than the text column, with room around them */
+    .article-body #figure-scales,
+    .article-body #figure-rings {
+      margin: 120px 0;
+    }
+
+    .article-body #figure-scales .fig-svg {
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    .article-body #figure-scales figcaption,
+    .article-body #figure-rings figcaption {
+      margin-top: 20px;
     }
 
     /* the three theories as a table: the theory column shaded light to dark */

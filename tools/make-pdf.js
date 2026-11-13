@@ -92,7 +92,7 @@ const CSS = `
   figure .fig-svg { display: block; width: 82%; height: auto; margin: 0 auto; overflow: visible; }
   figcaption { margin-top: 6pt; font-style: italic; font-size: 11pt; color: #777; }
   .fig-label { font-family: 'IBM Plex Sans', sans-serif; font-size: 27px; fill: #000; }
-  .fig-label-ring { text-anchor: middle; font-weight: 600; font-size: 25px; }
+  .fig-label-ring { text-anchor: middle; font-weight: 600; font-size: 34px; }
   .ring-disc { stroke-width: 3.5; }
   /* the two diagrams each small, on a page of their own, centred on it */
   #figure-scales, #figure-rings { break-before: page; break-after: page; box-sizing: border-box; min-height: 245mm; margin: 0; display: flex; flex-direction: column; justify-content: center; }
