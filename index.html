@@ -253,6 +253,7 @@
 
     html.serif-headings .article-body h3 {
       font-weight: 400;
+      font-style: italic;
       font-size: 1.2em;
       -webkit-text-stroke: 0.35px currentColor;
     }
@@ -740,12 +741,13 @@
       stroke-width: 2.5;
     }
 
+    /* the ring in the band's colour, on a faint track of the same */
     .progress-ring-track {
-      stroke: var(--canvas-track-tint);
+      stroke: color-mix(in srgb, var(--inverse-bg) 22%, var(--canvas-bg));
     }
 
     .progress-ring-fill {
-      stroke: var(--link);
+      stroke: var(--inverse-bg);
     }
 
     body.past-overview .progress-ring {
@@ -1279,7 +1281,7 @@
     .article-body h3 {
       font-family: 'Inter', sans-serif;
       font-weight: 500;
-      font-style: normal;
+      font-style: italic;
       letter-spacing: -0.01em;
       font-size: 0.9em;
       line-height: 1.25;
