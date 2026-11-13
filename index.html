@@ -1,0 +1,3210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link id="favicon-ico" rel="icon" href="favicon/favicon-light.ico?v=p" sizes="any">
+  <link id="favicon-32" rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32-light.png?v=p">
+  <link id="favicon-192" rel="icon" type="image/png" sizes="192x192" href="favicon/favicon-192-light.png?v=p">
+  <link id="favicon-apple" rel="apple-touch-icon" href="favicon/apple-touch-icon-light.png?v=p">
+  <script>
+    (function () {
+      try {
+        if ('scrollRestoration' in history) {
+          history.scrollRestoration = 'manual';
+        }
+        if (!location.hash) window.scrollTo(0, 0);
+      } catch (e) {}
+      try {
+        var navEntry = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+        // arriving from another page of this site (its own folder: another site may share the address), or a refresh, or back/forward: fade in
+        var fromSite = false;
+        try { fromSite = !!document.referrer && (function (r, s) { return r.origin === s.origin && r.pathname.indexOf(s.pathname) === 0; })(new URL(document.referrer), new URL('./', location.href)); } catch (e) {}
+        // browsers with cross-document view transitions crossfade between pages
+        // themselves; the others fade out and in (and so does a refresh)
+        var vt = 'CSSViewTransitionRule' in window;
+        if (vt) document.documentElement.classList.add('vt');
+        if ((fromSite || (navEntry && navEntry.type !== 'navigate')) && (!vt || (navEntry && navEntry.type === 'reload'))) document.documentElement.classList.add('page-entering');
+      } catch (e) {}
+      try {
+        // no theme chosen yet: follow the system setting
+        var sys = window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        var t = localStorage.getItem('crp.theme');
+        // a theme chosen with t holds only until the system setting changes
+        if (t && localStorage.getItem('crp.themeSystem') !== sys) { t = null; localStorage.removeItem('crp.theme'); }
+        t = t || sys;
+        if (t === 'dark') {
+          document.documentElement.setAttribute('data-theme', t);
+        }
+        if (t === 'dark') {
+          var suffix = 'dark';
+          document.getElementById('favicon-ico').href = 'favicon/favicon-' + suffix + '.ico?v=p';
+          document.getElementById('favicon-32').href = 'favicon/favicon-32-' + suffix + '.png?v=p';
+          document.getElementById('favicon-192').href = 'favicon/favicon-192-' + suffix + '.png?v=p';
+          document.getElementById('favicon-apple').href = 'favicon/apple-touch-icon-' + suffix + '.png?v=p';
+        }
+      } catch (e) {}
+      try {
+        if (localStorage.getItem('crp.blueLinks') !== 'off') document.documentElement.classList.add('colour');  // blue links (c): on by default
+        // ET Bembo headings are the default; f switches to Inter and back
+        if (localStorage.getItem('crp.headings') !== 'sans') document.documentElement.classList.add('serif-headings');
+        // the band colour (b): midnight green by default, or sepia, midnight blue or black
+        var band = localStorage.getItem('crp.bandColour') || 'green';
+        if (band === 'purple') band = 'green';  // the default band was purple before it was green
+        if (band === 'green' || band === 'midnight' || band === 'black') document.documentElement.classList.add('band-' + band);
+        // design 2 is the default; d switches to design 1 and back
+        if (localStorage.getItem('crp.design') !== '1') document.documentElement.classList.add('design-2');
+        // the Overview's shaded band is the default; h switches to dividing lines
+        if (localStorage.getItem('crp.overviewStyle') === 'lines') document.documentElement.classList.add('overview-lines');
+      } catch (e) {}
+    })();
+  </script>
+  <title>Civilisational Paradigm</title>
+  <meta name="description" content="Across civilisational mechanics – functioning at the macro-scale – design – ideal high-level principles – and transition – theory of world-systems change.">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Civilisational Paradigm">
+  <meta property="og:title" content="The Civilisation Research Paradigm">
+  <meta property="og:description" content="Across civilisational mechanics – functioning at the macro-scale – design – ideal high-level principles – and transition – theory of world-systems change.">
+  <meta property="og:url" content="https://maxramsahoye.github.io/civilisationresearchparadigm/">
+  <meta property="og:image" content="https://maxramsahoye.github.io/civilisationresearchparadigm/preview.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="A three-by-three grid of green squares, its centre column darker: the site’s loading mark">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,500&display=swap" rel="stylesheet"></noscript>
+  <style>
+    @font-face {
+      font-family: 'ET Bembo';
+      src: url('fonts/ETBembo-RomanOSF.woff2') format('woff2');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'ET Bembo';
+      src: url('fonts/ETBembo-SemiBoldOSF.woff2') format('woff2');
+      font-weight: 600;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'ET Bembo';
+      src: url('fonts/et-book-bold-line-figures.woff') format('woff');
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'ET Bembo';
+      src: url('fonts/ETBembo-DisplayItalic.woff2') format('woff2');
+      font-weight: 400;
+      font-style: italic;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'ET Bembo Lining';
+      src: url('fonts/ETBembo-RomanLF.woff2') format('woff2');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    :root {
+      --frame-bg: var(--canvas-bg);
+      --frame-ink: var(--canvas-ink);
+      --frame-accent: var(--canvas-accent);
+      --canvas-bg: #ffffff;
+      --canvas-ink: #000000;
+      --canvas-accent: #000000;
+      --canvas-track-tint: rgba(0, 0, 0, 0.08);
+      --muted: #8c8c8c;
+      --link-blue: #1a3a9c;
+      /* colours for the inverse Overview and footer, and the blue that reads on them */
+      --inverse-bg: #fbf6ec;
+      --inverse-ink: #000000;
+      --inverse-link: #1d4fbf;
+      /* no blue by default; c turns it on */
+      --link: var(--canvas-ink);
+      --selection-bg: rgba(186, 220, 240, 0.45);
+      --note-highlight: #dbe9f3;
+      --rule: #e4ddd3;
+      --frame-margin: 0px;
+      --header-margin: 100px;
+      --serif: 'ET Bembo', Bembo, 'Times New Roman', Georgia, serif;
+    }
+
+    body.wide {
+      --frame-margin: 0px;
+    }
+
+    html[data-theme="sepia"] {
+      --canvas-bg: #fbf6ec;
+      --canvas-ink: #000000;
+      --canvas-accent: #000000;
+      --canvas-track-tint: rgba(59, 47, 32, 0.12);
+      --muted: #9a8a72;
+      --link-blue: #1d4fbf;
+      --inverse-bg: #3b2f20;
+      --inverse-ink: #fbf6ec;
+      --inverse-link: #a9c4f5;
+      --selection-bg: rgba(214, 196, 160, 0.45);
+      --note-highlight: #eae1cf;
+      --rule: #e0d4b8;
+    }
+
+    html[data-theme="midnight"] {
+      --canvas-bg: #0d1330;
+      --canvas-ink: #e6ebf5;
+      --canvas-accent: #e6ebf5;
+      --canvas-track-tint: rgba(230, 235, 245, 0.15);
+      --muted: #8a93ad;
+      --link-blue: #8ab4f8;
+      --inverse-bg: #e6ebf5;
+      --inverse-ink: #0d1330;
+      --inverse-link: #1d4fbf;
+      --selection-bg: rgba(180, 205, 235, 0.35);
+      --note-highlight: #2a3352;
+      --rule: #232c4c;
+    }
+
+    html[data-theme="dark"] {
+      --canvas-bg: #000000;
+      --canvas-ink: #ffffff;
+      --canvas-accent: #ffffff;
+      --canvas-track-tint: rgba(255, 255, 255, 0.15);
+      --selection-bg: rgba(148, 218, 183, 0.35);
+      --note-highlight: #174b33;
+      --rule: #133e26;
+      --muted: #8c8c8c;
+      --link-blue: #8dd9aa;
+      /* the midnight green, as with the white theme's default band */
+      --inverse-bg: #0a2d1b;
+      --inverse-ink: #fbf6ec;
+      --inverse-link: #8dd9aa;
+    }
+
+    /* b (white theme only) cycles the Overview and footer: midnight green
+       (the default), light sepia (above), midnight blue, black */
+    html.band-green:not([data-theme]) {
+      /* links and highlights green, rather than blue */
+      --link-blue: #167e49;
+      --selection-bg: rgba(73, 190, 137, 0.3);
+      --note-highlight: #d9efe4;
+      --inverse-bg: #0a2d1b;
+      --inverse-ink: #fbf6ec;
+      --inverse-link: #8dd9aa;
+    }
+
+    html.band-midnight:not([data-theme]) {
+      --inverse-bg: #0d1330;
+      --inverse-ink: #fbf6ec;
+      --inverse-link: #8ab4f8;
+    }
+
+    html.band-black:not([data-theme]) {
+      --inverse-bg: #000000;
+      --inverse-ink: #ffffff;
+      --inverse-link: #8ab4f8;
+    }
+
+    /* c: colour — blue accent; links stay semi-bold */
+    /* f: headings and subheadings in ET Bembo (the title stays as it is);
+       a hairline stroke takes them past the font's heaviest cut */
+    html.serif-headings .article-body h2,
+    html.serif-headings .article-body h3 {
+      font-family: var(--serif);
+      font-weight: 700;
+      letter-spacing: 0;
+      -webkit-text-stroke: 0.4px currentColor;
+    }
+
+    html.serif-headings .article-body h2 {
+      font-size: 1.45em;
+    }
+
+    /* an upright ampersand in italic headings (the italic one is a flourished "Et") */
+    .amp {
+      font-style: normal;
+    }
+
+    html.serif-headings .article-body :is(#overview, .in-band) h2 {
+      font-size: 1.25em;
+    }
+
+    html.serif-headings .article-body h3 {
+      font-weight: 400;
+      font-size: 1.2em;
+      -webkit-text-stroke: 0.35px currentColor;
+    }
+
+    /* c: only links to other sites turn blue */
+    html.colour a[href^="http"] {
+      color: var(--link-blue);
+    }
+
+    html.colour :is(#overview, .in-band) a[href^="http"],
+    html.colour .site-footer a[href^="http"] {
+      color: var(--inverse-link);
+    }
+
+    /* links on the bands take the band's own text colour (links to other
+       sites turn the band's blue with c, above) */
+    :is(#overview, .in-band) a:not(.heading-link) {
+      color: inherit;
+    }
+
+    /* the author's name stays in the text colour, at the top and in the footer */
+    html.colour a.author-link,
+    html.colour .site-footer a.author-link {
+      color: inherit;
+    }
+
+    /* custom cursor: a small outlined dart; filled over things you can click */
+    /* the same in every theme: white with a black line, solid black over links */
+    :root {
+      --cursor-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24'%3E%3Cpath d='M3 2.5 L21 11.2 L12.6 12.6 L10.2 21 Z' fill='%23fff' stroke='%23fff' stroke-width='3.2' stroke-linejoin='round'/%3E%3Cpath d='M3 2.5 L21 11.2 L12.6 12.6 L10.2 21 Z' fill='%23fff' stroke='%23000' stroke-width='1.4' stroke-linejoin='round'/%3E%3C/svg%3E") 2 2, auto;
+      --cursor-link: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24'%3E%3Cpath d='M3 2.5 L21 11.2 L12.6 12.6 L10.2 21 Z' fill='%23fff' stroke='%23fff' stroke-width='3.2' stroke-linejoin='round'/%3E%3Cpath d='M3 2.5 L21 11.2 L12.6 12.6 L10.2 21 Z' fill='%23000' stroke='%23000' stroke-width='1.4' stroke-linejoin='round'/%3E%3C/svg%3E") 2 2, pointer;
+    }
+
+    html {
+      cursor: var(--cursor-arrow);
+    }
+
+    a,
+    button,
+    a *,
+    button * {
+      cursor: var(--cursor-link) !important;
+    }
+
+    .page {
+      position: relative;
+      transition: background-color 0.25s ease;
+    }
+
+    /* a page with a downward arrow: first of the controls, downloads the
+       article as a PDF */
+    .pdf-btn {
+      display: flex;
+      color: var(--muted);
+    }
+
+    .pdf-btn:hover,
+    .pdf-btn:focus-visible {
+      color: var(--canvas-ink);
+      outline: none;
+    }
+
+    .pdf-btn svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* the arrow drops a little on hover */
+    .pdf-btn .arrow {
+      transition: transform 0.25s ease;
+    }
+
+    .pdf-btn:hover .arrow,
+    .pdf-btn:focus-visible .arrow {
+      transform: translateY(1.5px);
+    }
+
+    /* hamburger: left of the theme toggle, opens the Pages menu */
+    .menu-btn {
+      display: flex;
+      color: var(--muted);
+    }
+
+    .menu-btn:hover,
+    .menu-btn.key-hover {
+      color: var(--canvas-ink);
+    }
+
+    .menu-btn svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* envelope: left of the hamburger, copies the email address, with a
+       note beneath it that says so */
+    .email-btn {
+      position: relative;
+      display: flex;
+      padding: 0;
+      border: none;
+      background: none;
+      color: var(--muted);
+      cursor: pointer;
+    }
+
+    .email-btn:hover,
+    .email-btn:focus-visible {
+      color: var(--canvas-ink);
+      outline: none;
+    }
+
+    .email-btn svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* on hover the envelope tilts into flight, trailing speed lines */
+    .email-btn .icon-mail-send {
+      display: none;
+      overflow: visible;
+    }
+
+    .email-btn:hover .icon-mail,
+    .email-btn:focus-visible .icon-mail,
+    .email-btn.copied .icon-mail {
+      display: none;
+    }
+
+    .email-btn:hover .icon-mail-send,
+    .email-btn:focus-visible .icon-mail-send,
+    .email-btn.copied .icon-mail-send {
+      display: block;
+    }
+
+    .email-btn .speed {
+      stroke-dasharray: 8;
+      animation: mail-speed 0.35s ease-out both;
+    }
+
+    @keyframes mail-speed {
+      from { stroke-dashoffset: -8; opacity: 0; }
+      to { stroke-dashoffset: 0; opacity: 1; }
+    }
+
+    /* a note beneath each of the top-right controls on hover, naming it and
+       its key */
+    .left-controls > * {
+      position: relative;
+    }
+
+    .ctl-note {
+      position: absolute;
+      top: calc(100% + 12px);
+      right: 50%;
+      transform: translate(50%, -4px);
+      font-family: var(--sans, 'Inter', sans-serif);
+      font-size: 12px;
+      white-space: nowrap;
+      color: var(--canvas-ink);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    .ctl-note kbd {
+      margin-left: 4px;
+      padding: 0 4px;
+      border: 1px solid color-mix(in srgb, currentColor 35%, transparent);
+      border-radius: 3px;
+      font-family: inherit;
+      font-size: 11px;
+    }
+
+    .left-controls > :hover .ctl-note,
+    .left-controls > :focus-visible .ctl-note,
+    .email-btn.copied .ctl-note {
+      opacity: 1;
+      transform: translate(50%, 0);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    ::selection {
+      background: var(--selection-bg);
+      color: var(--canvas-ink);
+    }
+
+    ::-moz-selection {
+      background: var(--selection-bg);
+      color: var(--canvas-ink);
+    }
+
+    .click-ripple {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 16px;
+      height: 16px;
+      margin-left: -8px;
+      margin-top: -8px;
+      border-radius: 50%;
+      border: 1.5px solid currentColor;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.55;
+      transform: scale(0.3);
+      animation: click-ripple-anim 0.4s ease-out forwards;
+    }
+
+    @keyframes click-ripple-anim {
+      to {
+        transform: scale(4);
+        opacity: 0;
+      }
+    }
+
+    html {
+      background: var(--frame-bg);
+      scroll-behavior: smooth;
+    }
+
+    body {
+      position: relative;
+      margin: 0;
+      min-height: 100vh;
+      background: var(--frame-bg);
+      padding: 90px var(--frame-margin) 0;
+      font-family: var(--serif);
+      color: var(--frame-ink);
+      -webkit-font-smoothing: antialiased;
+      transition: background-color 0.25s ease, opacity 0.2s cubic-bezier(0.45, 0, 0.55, 1);
+    }
+
+    /* page transitions: the page eases out, then the next one eases in */
+    body.page-leaving {
+      opacity: 0;
+    }
+
+    html.page-entering body {
+      animation: page-in 0.25s cubic-bezier(0.25, 0.1, 0.25, 1) backwards;
+    }
+
+    /* where the browser crossfades between pages itself, the old page stays put
+       while it leaves (its sounds still fade), so there is no blank flash */
+    @view-transition {
+      navigation: auto;
+    }
+
+    html.vt body.page-leaving:not(.reloading) {
+      opacity: 1;
+    }
+
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+      animation-duration: 0.3s;
+      animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1);
+    }
+
+    @keyframes page-in {
+      from { opacity: 0; }
+    }
+
+    /* loading screen: a centred ring that fills, then fades to reveal the page
+       (the fallback; the stack below is the default) */
+    .loader {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--canvas-bg);
+      transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .loader.loader-done {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .loader svg {
+      width: 72px;
+      height: 72px;
+      transform: rotate(-90deg);
+    }
+
+    .loader circle {
+      fill: none;
+      stroke-width: 1.6;
+    }
+
+    .loader-track {
+      stroke: var(--canvas-track-tint);
+    }
+
+    .loader-fill {
+      stroke: var(--link);
+    }
+
+    .loader.loader-stacking > svg:not(.loader-grid) {
+      display: none;
+    }
+
+    /* the default loading screen: the nine subframes of civilisation
+       research as a three-by-three grid, a column for each cluster. Meta
+       (left) arrives first, then Macro (right), then Civilisational (centre),
+       which the other two inform; once the page is ready the grid turns the
+       accent, the Civilisational column strongest */
+    .loader svg.loader-grid {
+      width: 84px;
+      height: 84px;
+      overflow: visible;
+      transform: none;
+      --t-side: color-mix(in srgb, var(--canvas-ink) 16%, var(--canvas-bg));
+      --t-core: color-mix(in srgb, var(--canvas-ink) 42%, var(--canvas-bg));
+    }
+
+    .loader-grid rect {
+      fill: var(--t-side);
+      transform-box: fill-box;
+      transform-origin: center;
+      opacity: 0;
+      transition: fill 0.45s ease var(--turn, 0ms);
+      animation: loader-tile-in var(--dur) cubic-bezier(0.22, 1, 0.36, 1) var(--delay) forwards;
+    }
+
+    .loader-grid rect.core {
+      fill: var(--t-core);
+    }
+
+    .loader.loader-complete .loader-grid {
+      --t-side: color-mix(in srgb, var(--link-blue) 50%, var(--canvas-bg));
+      --t-core: var(--link-blue);
+    }
+
+    /* still waiting for the page once the grid is built: a slow wave runs
+       across it, column by column */
+    .loader-grid.loader-waiting rect {
+      opacity: 1;
+      animation: loader-tile-wave 1.5s ease-in-out var(--wave) infinite;
+    }
+
+    @keyframes loader-tile-in {
+      from { opacity: 0; transform: translateY(-10px) scale(0.6); }
+      to { opacity: 1; transform: none; }
+    }
+
+    @keyframes loader-tile-wave {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.45; }
+    }
+
+    .page {
+      background: var(--canvas-bg);
+      color: var(--canvas-ink);
+      min-height: calc(100vh - 90px);
+    }
+
+    .frame-header {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 90px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-end;
+      padding: 50px var(--header-margin) 0 0;
+    }
+
+    .site-title {
+      position: absolute;
+      top: 24px;
+      /* top-left corner, mirroring the theme toggle in the top right */
+      left: 40px;
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 18px;
+      line-height: 1.15;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--frame-ink);
+      text-decoration: none;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .site-title:hover {
+      color: var(--frame-accent);
+    }
+
+    .left-controls {
+      position: absolute;
+      top: 36px;
+      /* in line with the progress ring and scroll-to-top button */
+      right: 40px;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .theme-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      color: var(--muted);
+    }
+
+    .theme-toggle:hover,
+    .theme-toggle.key-hover {
+      color: var(--canvas-ink);
+    }
+
+    .theme-toggle svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    /* one icon per theme: sun (light), sun and cloud (sepia),
+       moon and star (midnight), moon (dark) */
+    .theme-toggle svg {
+      display: none;
+    }
+
+    .theme-toggle .icon-sun,
+    html[data-theme="sepia"] .theme-toggle .icon-sun-cloud,
+    html[data-theme="midnight"] .theme-toggle .icon-moon-star,
+    html[data-theme="dark"] .theme-toggle .icon-moon {
+      display: block;
+    }
+
+    html[data-theme] .theme-toggle .icon-sun {
+      display: none;
+    }
+
+    /* the cloud hides the part of the sun behind it */
+    .theme-toggle .cloud {
+      fill: var(--frame-bg);
+    }
+
+    html {
+      scrollbar-width: none;
+    }
+
+    html::-webkit-scrollbar {
+      display: none;
+    }
+
+    .progress-ring {
+      position: fixed;
+      /* vertically centred on the theme toggle */
+      top: 31px;
+      left: calc(var(--frame-margin) + 40px);
+      width: 28px;
+      height: 28px;
+      transform: rotate(-90deg);
+      z-index: 40;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.6s ease;
+    }
+
+    .progress-ring circle {
+      fill: none;
+      stroke-width: 2.5;
+    }
+
+    .progress-ring-track {
+      stroke: var(--canvas-track-tint);
+    }
+
+    .progress-ring-fill {
+      stroke: var(--link);
+    }
+
+    body.past-overview .progress-ring {
+      opacity: 1;
+    }
+
+    /* full by the time the footer arrives, then gone */
+    body.past-overview.footer-in-view .progress-ring {
+      opacity: 0;
+    }
+
+    @media (max-width: 960px) {
+      .progress-ring {
+        left: 24px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .progress-ring {
+        top: 22px;
+      }
+    }
+
+    /* on the canvas (past the Overview, as the ring): the site's name in the
+       top right corner, mirroring the title in the top left at the top of
+       the page; it takes you back to the top */
+    .canvas-title {
+      position: fixed;
+      top: 24px;
+      right: calc(var(--frame-margin) + 40px);
+      z-index: 40;
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 18px;
+      line-height: 1.15;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      text-align: right;
+      white-space: nowrap;
+      color: var(--frame-ink);
+      text-decoration: none;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.6s ease, visibility 0s linear 0.6s, color 0.2s ease;
+    }
+
+    .canvas-title:hover {
+      color: var(--frame-accent);
+    }
+
+    body.past-overview:not(.footer-in-view) .canvas-title {
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 0.6s ease, color 0.2s ease;
+    }
+
+    @media (max-width: 960px) {
+      .canvas-title {
+        top: 24px;
+        right: 24px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .canvas-title {
+        top: 19px;
+        font-size: 15px;
+      }
+    }
+
+    .scroll-top-btn {
+      position: fixed;
+      bottom: 30px;
+      right: calc(var(--frame-margin) + 37px);
+      width: 34px;
+      height: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease, right 0.6s ease;
+      z-index: 42;
+      color: var(--canvas-accent);
+    }
+
+    .scroll-top-btn.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .scroll-top-btn:hover,
+    .scroll-top-btn.key-hover {
+      color: var(--canvas-ink);
+    }
+
+    .scroll-top-btn {
+      color: var(--canvas-ink);
+    }
+
+    /* same diameter as the progress ring; the button keeps a 34px hit area */
+    .scroll-top-btn svg {
+      width: 32px;
+      height: 32px;
+    }
+
+    .layout-grid {
+      display: grid;
+      grid-template-columns: 300px minmax(0, 760px) 300px;
+      column-gap: 90px;
+      align-items: start;
+      justify-content: center;
+      max-width: 1540px;
+      margin: 0 auto;
+      padding: 0 0 40px;
+    }
+
+    /* fixed at the middle left, in the empty column left of the text;
+       it appears once the Overview has been read, fades after 2 seconds, and
+       comes back while the pointer is in that column */
+    .toc {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      left: 40px;
+      z-index: 45;
+      width: clamp(180px, 50vw - 460px, 280px);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.5s ease, visibility 0s linear 0.5s;
+    }
+
+    body.toc-open .toc {
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 0.3s ease, visibility 0s;
+    }
+
+    /* too little room beside the text for it on narrower windows */
+    @media (max-width: 1279px) {
+      .toc {
+        display: none;
+      }
+    }
+
+    .toc-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      letter-spacing: -0.01em;
+      font-weight: 500;
+      color: var(--canvas-accent);
+      margin: 0 0 14px;
+    }
+
+    .toc ol {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      counter-reset: toc-counter;
+    }
+
+    .toc li {
+      font-family: 'Inter', sans-serif;
+      counter-increment: toc-counter;
+      margin-bottom: 7px;
+      font-size: 14px;
+      line-height: 1.35;
+    }
+
+    .toc li::before {
+      content: counter(toc-counter) '. ';
+      color: var(--canvas-accent);
+    }
+
+    .toc a {
+      color: var(--canvas-ink);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+    }
+
+    .toc-upcoming,
+    .toc .toc-upcoming::before {
+      color: var(--muted);
+    }
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
+    }
+
+    .toc a:hover {
+      border-bottom-color: var(--canvas-ink);
+    }
+
+    .main-area {
+      grid-column: 2;
+    }
+
+    /* first screen: author, title and subtitle centred vertically below the
+       site header, left-aligned in the article column */
+    .article-header {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 40px 0;
+      min-height: calc(100vh - 90px);
+      min-height: calc(100svh - 90px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      text-align: left;
+    }
+
+    .next-screen {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      padding: 0;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--canvas-ink);
+    }
+
+    .next-screen:hover,
+    .next-screen.key-hover {
+      color: var(--canvas-ink);
+    }
+
+    /* line the triangle itself up with the left edge of the text */
+    .article-header .next-screen {
+      margin-left: -10px;
+    }
+
+    /* bottom centre of the Overview band */
+    .next-screen-overview {
+      position: absolute;
+      bottom: 64px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .next-screen svg {
+      width: 32px;
+      height: 32px;
+      animation: arrow-nudge 2.4s ease-in-out infinite;
+    }
+
+    /* a slow downward nudge inviting the scroll */
+    @keyframes arrow-nudge {
+      0%, 55%, 100% {
+        transform: translateY(0);
+      }
+
+      25% {
+        transform: translateY(6px);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .next-screen svg {
+        animation: none;
+      }
+    }
+
+    .article-author {
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 17px;
+      color: var(--muted);
+      margin: 0 0 32px;
+    }
+
+    .article-title {
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      /* runs 240px into the right margin; three lines, sized so "Major
+         Technological Transitions" fits on one */
+      width: calc(100% + 240px);
+      font-size: min(52px, calc((min(760px, 100vw - 480px) + 240px) / 15.4));
+      line-height: 1.08;
+      margin: 0 0 24px;
+      color: var(--canvas-ink);
+    }
+
+    .title-line {
+      white-space: nowrap;
+    }
+
+
+    .article-title .title-line {
+      display: block;
+    }
+
+    .article-subtitle {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: 26px;
+      color: var(--canvas-ink);
+      margin: 0 0 80px;
+    }
+
+    .article-body {
+      font-size: clamp(20px, 0.485vw + 14.3px, 23px);
+      line-height: 1.3;
+      color: var(--canvas-ink);
+      counter-reset: sidenote;
+    }
+
+    .article-body::after {
+      content: '';
+      display: table;
+      clear: both;
+    }
+
+    .article-body p,
+    .article-body ul {
+      max-width: 760px;
+    }
+
+    .article-body p {
+      margin: 15px 0;
+    }
+
+    .article-body p a {
+      color: var(--link);
+      font-weight: 600;
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+    }
+
+    /* ET Bembo has no bold italic, and browsers fake one (iOS Safari
+       crudely): italics in a link, in bold or in the semibold subtitle keep
+       the true italic, and take on weight from a hairline stroke, as the
+       italic subheadings do */
+    .article-body :is(a, strong, b) :is(em, i),
+    .article-body :is(em, i) :is(a, strong, b),
+    .article-body :is(em, i):is(a, strong, b),
+    .article-subtitle :is(em, i) {
+      font-weight: 400;
+      font-synthesis: none;
+      -webkit-text-stroke: 0.35px currentColor;
+    }
+
+    .article-body h2 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      font-size: 1.15em;
+      line-height: 1.2;
+      margin: 0 0 18px;
+    }
+
+    .article-body section + section {
+      margin-top: 88px;
+    }
+
+    /* a 2px rule between the clusters of sections (above Meta and Macro),
+       with the same space above and below it */
+    .article-body section.divided {
+      margin-top: 72px;
+      padding-top: 72px;
+      border-top: 2px solid var(--canvas-ink);
+    }
+
+    /* headings link to themselves; menu and heading links land with room above */
+    .article-body section:not(#overview),
+    .article-body h3[id] {
+      scroll-margin-top: 72px;
+    }
+
+    /* the Overview heading in solid ink, rendered crisply */
+    :is(#overview, .in-band) h2 {
+      color: var(--canvas-ink);
+      -webkit-font-smoothing: auto;
+    }
+
+    .heading-link {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .heading-link:hover {
+      text-decoration: underline;
+      text-decoration-thickness: 1.5px;
+      text-underline-offset: 4px;
+    }
+
+    .article-body h3 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-style: normal;
+      letter-spacing: -0.01em;
+      font-size: 0.9em;
+      line-height: 1.25;
+      margin: 52px 0 14px;
+    }
+
+    /* a full-width grey band behind the Overview; text stays in the column */
+    #overview {
+      position: relative;
+      z-index: 0;
+      padding: 56px 0 128px;
+      min-height: 100vh;
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    /* flex children don't collapse margins, so space paragraphs one way only */
+    #overview > p {
+      margin: 0 0 15px;
+    }
+
+    :is(#overview, .in-band)::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 100vw;
+      transform: translateX(-50%);
+      background: var(--canvas-bg);
+      z-index: -1;
+    }
+
+    /* h: the Overview in the page's own colours instead of a shaded band */
+    html.overview-lines :is(#overview, .in-band) {
+      --canvas-bg: var(--frame-bg);
+      --canvas-ink: var(--frame-ink);
+      --canvas-accent: var(--frame-ink);
+      color: var(--frame-ink);
+    }
+
+    /* no band: dividing lines above and below, across the text column */
+    html.overview-lines #overview::before,
+    html.overview-lines #overview::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: auto;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      transform: none;
+      background: currentColor;
+      z-index: 0;
+    }
+
+    html.overview-lines #overview::after {
+      top: auto;
+      bottom: 0;
+    }
+
+    html.colour.overview-lines :is(#overview, .in-band) a[href^="http"] {
+      color: var(--link-blue);
+    }
+
+    /* inverse: swap text and background colours for everything in the Overview */
+    :is(#overview, .in-band) {
+      --canvas-bg: var(--inverse-bg);
+      --canvas-ink: var(--inverse-ink);
+      --canvas-accent: var(--inverse-ink);
+      color: var(--canvas-ink);
+    }
+
+    #overview > :last-child {
+      margin-bottom: 0;
+    }
+
+    .article-body #overview + section {
+      margin-top: 104px;
+    }
+
+    /* the sections that follow the Overview in its band (those shaded in the
+       Live doc): the band runs on behind them, its gaps padding, not margin */
+    .article-body section.in-band {
+      position: relative;
+      z-index: 0;
+      margin: 0;
+      padding: 0 0 104px;
+    }
+
+    .article-body #overview + section.in-band {
+      margin-top: 0;
+    }
+
+    .article-body section.in-band > h2 {
+      margin-top: 0;
+    }
+
+    .article-body section.in-band:not(:has(+ section.in-band)) {
+      padding-bottom: 128px;
+    }
+
+    .article-body section.in-band + section:not(.in-band) {
+      margin-top: 104px;
+    }
+
+    /* every other section in the band a shade darker, in its own band (as
+       the Live doc alternates its shaded sections) */
+    /* the shade for each band: a darker sepia on the light sepia band, a
+       lighter black on the black ones, and darker on the others */
+    :root {
+      --inverse-bg-alt: color-mix(in srgb, var(--inverse-bg) 80%, #000);
+    }
+
+    :root:not([data-theme]):not(.band-green):not(.band-midnight):not(.band-black) {
+      --inverse-bg-alt: #f1e6d0;
+    }
+
+    html.band-black:not([data-theme]) {
+      --inverse-bg-alt: color-mix(in srgb, var(--inverse-bg) 88%, #fff);
+    }
+
+    html[data-theme="midnight"] {
+      --inverse-bg-alt: color-mix(in srgb, var(--inverse-bg) 90%, var(--inverse-ink));
+    }
+
+    :is(#overview, .in-band).band-alt {
+      --canvas-bg: var(--inverse-bg-alt);
+      padding-top: 96px;
+    }
+
+    .article-body section.band-alt + section.in-band {
+      padding-top: 96px;
+    }
+
+    html.overview-lines :is(#overview, .in-band).band-alt {
+      --canvas-bg: var(--frame-bg);
+    }
+
+    /* without the band (h), one rule above the Overview and one below the
+       last section in it */
+    html.overview-lines #overview:has(+ section.in-band)::after,
+    html.overview-lines section.in-band::before,
+    html.overview-lines section.in-band:has(+ section.in-band)::after {
+      content: none;
+    }
+
+    html.overview-lines section.in-band::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 2px;
+      background: currentColor;
+    }
+
+    /* design 2 (d): the first screen stays put, and the Overview is pulled up
+       (by script) to follow straight on from the down arrow; it is hidden until
+       the arrow is pressed or the page is scrolled, then fades in */
+    /* one after the other: the arrow fades out before the Overview fades in,
+       and the Overview fades out before the arrow comes back */
+    html.design-2 .article-header .next-screen {
+      transition: opacity 0.4s ease 0.4s;
+    }
+
+    html.design-2 body.overview-shown .article-header .next-screen {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+
+    html.design-2 .next-screen-overview {
+      display: none;
+    }
+
+    html.design-2 #overview {
+      min-height: 0;
+      /* the band (h) spans exactly where the dividing lines sit */
+      padding: 72px 0;
+      opacity: 0;
+      /* while hidden it lets clicks through to the down arrow it overlaps */
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+
+    html.design-2 body.overview-shown #overview {
+      opacity: 1;
+      pointer-events: auto;
+      transition: opacity 0.3s ease 0.2s;
+    }
+
+    @media (max-width: 600px) {
+      #overview {
+        padding: 40px 0 104px;
+      }
+
+      .next-screen-overview {
+        bottom: 48px;
+      }
+    }
+
+    .article-body ul {
+      margin: 20px 0;
+    }
+
+    .dash-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .dash-list li {
+      padding-left: 1.3em;
+      text-indent: -1.3em;
+      margin-bottom: 18px;
+    }
+
+    .dash-list li:last-child {
+      margin-bottom: 0;
+    }
+
+    /* lists from the Live doc: an em dash for an item, an open circle for
+       a sub-item */
+    .live-list li {
+      margin-bottom: 10px;
+    }
+
+    .live-list > li::before {
+      content: '\2014\00a0\00a0';
+    }
+
+    .live-list .live-sub {
+      margin: 10px 0 0;
+    }
+
+    .live-sub li::before {
+      content: '\25CB\00a0\00a0';
+      font-size: 0.75em;
+      vertical-align: 0.12em;
+    }
+
+    /* the article's own contents list, in IBM Plex, sub-items smaller */
+    #contents .live-list {
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 19px;
+      line-height: 1.45;
+    }
+
+    #contents .live-list li {
+      margin-bottom: 12px;
+    }
+
+    #contents .live-sub {
+      margin-top: 12px;
+      font-size: 16px;
+    }
+
+    #contents .live-sub li {
+      margin-bottom: 8px;
+    }
+
+    /* across three columns, each item kept whole with its sub-items */
+    #contents .live-list:not(.live-sub) {
+      columns: 3;
+      column-gap: 48px;
+    }
+
+    /* a little wider than the text column where there is room, so no item
+       breaks across two lines */
+    @media (min-width: 1200px) {
+      #contents .live-list:not(.live-sub) {
+        width: 860px;
+        max-width: none;
+      }
+    }
+
+    #contents .live-list > li {
+      break-inside: avoid;
+    }
+
+    /* a short list keeps to a single column */
+    #contents .live-list.one-col {
+      columns: 1;
+    }
+
+    @media (max-width: 700px) {
+      #contents .live-list:not(.live-sub) {
+        columns: 1;
+      }
+    }
+
+    .article-rule {
+      max-width: 760px;
+      margin: 48px 0;
+      border: 0;
+      border-top: 1px solid color-mix(in srgb, currentColor 20%, transparent);
+    }
+
+    .sidenote {
+      float: right;
+      clear: right;
+      width: 300px;
+      margin: 4px -420px 20px 0;
+      font-family: var(--serif);
+      font-style: normal;
+      font-size: 16px;
+      line-height: 1.5;
+      color: var(--canvas-ink);
+      opacity: 0;
+      transition: opacity 0.9s ease-in-out;
+    }
+
+    body.wide.reveal-ready .sidenote.note-in-view {
+      opacity: 1;
+    }
+
+    .sidenote {
+      position: relative;
+      z-index: 0;
+    }
+
+    .sidenote::after {
+      content: '';
+      position: absolute;
+      inset: -8px -10px;
+      background: var(--note-highlight);
+      border-radius: 6px;
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .sidenote.note-active::after {
+      opacity: 1;
+    }
+
+    .note-anchor {
+      padding: 0.08em 0;
+      border-radius: 4px;
+      -webkit-box-decoration-break: clone;
+      box-decoration-break: clone;
+      transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .note-anchor.note-active {
+      background-color: var(--note-highlight);
+      box-shadow: 4px 0 0 var(--note-highlight), -4px 0 0 var(--note-highlight);
+    }
+
+    /* the Overview's keywords, set apart below its last paragraph */
+    #overview .overview-keywords {
+      margin-top: 40px;
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.8;
+      letter-spacing: 0.02em;
+    }
+
+    .sidenote-label {
+      display: block;
+      font-family: 'IBM Plex Sans', sans-serif;
+      width: fit-content;
+      font-style: normal;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--canvas-accent);
+      text-decoration: none;
+      margin-bottom: 4px;
+    }
+
+    .sidenote-label:hover {
+      color: var(--canvas-ink);
+    }
+
+    .sidenote-label::before {
+      content: counter(sidenote) '.';
+    }
+
+    .sidenote-ref {
+      counter-increment: sidenote;
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 0.65em;
+      color: var(--canvas-accent);
+      vertical-align: super;
+      line-height: 0;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .sidenote-ref:hover {
+      color: var(--canvas-ink);
+    }
+
+    .sidenote-ref.note-active,
+    .sidenote-label.note-active {
+      color: var(--canvas-ink);
+      font-weight: 600;
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 2px;
+    }
+
+    .sidenote-ref::before {
+      content: counter(sidenote);
+    }
+
+    .sidenote-label[data-num]::before {
+      content: attr(data-num) '.';
+    }
+
+    .endnotes {
+      display: none;
+    }
+
+    /* inverse: text colour as the background, and the page colour as text */
+    .site-footer {
+      margin-top: 96px;
+      padding: 80px 24px 64px;
+      background: var(--inverse-bg);
+      color: var(--inverse-ink);
+    }
+
+    .site-footer p {
+      max-width: 760px;
+      margin: 0 auto;
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      color: inherit;
+    }
+
+    /* the author's name: a plain underline, nothing else */
+    .author-link {
+      color: inherit;
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+    }
+
+    .article-author .author-link {
+      text-decoration-color: transparent;
+    }
+
+    .article-author .author-link:hover {
+      text-decoration-color: currentColor;
+    }
+
+    /* author, title and subtitle on the left; sitemap on the right */
+    /* the footer spans the central text column exactly: the left block starts
+       at its left edge and the menu ends at its right edge (the column is 760px,
+       narrower as the window closes in, 660px at 1180px and below) */
+    .site-footer {
+      --text-column: min(760px, 100vw - 480px);
+    }
+
+    @media (max-width: 1180px) {
+      .site-footer {
+        --text-column: 660px;
+      }
+    }
+
+    .footer-inner {
+      display: grid;
+      grid-template-columns: max-content max-content;
+      justify-content: space-between;
+      column-gap: 48px;
+      align-items: center;
+      /* wider than the text column, for more room between the two sides */
+      width: calc(var(--text-column) + 120px);
+      max-width: 100%;
+      margin: 0 auto;
+    }
+
+    .site-footer .footer-inner p {
+      max-width: none;
+      margin: 0;
+    }
+
+    .site-footer .footer-inner .footer-author {
+      margin-top: 14px;
+      font-size: 17px;
+    }
+
+    /* the block is as wide as its longest line */
+    .footer-head {
+      --footer-title-size: min(27px, calc((100vw - 48px) / 16.6));
+      width: max-content;
+      max-width: 100%;
+    }
+
+    .site-footer .footer-inner .footer-subtitle {
+      margin-bottom: 20px;
+      font-family: var(--serif);
+      font-size: clamp(16px, calc((100vw - 48px) / 20), 22px);
+      line-height: 1.35;
+      text-wrap: balance;
+    }
+
+    .site-footer .footer-subtitle .hang {
+      margin-left: -0.51em;
+    }
+
+    /* the menu's last line sits level with the subtitle's last line */
+    /* the menu sits in from the column's right edge */
+    .footer-sitemap[hidden] {
+      display: none;
+    }
+
+    .footer-sitemap {
+      align-self: center;
+      margin-right: 0;
+    }
+
+    @media (max-width: 1000px) {
+      .footer-sitemap {
+        margin-right: 0;
+      }
+    }
+
+    /* "All Pages" as a small, faded, capitalised heading over the two pages */
+    .site-footer .footer-sitemap .sitemap-heading {
+      margin: 0 0 14px;
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      /* a lighter grey, mixed from the footer's own colours */
+      color: color-mix(in srgb, var(--inverse-ink) 70%, var(--inverse-bg));
+    }
+
+    /* a single vertical line down the left of the menu */
+    .footer-sitemap ol {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 17px;
+      line-height: 1.3;
+    }
+
+
+    /* the pages in two columns, down the first and then the second */
+    .footer-sitemap ol {
+      display: grid;
+      grid-template-rows: repeat(4, auto);
+      grid-auto-flow: column;
+      grid-auto-columns: max-content;
+      column-gap: 72px;
+      row-gap: 10px;
+    }
+
+
+    .footer-sitemap a {
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+    }
+
+    .footer-sitemap a:hover {
+      border-bottom-color: currentColor;
+    }
+
+    .site-footer .footer-title {
+      overflow-wrap: anywhere;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: var(--footer-title-size);
+      letter-spacing: -0.01em;
+      line-height: 1.15;
+    }
+
+    /* three lines: "A Critical Evolutionary" / "Game-Theory Model of" /
+       "Major Technological Transitions" */
+    .footer-title > span {
+      display: block;
+      white-space: nowrap;
+    }
+
+    .nowrap {
+      white-space: nowrap;
+    }
+
+    @media (max-width: 1000px) {
+      .footer-inner {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .footer-inner {
+        row-gap: 48px;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .site-footer .footer-inner .footer-subtitle {
+        text-wrap: pretty;
+      }
+
+
+      .footer-title > span {
+        display: inline;
+        white-space: normal;
+      }
+    }
+
+    /* the footer (its sitemap hidden): one column, left-aligned, the title
+       with the quote beside it on one line (the quote wrapping beneath the
+       title where there is no room) */
+    .site-footer {
+      padding-top: 40px;
+      padding-bottom: 36px;
+    }
+
+    .footer-inner {
+      grid-template-columns: minmax(0, 1fr);
+      text-align: left;
+      /* level with the article's text column */
+      width: var(--text-column);
+    }
+
+    .footer-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      column-gap: 24px;
+      row-gap: 6px;
+      width: auto;
+    }
+
+    .site-footer .footer-inner .footer-title {
+      order: 1;
+    }
+
+    .site-footer .footer-inner .footer-subtitle {
+      order: 2;
+      margin-bottom: 0;
+    }
+
+    .site-footer .footer-subtitle .hang {
+      margin-left: 0;
+    }
+
+    .site-footer .footer-inner .footer-url {
+      margin-top: 56px;
+    }
+
+    .footer-site {
+      font-weight: 600;
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+    }
+
+    .footer-site:hover {
+      border-bottom-color: currentColor;
+    }
+
+    .endnotes.has-notes {
+      display: block;
+      max-width: 660px;
+      margin: 0 auto;
+      padding: 32px 24px 0;
+      border-top: 1px solid var(--rule);
+    }
+
+    .endnotes-heading {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: 20px;
+      color: var(--canvas-ink);
+      margin: 0 0 16px;
+    }
+
+    .endnotes .sidenote {
+      border-left: none;
+      padding-left: 0;
+      margin: 0 0 16px;
+    }
+
+    .endnotes .sidenote:last-child {
+      margin-bottom: 0;
+    }
+
+    @media (max-width: 1800px) {
+      .layout-grid {
+        grid-template-columns: 200px minmax(0, 760px) 200px;
+        column-gap: 40px;
+      }
+
+      .sidenote {
+        width: 200px;
+        margin: 4px -240px 20px 0;
+        font-size: 13px;
+      }
+    }
+
+    @media (max-width: 1180px) {
+      .article-title {
+        width: auto;
+        font-size: min(37px, calc((100vw - 48px) / 15.4));
+      }
+
+      .layout-grid {
+        grid-template-columns: 1fr;
+        max-width: none;
+        padding: 0 24px 100px;
+      }
+
+      .toc {
+        display: none;
+      }
+
+      .main-area {
+        grid-column: 1;
+        max-width: 660px;
+        margin: 0 auto;
+      }
+
+      .article-header,
+      .article-body p,
+      .article-body ul {
+        max-width: 660px;
+      }
+
+      .article-body {
+        font-size: 23px;
+      }
+
+      .sidenote {
+        float: none;
+        width: 100%;
+        margin: 10px 0;
+        line-height: 1.3;
+        padding-left: 16px;
+        border-left: 2px solid var(--rule);
+        opacity: 1;
+        font-size: 16px;
+      }
+    }
+
+    @media (max-width: 960px) {
+      :root {
+        --frame-margin: 0px;
+        --header-margin: 0px;
+      }
+
+      body {
+        padding-top: 80px;
+      }
+
+      .page {
+        min-height: calc(100vh - 80px);
+      }
+
+      .frame-header {
+        height: 80px;
+        padding-top: 38px;
+      }
+
+      .left-controls {
+        top: 31px;
+        right: 24px;
+      }
+
+      .site-title {
+        top: 19px;
+        left: 24px;
+      }
+
+      .article-header {
+        min-height: calc(100vh - 80px);
+        min-height: calc(100svh - 80px);
+      }
+
+      .article-subtitle {
+        font-size: 22px;
+        margin-bottom: 64px;
+      }
+
+      .article-body {
+        font-size: 22px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      :root {
+        --header-margin: 24px;
+      }
+
+      body {
+        padding-top: 72px;
+      }
+
+      .page {
+        min-height: calc(100vh - 72px);
+      }
+
+      .frame-header {
+        height: 72px;
+        padding-top: 25px;
+      }
+
+      .left-controls {
+        top: 27px;
+      }
+
+      .site-title {
+        top: 18px;
+        font-size: 15px;
+      }
+
+      /* centred under the progress ring */
+      .scroll-top-btn {
+        right: 21px;
+      }
+
+      .article-header {
+        min-height: calc(100vh - 72px);
+        min-height: calc(100svh - 72px);
+      }
+
+      .article-subtitle {
+        font-size: 19px;
+        margin-bottom: 56px;
+      }
+
+      .article-body {
+        font-size: 20px;
+      }
+
+      .toc-label {
+        font-size: 22px;
+      }
+    }
+
+    @media (min-width: 1181px) and (min-resolution: 1.25dppx) {
+      .article-body {
+        font-size: clamp(19px, 0.485vw + 13.3px, 22px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="loader" aria-hidden="true">
+    <svg viewBox="0 0 30 30">
+      <circle class="loader-track" cx="15" cy="15" r="13"/>
+      <circle class="loader-fill" cx="15" cy="15" r="13"/>
+    </svg>
+  </div>
+  <noscript><style>.loader { display: none; }</style></noscript>
+  <script>
+    (function () {
+      var loader = document.querySelector('.loader');
+
+      // On arriving at the site, and on every refresh: skip it only when
+      // coming from another page of the site, or going back/forward.
+      var internal = false;
+      try {
+        internal = !!document.referrer && (function (r, s) { return r.origin === s.origin && r.pathname.indexOf(s.pathname) === 0; })(new URL(document.referrer), new URL('./', location.href));
+        var nav = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+        if (nav && nav.type === 'back_forward') internal = true;
+        if (nav && nav.type === 'reload') internal = false;   // a refresh plays it again
+      } catch (e) {}
+      if (internal) {
+        loader.remove();
+        return;
+      }
+
+      var ready = false;
+      var loaded = new Promise(function (resolve) {
+        if (document.readyState === 'complete') resolve(); else window.addEventListener('load', resolve);
+      });
+      var fonts = document.fonts ? document.fonts.ready : Promise.resolve();
+      Promise.all([loaded, fonts]).then(function () { ready = true; });
+
+      function finishLoader() {
+        // The page script plays the completion chord on this.
+        window.loaderComplete = true;
+        document.dispatchEvent(new Event('loadercomplete'));
+        // the finished grid (already the accent from the moment the last
+        // tile landed) holds a moment, then fades away
+        var stacking = loader.classList.contains('loader-stacking');
+        var hold = stacking ? Math.max(200, 650 - (performance.now() - (window.loaderBlueAt || 0))) : 200;
+        loader.classList.add('loader-complete');
+        setTimeout(function () {
+          loader.classList.add('loader-done');
+          setTimeout(function () { loader.remove(); }, 700);
+        }, hold);
+      }
+
+      // Default: the grid. The ring stays as the fallback, for anyone who
+      // prefers reduced motion (or who sets localStorage['crp.loader'] = 'ring').
+      var useRing = false;
+      try { useRing = localStorage.getItem('crp.loader') === 'ring'; } catch (e) {}
+      if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) useRing = true;
+      if (!useRing) {
+        // the tiles, column by column (Meta, Macro, Civilisational), each
+        // column top to bottom, with a short pause between columns
+        var TILE = 24, GAP = 6, STEP = 130, PAUSE = 140, DUR = 520, MAX_WAIT = 7000;
+        var COLS = [0, 2, 1];   // grid columns in the order they arrive
+        var rects = '', k = 0, last = 0;
+        COLS.forEach(function (col, c) {
+          for (var row = 0; row < 3; row++, k++) {
+            var delay = k * STEP + c * PAUSE;
+            last = delay;
+            rects += '<rect' + (col === 1 ? ' class="core"' : '') + ' x="' + col * (TILE + GAP) + '" y="' + row * (TILE + GAP) +
+              '" width="' + TILE + '" height="' + TILE + '" rx="3" style="--delay:' + delay + 'ms;--dur:' + DUR + 'ms;--turn:' + (col * 90 + row * 40) +
+              'ms;--wave:' + (col * 180 + row * 60) + 'ms"/>';
+          }
+        });
+        loader.insertAdjacentHTML('beforeend', '<svg class="loader-grid" viewBox="0 0 84 84">' + rects + '</svg>');
+        loader.classList.add('loader-stacking');
+        var grid = loader.querySelector('.loader-grid');
+        var built = last + DUR + 120;
+        var t0 = performance.now();
+        // a soft note as each column completes, rising a step each time (the
+        // browser may hold sound back until the page has been interacted with)
+        var layerCtx = null;
+        function layerSound(i) {
+          try {
+            if (!layerCtx) {
+              var AC = window.AudioContext || window.webkitAudioContext;
+              if (!AC) return;
+              layerCtx = new AC();
+            }
+            if (layerCtx.state === 'suspended') layerCtx.resume();
+            var when = layerCtx.currentTime;
+            var freq = [130.81, 164.81, 196.00][i % 3];   // C3 E3 G3
+            [[freq, 0.05, 0.7], [freq * 2, 0.012, 0.35]].forEach(function (partial) {
+              var osc = layerCtx.createOscillator();
+              osc.type = 'sine';
+              osc.frequency.value = partial[0];
+              var gain = layerCtx.createGain();
+              gain.gain.setValueAtTime(0, when);
+              gain.gain.linearRampToValueAtTime(partial[1], when + 0.008);
+              gain.gain.exponentialRampToValueAtTime(0.0001, when + partial[2]);
+              osc.connect(gain).connect(layerCtx.destination);
+              osc.start(when);
+              osc.stop(when + partial[2]);
+            });
+          } catch (e) {}
+        }
+        for (var n = 0; n < 3; n++) {
+          setTimeout(layerSound.bind(null, n), (n * 3 + 2) * STEP + n * PAUSE + DUR * 0.55);
+        }
+        // turn the accent the moment the last tile lands (the ease-out has it
+        // settled well before its animation formally ends)
+        setTimeout(function () {
+          window.loaderBlueAt = performance.now();
+          loader.classList.add('loader-complete');
+        }, last + DUR * 0.55);
+        // built but the page not ready yet: the waiting wave
+        setTimeout(function () { if (!ready) grid.classList.add('loader-waiting'); }, built);
+        (function wait() {
+          var elapsed = performance.now() - t0;
+          if (elapsed >= built && (ready || elapsed >= MAX_WAIT)) finishLoader();
+          else setTimeout(wait, 60);
+        })();
+        return;
+      }
+
+      var fill = loader.querySelector('.loader-fill');
+      var LENGTH = 2 * Math.PI * 13;
+      var FILL_MS = 1400;
+      var MAX_MS = 5000;
+      var start = performance.now();
+      var finished = false;
+
+      fill.style.strokeDasharray = LENGTH + ' ' + LENGTH;
+      fill.style.strokeDashoffset = LENGTH;
+
+      function draw(pct) {
+        if (pct >= 100) {
+          fill.style.strokeDasharray = 'none';
+        } else {
+          fill.style.strokeDashoffset = LENGTH * (1 - pct / 100);
+        }
+      }
+
+      function finish() {
+        if (finished) return;
+        finished = true;
+        finishLoader();
+      }
+
+      // One smooth, continuous fill. If the page is still loading when the
+      // ring closes, it simply stays full until it is ready.
+      function tick(now) {
+        var elapsed = now - start;
+        var t = Math.min(1, elapsed / FILL_MS);
+        var eased = t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+        draw(eased * 100);
+        if (t >= 1 && (ready || elapsed >= MAX_MS)) finish(); else requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    })();
+  </script>
+  <div class="frame-header">
+    <a class="site-title" href="./">Civilisational<br>Paradigm</a>
+
+    <nav class="toc" aria-label="Contents" data-upcoming='[]'>
+      <p class="toc-label">Civilisation Research</p>
+      <ol></ol>
+    </nav>
+  </div>
+
+  <div class="left-controls">
+    <a class="pdf-btn" href="The%20Civilisation%20Research%20Paradigm.pdf" download="The Civilisation Research Paradigm.pdf" aria-label="Download the article as a PDF">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14 3H6.5A1.5 1.5 0 0 0 5 4.5v15A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5V8z"/>
+        <path d="M14 3v5h5"/>
+        <g class="arrow"><path d="M12 10.5v6.5"/><path d="M9 14l3 3 3-3"/></g>
+      </svg>
+      <span class="ctl-note" aria-hidden="true">Download PDF</span>
+    </a>
+    <button class="email-btn" type="button" data-email="maxjosephholly@outlook.com" aria-label="Copy the email address, maxjosephholly@outlook.com">
+      <svg class="icon-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="5.5" width="18" height="13" rx="1.5"/>
+        <path d="M3.5 6.5 12 13l8.5-6.5"/>
+      </svg>
+      <svg class="icon-mail-send" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <g transform="rotate(-20 14 12)">
+          <rect x="5.5" y="5.75" width="17" height="12.5" rx="1.3"/>
+          <path d="M6 6.4 14 12.8 22 6.4"/>
+        </g>
+        <path class="speed" d="M-3.5 8.5h6.5M-2 11.5h5M-4 14.5h7M-1.5 17.5h4.5"/>
+      </svg>
+      <span class="ctl-note" aria-live="polite">Copy email</span>
+    </button>
+    <button class="theme-toggle" type="button" aria-label="Toggle theme">
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+        <circle cx="12" cy="12" r="4.5"/>
+        <line x1="12" y1="2" x2="12" y2="5"/>
+        <line x1="12" y1="19" x2="12" y2="22"/>
+        <line x1="2" y1="12" x2="5" y2="12"/>
+        <line x1="19" y1="12" x2="22" y2="12"/>
+        <line x1="4.5" y1="4.5" x2="6.5" y2="6.5"/>
+        <line x1="17.5" y1="17.5" x2="19.5" y2="19.5"/>
+        <line x1="4.5" y1="19.5" x2="6.5" y2="17.5"/>
+        <line x1="17.5" y1="6.5" x2="19.5" y2="4.5"/>
+      </svg>
+      <svg class="icon-sun-cloud" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="9" cy="9" r="3.4"/>
+        <line x1="9" y1="2" x2="9" y2="3.6"/>
+        <line x1="2" y1="9" x2="3.6" y2="9"/>
+        <line x1="4.05" y1="4.05" x2="5.2" y2="5.2"/>
+        <line x1="13.95" y1="4.05" x2="12.8" y2="5.2"/>
+        <line x1="4.05" y1="13.95" x2="5.2" y2="12.8"/>
+        <path class="cloud" d="M9.5 21h8a4.5 4.5 0 0 0 0-9 5.5 5.5 0 0 0-10.4 1.9A3.6 3.6 0 0 0 9.5 21Z"/>
+      </svg>
+      <svg class="icon-moon-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5Z"/>
+        <path d="M18 2.2Q18.5 4.5 20.8 5 18.5 5.5 18 7.8 17.5 5.5 15.2 5 17.5 4.5 18 2.2Z" fill="currentColor" stroke-width="0.8"/>
+      </svg>
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5Z"/>
+      </svg>
+      <span class="ctl-note" aria-hidden="true">Theme <kbd>T</kbd></span>
+    </button>
+  </div>
+
+  <svg class="progress-ring" viewBox="0 0 30 30" aria-hidden="true">
+    <circle class="progress-ring-track" cx="15" cy="15" r="13"/>
+    <circle class="progress-ring-fill" cx="15" cy="15" r="13"/>
+  </svg>
+
+  <a class="canvas-title title-top" href="#" aria-label="Civilisational Paradigm: back to the top">Civilisational<br>Paradigm</a>
+
+  <button class="scroll-top-btn" type="button" aria-label="Scroll to top">
+    <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1" stroke-linejoin="round">
+      <polygon points="14,9.078 20.328,18.922 14,15.969 7.672,18.922"/>
+    </svg>
+  </button>
+
+  <div class="page">
+    <header class="site-header"></header>
+
+    <div class="layout-grid">
+      <main class="main-area">
+        <article>
+          <div class="article-header">
+            <p class="article-author"><a class="author-link" href="https://maxramsahoye.github.io/max/" target="_blank" rel="noopener">Max Ramsahoye</a></p>
+            <h1 class="article-title"><a class="heading-link title-top" href="#"><span class="title-line">The Civilisation Research Paradigm</span></a></h1>
+            <p class="article-subtitle">Across civilisational <em>mechanics</em> &ndash; functioning at the macro-scale &ndash; <em>design</em> &ndash; ideal high-level principles &ndash; and <em>transition</em> &ndash; theory of world-systems change.</p>
+            <button class="next-screen" type="button" data-target="overview" aria-label="Continue to the overview">
+              <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1" stroke-linejoin="round">
+                <polygon points="14,19.469 21.031,8.531 14,11.813 6.969,8.531"/>
+              </svg>
+            </button>
+          </div>
+
+          <div class="article-body">
+            <section id="overview">
+              <button class="next-screen next-screen-overview" type="button" data-target="structure" aria-label="Continue to the next section">
+                <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1" stroke-linejoin="round">
+                <polygon points="14,19.469 21.031,8.531 14,11.813 6.969,8.531"/>
+              </svg>
+              </button>
+
+              <h2><a class="heading-link" href="#overview">Overview</a></h2>
+
+              <p>In 2020, The <a href="https://civilizationresearchinstitute.org/" target="_blank" rel="noopener">Civilization Research Institute</a> (CRI) was founded by Daniel Schmachtenberger. Prior to this in 2017, Schmachtenberger had published a series of notes on civilisation design and transition criteria with a focus on New Economics. As a leading theorist of the metacrisis he has also spoken at length on the search for the third attractor: a civilisation design that avoids decentralised destruction by default &ndash; from multi-polar dynamics &ndash; and centralised control as counter-reaction &ndash; coercively managing catastrophic risks.</p>
+
+              <p>At this point in time, civilisation research &ndash; under the paradigm Schmachtenberger has pioneered &ndash; is not formally developed, even by CRI itself (at least from the outside). From a cursory investigation online, &lsquo;civilisation research&rsquo;, &lsquo;civilisation studies&rsquo; and &lsquo;civilisation science&rsquo; mostly yield results with an anthropology or complex systems emphasis &ndash; which are of course major components, but not sufficiently holistic. Similarly, whilst I have previously written on starting a new field and movement for the Metacrisis, Civilisation Alignment or Coordination (Studies), Civilisation Research subsumes these as the highest-level or most foundational frame possible.</p>
+
+              <p>My goal with this document is to give a conceptual structure to the paradigm of Civilisation Research and set out a preliminary research agenda: to be undertaken outside of and beyond CRI &ndash; across a wider (generative cooperative) research network. Essentially this document serves an onboarding function (assembling everything in one place) for those who are new to this extremely large-scale and complex domain of thought.</p>
+            </section>
+
+            <section id="structure" class="in-band band-alt">
+              <h2><a class="heading-link" href="#structure">Structure</a></h2>
+
+              <p>In my conceptual model of civilisation research, it is subdivided into nine subframes: three civilisational&ndash;, three meta&ndash; and three macro&ndash;. These latter clusters inform and are conceptually subordinate to the Civilisational framework. I set out each of these in the sections below.</p>
+            </section>
+
+            <section id="contents" class="in-band" data-toc="off">
+              <h2><a class="heading-link" href="#contents">Contents</a></h2>
+
+              <ul class="dash-list live-list">
+                <li>Civilisational
+                  <ul class="dash-list live-sub">
+                    <li>Civilisational Mechanics</li>
+                    <li>Civilisation Design</li>
+                    <li>Civilisational Transition</li>
+                  </ul>
+                </li>
+                <li>Meta
+                  <ul class="dash-list live-sub">
+                    <li>Metacrisis</li>
+                    <li>Metamodernism</li>
+                    <li>Metatheory</li>
+                  </ul>
+                </li>
+                <li>Macro
+                  <ul class="dash-list live-sub">
+                    <li>Macrohistory</li>
+                    <li>Macrosociology</li>
+                    <li>Macrostrategy</li>
+                  </ul>
+                </li>
+              </ul>
+            </section>
+
+            <section id="civilisational">
+              <h2><a class="heading-link" href="#civilisational">Civilisational</a></h2>
+
+              <h3 id="civilisational-mechanics"><a class="heading-link" href="#civilisational-mechanics">Civilisational Mechanics</a></h3>
+
+              <h3 id="civilisation-design"><a class="heading-link" href="#civilisation-design">Civilisation Design</a></h3>
+
+              <h3 id="civilisational-transition"><a class="heading-link" href="#civilisational-transition">Civilisational Transition</a></h3>
+            </section>
+
+            <section id="meta" class="divided">
+              <h2><a class="heading-link" href="#meta">Meta</a></h2>
+
+              <h3 id="metacrisis"><a class="heading-link" href="#metacrisis">Metacrisis</a></h3>
+
+              <h3 id="metamodernism"><a class="heading-link" href="#metamodernism">Metamodernism</a></h3>
+
+              <h3 id="metatheory"><a class="heading-link" href="#metatheory">Metatheory</a></h3>
+            </section>
+
+            <section id="macro" class="divided">
+              <h2><a class="heading-link" href="#macro">Macro</a></h2>
+
+              <h3 id="macrohistory"><a class="heading-link" href="#macrohistory">Macrohistory</a></h3>
+
+              <h3 id="macrosociology"><a class="heading-link" href="#macrosociology">Macrosociology</a></h3>
+
+              <h3 id="macrostrategy"><a class="heading-link" href="#macrostrategy">Macrostrategy</a></h3>
+            </section>
+          </div>
+        </article>
+      </main>
+    </div>
+
+    <div class="endnotes" id="endnotes">
+      <p class="endnotes-heading">Endnotes</p>
+    </div>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+      <div class="footer-head">
+      <p class="footer-subtitle"><em><span class="hang">“</span>Very young to the field whose paradigm they change”</em></p>
+      <p class="footer-title"><a class="heading-link" href="./">civilisationalparadigm</a></p>
+      </div>
+      <!-- hidden: remove the hidden attribute to show the menu again -->
+      <nav class="footer-sitemap" aria-label="Sitemap" hidden>
+        <ol>
+          <li><a href="./">Article</a></li>
+          <li><a class="footer-contact" href="mailto:maxjosephholly@outlook.com" data-email="maxjosephholly@outlook.com">Contact</a></li>
+        </ol>
+      </nav>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // the title takes you back to the top of the page
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest('a.title-top');
+      if (!a || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+  </script>
+  <script>
+    (function () {
+      window.addEventListener('pageshow', function (e) {
+        if (e.persisted) {
+          document.body.classList.remove('page-leaving');
+        }
+      });
+
+      document.addEventListener('click', function (e) {
+        if (e.defaultPrevented || e.button !== 0) return;
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+        var link = e.target.closest('a');
+        if (!link || (link.target && link.target !== '_self') || link.hasAttribute('download')) return;
+        var url;
+        try { url = new URL(link.href, location.href); } catch (err) { return; }
+        if (url.origin !== location.origin) return;
+        if (url.pathname === location.pathname && url.hash) return;
+        e.preventDefault();
+        document.body.classList.add('page-leaving');
+        setTimeout(function () {
+          location.href = link.href;
+        }, 210);
+      });
+
+      // the last section in the Overview's band: the Overview itself, or the
+      // last of the sections that follow it there
+      function bandEnd() {
+        var e = document.getElementById('overview');
+        while (e && e.nextElementSibling && e.nextElementSibling.classList.contains('in-band')) e = e.nextElementSibling;
+        return e;
+      }
+      var tocNav = document.querySelector('.toc');
+      var tocList = tocNav.querySelector('ol');
+      var tocItemCount = 0;
+      document.querySelectorAll('.article-body > section[id]:not([data-toc="off"])').forEach(function (section) {
+        var heading = section.querySelector(':scope > h2, :scope > h3');
+        if (!heading) return;
+        var li = document.createElement('li');
+        var a = document.createElement('a');
+        a.href = '#' + section.id;
+        a.textContent = heading.dataset.toc || heading.textContent;
+        li.appendChild(a);
+        tocList.appendChild(li);
+        tocItemCount++;
+      });
+      // sections still to come (named on the menu itself, where the Overviews
+      // page reads them too): listed in the menu, greyed out, not yet links
+      var upcoming = [];
+      try { upcoming = JSON.parse(tocNav.getAttribute('data-upcoming') || '[]'); } catch (err) {}
+      upcoming.forEach(function (title) {
+        var li = document.createElement('li');
+        li.className = 'toc-upcoming';
+        li.title = 'Forthcoming';
+        li.innerHTML = '<span></span><span class="visually-hidden"> (forthcoming)</span>';
+        li.firstChild.textContent = title;
+        tocList.appendChild(li);
+      });
+
+      if (tocItemCount === 0) {
+        tocNav.style.display = 'none';
+      }
+
+      // the menu shows once the Overview is scrolled past (not over the
+      // footer), fades after 1.5 seconds, and comes back while the pointer is
+      // in the empty column left of the text, or on the menu itself
+      (function () {
+        var TOC_HOLD = 1500;
+        var overview = bandEnd();
+        var footer = document.querySelector('.site-footer');
+        var mainArea = document.querySelector('.main-area');
+        var active = false, hovering = false, timer = null;
+
+        function setOpen(on) { document.body.classList.toggle('toc-open', on); }
+        function fadeLater() {
+          clearTimeout(timer);
+          timer = setTimeout(function () { if (!hovering) setOpen(false); }, TOC_HOLD);
+        }
+        function check() {
+          var now = overview.getBoundingClientRect().bottom < 0 &&
+            !(footer && footer.getBoundingClientRect().top < window.innerHeight);
+          if (now === active) return;
+          active = now;
+          if (active) { setOpen(true); fadeLater(); }
+          else { clearTimeout(timer); setOpen(false); }
+        }
+        document.addEventListener('mousemove', function (e) {
+          var inColumn = e.clientX < mainArea.getBoundingClientRect().left || tocNav.contains(e.target);
+          if (inColumn === hovering) return;
+          hovering = inColumn;
+          if (!active) return;
+          if (hovering) { clearTimeout(timer); setOpen(true); }
+          else fadeLater();
+        });
+        document.addEventListener('mouseleave', function () {
+          if (hovering && active) { hovering = false; fadeLater(); }
+          hovering = false;
+        });
+        window.addEventListener('scroll', check, { passive: true });
+        window.addEventListener('resize', check);
+        check();
+      })();
+
+      var endnotesContainer = document.getElementById('endnotes');
+      var sidenotes = Array.prototype.slice.call(document.querySelectorAll('.sidenote'));
+      var sidenoteHomes = sidenotes.map(function (el) {
+        return { el: el, parent: el.parentNode, next: el.nextSibling };
+      });
+
+      sidenotes.forEach(function (el, i) {
+        var label = el.querySelector('.sidenote-label');
+        if (label) label.setAttribute('data-num', i + 1);
+      });
+
+      function findSentenceStart(textBefore) {
+        var boundary = /[.!?]+["'’”)\]]*\s+/g;
+        var start = 0;
+        var m;
+        while ((m = boundary.exec(textBefore))) {
+          var wordBefore = textBefore.slice(0, m.index).match(/(\S+)$/);
+          var word = wordBefore ? wordBefore[1] : '';
+          if (/^(?:[A-Z]\.)*[A-Z]$/.test(word)) continue;
+          if (/^(?:e\.g|i\.e|etc|vs|cf|Mr|Mrs|Ms|Dr|St)$/i.test(word)) continue;
+          start = m.index + m[0].length;
+        }
+        return start;
+      }
+
+      function wrapAnchorSentence(ref, noteNum) {
+        var block = ref.closest('p, li');
+        if (!block) return;
+        var before = document.createRange();
+        before.setStart(block, 0);
+        before.setEndBefore(ref);
+        var offset = findSentenceStart(before.toString());
+
+        var walker = document.createTreeWalker(block, NodeFilter.SHOW_TEXT);
+        var node;
+        var startNode = null;
+        var startOffset = 0;
+        while ((node = walker.nextNode())) {
+          if (node.compareDocumentPosition(ref) & Node.DOCUMENT_POSITION_PRECEDING) break;
+          if (offset <= node.length) {
+            startNode = node;
+            startOffset = offset;
+            break;
+          }
+          offset -= node.length;
+        }
+        if (!startNode) return;
+
+        var range = document.createRange();
+        if (startNode.parentNode === block) {
+          range.setStart(startNode, startOffset);
+        } else {
+          var top = startNode;
+          while (top.parentNode !== block) top = top.parentNode;
+          range.setStartBefore(top);
+        }
+        range.setEndAfter(ref);
+
+        var span = document.createElement('span');
+        span.className = 'note-anchor';
+        span.setAttribute('data-note', noteNum);
+        try {
+          range.surroundContents(span);
+        } catch (err) {}
+      }
+
+      Array.prototype.forEach.call(document.querySelectorAll('.sidenote-ref'), function (ref) {
+        wrapAnchorSentence(ref, ref.id.replace('ref-', ''));
+      });
+
+      function noteParts(num) {
+        var note = document.getElementById('note-' + num);
+        return [
+          document.getElementById('ref-' + num),
+          note,
+          note && note.querySelector('.sidenote-label'),
+          document.querySelector('.note-anchor[data-note="' + num + '"]')
+        ].filter(Boolean);
+      }
+
+      function setNoteActive(num, on) {
+        noteParts(num).forEach(function (el) {
+          el.classList.toggle('note-active', on);
+        });
+      }
+
+      Array.prototype.forEach.call(document.querySelectorAll('.sidenote-ref, .sidenote-label'), function (el) {
+        var num = el.classList.contains('sidenote-ref')
+          ? el.id.replace('ref-', '')
+          : el.getAttribute('href').replace('#ref-', '');
+        ['mouseenter', 'focus'].forEach(function (type) {
+          el.addEventListener(type, function () { setNoteActive(num, true); });
+        });
+        ['mouseleave', 'blur'].forEach(function (type) {
+          el.addEventListener(type, function () { setNoteActive(num, false); });
+        });
+      });
+
+      var endnotesQuery = window.matchMedia('(max-width: 960px)');
+      var notesAreEndnotes = null;
+
+      function setEndnotesMode(isEndnotes) {
+        if (isEndnotes === notesAreEndnotes) return;
+        notesAreEndnotes = isEndnotes;
+        if (isEndnotes) {
+          sidenoteHomes.forEach(function (home) {
+            endnotesContainer.appendChild(home.el);
+          });
+          endnotesContainer.classList.toggle('has-notes', sidenoteHomes.length > 0);
+        } else {
+          sidenoteHomes.forEach(function (home) {
+            home.parent.insertBefore(home.el, home.next);
+          });
+          endnotesContainer.classList.remove('has-notes');
+        }
+      }
+
+      setEndnotesMode(endnotesQuery.matches);
+      endnotesQuery.addEventListener('change', function (e) {
+        setEndnotesMode(e.matches);
+      });
+
+      var sidenoteRefs = Array.prototype.slice.call(document.querySelectorAll('.sidenote-ref'));
+      var SIDENOTE_STAGGER_MS = 350;
+
+      if (window.IntersectionObserver) {
+        var sidenoteStaggerIndex = 0;
+        var sidenoteStaggerResetTimer = null;
+
+        var refOnScreen = {};
+        var noteOnScreen = {};
+
+        function refreshNoteVisibility(num) {
+          var note = document.getElementById('note-' + num);
+          if (!note) return;
+          var show = !!(refOnScreen[num] && noteOnScreen[num]);
+          if (show === note.classList.contains('note-in-view')) return;
+          if (show) {
+            note.style.transitionDelay = (sidenoteStaggerIndex * SIDENOTE_STAGGER_MS) + 'ms';
+            sidenoteStaggerIndex++;
+            clearTimeout(sidenoteStaggerResetTimer);
+            sidenoteStaggerResetTimer = setTimeout(function () { sidenoteStaggerIndex = 0; }, 700);
+          } else {
+            note.style.transitionDelay = '0ms';
+          }
+          note.classList.toggle('note-in-view', show);
+        }
+
+        var sidenoteObserver = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            var isRef = entry.target.classList.contains('sidenote-ref');
+            var num = entry.target.id.replace(isRef ? 'ref-' : 'note-', '');
+            if (isRef) {
+              refOnScreen[num] = entry.isIntersecting;
+            } else if (!entry.isIntersecting) {
+              noteOnScreen[num] = false;
+            }
+            refreshNoteVisibility(num);
+          });
+          checkNotesArrival();
+        });
+
+        // A note only counts as arrived once all of it is on screen with clear space below it of half its height.
+        var checkNotesArrival = function () {
+          var viewportHeight = window.innerHeight;
+          sidenotes.forEach(function (note) {
+            var num = note.id.replace('note-', '');
+            if (noteOnScreen[num]) return;
+            var rect = note.getBoundingClientRect();
+            var needed = Math.min(rect.height * 1.5, viewportHeight * 0.75);
+            if (rect.top >= 0 && rect.top + needed <= viewportHeight) {
+              noteOnScreen[num] = true;
+              refreshNoteVisibility(num);
+            }
+          });
+        };
+
+        sidenoteRefs.concat(sidenotes).forEach(function (el) {
+          sidenoteObserver.observe(el);
+        });
+        window.addEventListener('scroll', checkNotesArrival, { passive: true });
+        window.addEventListener('resize', checkNotesArrival);
+        checkNotesArrival();
+      } else {
+        sidenotes.forEach(function (note) {
+          note.classList.add('note-in-view');
+        });
+      }
+
+      var ringFill = document.querySelector('.progress-ring-fill');
+      var footerEl = document.querySelector('.site-footer');
+      var overviewSection = bandEnd();
+      var RING_LENGTH = 2 * Math.PI * ringFill.r.baseVal.value;
+      var btn = document.querySelector('.scroll-top-btn');
+      var page = document.querySelector('.page');
+      var reachedEnd = false;
+      var revealReady = false;
+
+      function markRevealReady() {
+        revealReady = true;
+        sidenotes.filter(function (note) {
+          return note.classList.contains('note-in-view');
+        }).forEach(function (note, i) {
+          note.style.transitionDelay = (i * SIDENOTE_STAGGER_MS) + 'ms';
+        });
+        document.body.classList.add('reveal-ready');
+      }
+
+      function update() {
+        var doc = document.documentElement;
+        var scrollTop = doc.scrollTop || document.body.scrollTop;
+        var scrollable = doc.scrollHeight - doc.clientHeight;
+        // The ring measures reading from the Overview's bottom rule (the start of
+        // Macrohistory) to the end of the page, and only shows once that rule
+        // has scrolled past the top of the window.
+        var RING_START = overviewSection.getBoundingClientRect().bottom + scrollTop;
+        var ringScrollable = scrollable - RING_START;
+        var pastOverviewRule = scrollTop >= RING_START;
+        var pct = ringScrollable > 0 ? Math.min(100, Math.max(0, ((scrollTop - RING_START) / ringScrollable) * 100)) : 0;
+        if (scrollable > 0 && scrollTop >= scrollable - 2) {
+          pct = 100;
+        }
+
+        if (pct >= 100) {
+          // A solid stroke: dashes can leave a hairline gap at the join.
+          ringFill.style.strokeDasharray = 'none';
+        } else {
+          ringFill.style.strokeDasharray = RING_LENGTH + ' ' + RING_LENGTH;
+          ringFill.style.strokeDashoffset = RING_LENGTH * (1 - pct / 100);
+        }
+
+        if (pct >= 100 && !reachedEnd) {
+          reachedEnd = true;
+          playCompletionSound();
+        } else if (pct < 100 && reachedEnd) {
+          reachedEnd = false;
+        }
+
+        var footerInView = footerEl.getBoundingClientRect().top < window.innerHeight;
+        var pastOverview = overviewSection.getBoundingClientRect().bottom < window.innerHeight / 2;
+        btn.classList.toggle('visible', pastOverview && !footerInView);
+        var isWide = scrollTop > 10;
+        document.body.classList.toggle('wide', isWide);
+        document.body.classList.toggle('past-overview', pastOverviewRule);
+        document.body.classList.toggle('footer-in-view', footerInView);
+      }
+
+      window.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update);
+      update();
+
+      function easeInOutQuad(t) {
+        return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+      }
+
+      function animateScrollTo(targetY, duration) {
+        var startY = window.scrollY;
+        var distance = targetY - startY;
+        var startTime = null;
+
+        function step(timestamp) {
+          if (startTime === null) startTime = timestamp;
+          var progress = Math.min((timestamp - startTime) / duration, 1);
+          window.scrollTo({ top: startY + distance * easeInOutQuad(progress), behavior: 'instant' });
+          if (progress < 1) requestAnimationFrame(step);
+        }
+
+        requestAnimationFrame(step);
+      }
+
+      var REVEAL_DELAY = 1000;
+
+      if (!location.hash) {
+        setTimeout(markRevealReady, REVEAL_DELAY);
+      } else {
+        markRevealReady();
+      }
+
+      function scrollToTop() {
+        animateScrollTo(0, 900);
+      }
+
+      btn.addEventListener('click', scrollToTop);
+
+      // Give an arrow its hover look for a moment when its shortcut is used.
+      function flashHover(el) {
+        el.classList.add('key-hover');
+        clearTimeout(el.keyHoverTimer);
+        el.keyHoverTimer = setTimeout(function () { el.classList.remove('key-hover'); }, 600);
+      }
+
+      var nextScreenBtns = Array.prototype.slice.call(document.querySelectorAll('.next-screen'));
+
+      // design 2: the first arrow (or any scroll) fades the Overview in
+      function isDesign2() {
+        return document.documentElement.classList.contains('design-2');
+      }
+
+      function showOverview() {
+        document.body.classList.add('overview-shown');
+        try { sessionStorage.setItem('crp.overviewShown', '1'); } catch (e) {}
+      }
+      window.showOverview = showOverview;
+
+      function hideOverview() {
+        var body = document.body;
+        body.classList.remove('overview-shown');
+      }
+
+      // scrolling down shows it, and once shown it stays (scrolling back to
+      // the very top no longer hides it and brings back the down arrow; a
+      // reload starts afresh)
+      function checkOverview() {
+        if (!isDesign2()) return;
+        if (window.scrollY > 10) showOverview();
+      }
+
+      window.addEventListener('scroll', checkOverview, { passive: true });
+      // once shown it stays shown on returning from the site's other pages;
+      // only a reload of the page (or arriving from elsewhere) starts afresh
+      (function () {
+        var nav = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+        var reload = nav ? nav.type === 'reload' : (performance.navigation && performance.navigation.type === 1);
+        var fromSite = false;
+        try {
+          fromSite = !!document.referrer && (function (r, s) { return r.origin === s.origin && r.pathname.indexOf(s.pathname) === 0; })(new URL(document.referrer), new URL('./', location.href));
+        } catch (e) {}
+        var seen = false;
+        try { seen = sessionStorage.getItem('crp.overviewShown') === '1'; } catch (e) {}
+        // (back and forward within the tab count as moving within the site)
+        if (nav && nav.type === 'back_forward') fromSite = true;
+        if (reload || !fromSite) { try { sessionStorage.removeItem('crp.overviewShown'); } catch (e) {} }
+        else if (seen && isDesign2()) showOverview();
+      })();
+      // a link straight to a section needs the whole article there at once
+      if (isDesign2() && location.hash) {
+        showOverview(true);
+        var target = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+        if (target) target.scrollIntoView();
+      } else if (isDesign2() && window.scrollY > 10) showOverview(true);
+      window.addEventListener('hashchange', function () {
+        if (!isDesign2() || document.body.classList.contains('overview-shown')) return;
+        showOverview(true);
+        var target = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+        if (target) target.scrollIntoView();
+      });
+
+      // pull the Overview up to just below the first arrow, leaving the first
+      // screen where it is in design 1
+      var firstHeader = document.querySelector('.article-header');
+      var firstArrow = firstHeader.querySelector('.next-screen');
+      var overviewEl = document.getElementById('overview');
+      function placeOverview() {
+        overviewEl.style.marginTop = '';
+        if (!isDesign2()) return;
+        // the Overview band starts 750px down the page (never higher than
+        // where the down arrow sits, nor lower than the foot of the first screen)
+        var headerBottom = firstHeader.getBoundingClientRect().bottom + window.scrollY;
+        var underArrow = firstArrow.getBoundingClientRect().bottom + window.scrollY - 24;
+        var bandTop = Math.min(headerBottom, Math.max(750, underArrow));
+        overviewEl.style.marginTop = Math.round(bandTop - headerBottom) + 'px';
+      }
+      window.placeOverview = placeOverview;
+      window.addEventListener('resize', placeOverview);
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(placeOverview);
+      placeOverview();
+
+      function goTo(btn) {
+        if (btn.dataset.target === 'overview' && isDesign2()) {
+          // fade the Overview in and move down to the top of its band
+          showOverview();
+          animateScrollTo(overviewEl.getBoundingClientRect().top + window.scrollY, 900);
+          return;
+        }
+        var target = document.getElementById(btn.dataset.target);
+        var offset = btn.dataset.target === 'overview' ? 0 : 72;
+        animateScrollTo(target.getBoundingClientRect().top + window.scrollY - offset, 900);
+      }
+
+      nextScreenBtns.forEach(function (btn) {
+        btn.addEventListener('click', function () { goTo(btn); });
+      });
+
+      // Enter does the same as the down arrow of the screen being read: the
+      // first screen, or the Overview while it fills the middle of the view.
+      document.addEventListener('keydown', function (e) {
+        if (e.key !== 'Enter' || e.metaKey || e.ctrlKey || e.altKey || e.shiftKey) return;
+        var tag = document.activeElement && document.activeElement.tagName;
+        if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'A' || tag === 'BUTTON' || (document.activeElement && document.activeElement.isContentEditable)) return;
+        var mid = window.innerHeight / 2;
+        var btn = nextScreenBtns.filter(function (b) {
+          var screen = b.closest('.article-header, section');
+          var r = screen.getBoundingClientRect();
+          return r.top <= mid && r.bottom > mid;
+        })[0];
+        if (!btn) return;
+        e.preventDefault();
+        flashHover(btn);
+        btn.click();
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key !== 'Backspace') return;
+        var tag = document.activeElement && document.activeElement.tagName;
+        if (tag === 'INPUT' || tag === 'TEXTAREA' || (document.activeElement && document.activeElement.isContentEditable)) return;
+        e.preventDefault();
+        flashHover(btn);
+        btn.click();
+      });
+
+      var themeToggle = document.querySelector('.theme-toggle');
+      var root = document.documentElement;
+      var THEMES = ['light', 'dark'];  // sepia and midnight hidden for now
+      var DARK_THEMES = ['midnight', 'dark'];
+
+      function setFavicons(isDark) {
+        var suffix = isDark ? 'dark' : 'light';
+        document.getElementById('favicon-ico').href = 'favicon/favicon-' + suffix + '.ico?v=p';
+        document.getElementById('favicon-32').href = 'favicon/favicon-32-' + suffix + '.png?v=p';
+        document.getElementById('favicon-192').href = 'favicon/favicon-192-' + suffix + '.png?v=p';
+        document.getElementById('favicon-apple').href = 'favicon/apple-touch-icon-' + suffix + '.png?v=p';
+      }
+
+      function currentTheme() {
+        var stored;
+        try { stored = localStorage.getItem('crp.theme'); } catch (e) {}
+        if (THEMES.indexOf(stored) !== -1) return stored;
+        // no theme chosen yet: follow the system setting
+        return systemDark && systemDark.matches ? 'dark' : 'light';
+      }
+
+      var systemDark = window.matchMedia ? matchMedia('(prefers-color-scheme: dark)') : null;
+
+      function applyTheme(theme, fromSystem) {
+        if (theme === 'light') {
+          root.removeAttribute('data-theme');
+        } else {
+          root.setAttribute('data-theme', theme);
+        }
+        setFavicons(DARK_THEMES.indexOf(theme) !== -1);
+        if (!fromSystem) try { localStorage.setItem('crp.theme', theme); localStorage.setItem('crp.themeSystem', systemDark && systemDark.matches ? 'dark' : 'light'); } catch (e) {}
+      }
+
+      // until a theme is chosen here (t), the page follows the system as it changes
+      if (systemDark && systemDark.addEventListener) systemDark.addEventListener('change', function () {
+        // a change of the system setting wins over a theme chosen with t
+        try { localStorage.removeItem('crp.theme'); } catch (e) {}
+        applyTheme(currentTheme(), true);
+      });
+
+      function toggleTheme() {
+        var next = THEMES[(THEMES.indexOf(currentTheme()) + 1) % THEMES.length];
+        applyTheme(next);
+        playThemeSound(DARK_THEMES.indexOf(next) !== -1);
+      }
+
+      themeToggle.addEventListener('click', toggleTheme);
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key !== 't' && e.key !== 'T') return;
+        if (e.metaKey || e.ctrlKey || e.altKey) return;
+        var tag = document.activeElement && document.activeElement.tagName;
+        if (tag === 'INPUT' || tag === 'TEXTAREA' || (document.activeElement && document.activeElement.isContentEditable)) return;
+        flashHover(themeToggle);
+        themeToggle.click();
+      });
+
+      // b cycles the Overview and footer colours (white theme); c toggles the blue accent.
+      var BANDS = ['green', '', 'midnight', 'black'];  // '' is light sepia; green is the default
+
+      function cycleBand() {
+        var current = BANDS.filter(function (b) { return b && root.classList.contains('band-' + b); })[0] || '';
+        var next = BANDS[(BANDS.indexOf(current) + 1) % BANDS.length];
+        BANDS.forEach(function (b) { if (b) root.classList.remove('band-' + b); });
+        if (next) root.classList.add('band-' + next);
+        try { localStorage.setItem('crp.bandColour', next || 'sepia'); } catch (err) {}
+      }
+
+      function toggleColour() {
+        var on = root.classList.toggle('colour');
+        try { localStorage.setItem('crp.blueLinks', on ? 'on' : 'off'); } catch (err) {}
+      }
+
+      // d switches between the two designs (see design 2 in the styles)
+      function toggleDesign() {
+        var on = root.classList.toggle('design-2');
+        try { localStorage.setItem('crp.design', on ? '2' : '1'); } catch (err) {}
+        if (on && window.scrollY > 10 && window.showOverview) window.showOverview(true);
+        if (window.placeOverview) window.placeOverview();
+      }
+
+      // f switches headings and subheadings to ET Bembo and back
+      function toggleSerifHeadings() {
+        var on = root.classList.toggle('serif-headings');
+        try { localStorage.setItem('crp.headings', on ? 'serif' : 'sans'); } catch (err) {}
+      }
+
+      // h switches the Overview between its shaded band and short dividing lines
+      function toggleOverviewLines() {
+        var on = root.classList.toggle('overview-lines');
+        if (window.placeOverview) window.placeOverview();
+        try { localStorage.setItem('crp.overviewStyle', on ? 'lines' : 'band'); } catch (err) {}
+      }
+
+
+      var SHORTCUTS = { b: cycleBand, c: toggleColour, d: toggleDesign, f: toggleSerifHeadings, h: toggleOverviewLines };
+
+      // b, c, d, f and h have no button: their ripple shows where the pointer is
+      var pointer = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+      document.addEventListener('mousemove', function (e) {
+        pointer.x = e.clientX;
+        pointer.y = e.clientY;
+      }, { passive: true });
+
+      document.addEventListener('keydown', function (e) {
+        var action = SHORTCUTS[e.key.toLowerCase()];
+        if (!action) return;
+        if (e.metaKey || e.ctrlKey || e.altKey) return;
+        var tag = document.activeElement && document.activeElement.tagName;
+        if (tag === 'INPUT' || tag === 'TEXTAREA' || (document.activeElement && document.activeElement.isContentEditable)) return;
+        action();
+        playPianoClick();
+        spawnRipple(pointer.x, pointer.y, getComputedStyle(document.body).color);
+      });
+
+      var audioCtx = null;
+      // C major pentatonic, C4 to E5. Clicks walk through it a step or two at a time.
+      var pianoNotes = [261.63, 293.66, 329.63, 392.00, 440.00, 523.25, 587.33, 659.25];
+      var noteIndex = 2;
+
+      // every sound passes through one master volume, which fades out as a page
+      // leaves, so notes still ringing die away instead of being cut off
+      function out() {
+        if (!audioCtx.ttMaster) {
+          audioCtx.ttMaster = audioCtx.createGain();
+          audioCtx.ttMaster.connect(audioCtx.destination);
+        }
+        return audioCtx.ttMaster;
+      }
+      new MutationObserver(function () {
+        if (!audioCtx || !audioCtx.ttMaster) return;
+        var g = audioCtx.ttMaster.gain, now = audioCtx.currentTime;
+        g.cancelScheduledValues(now);
+        g.setValueAtTime(g.value, now);
+        if (document.body.classList.contains('page-leaving')) g.linearRampToValueAtTime(0, now + 0.2);
+        else g.linearRampToValueAtTime(1, now + 0.05);
+      }).observe(document.body, { attributes: true, attributeFilter: ['class'] });
+
+      // A soft sine tone with a gentle swell and long fade, plus a faint octave.
+      // Sounds carry across page changes: every note is kept as a frequency, a
+      // start time and a fade; when the page goes, the notes still ringing are
+      // handed to the next page, which picks them up where they had reached.
+      var liveTones = [];
+      function toneAt(f, t0, p, d) {
+        var c = audioCtx.currentTime, nowMs = Date.now();
+        var start = c + (t0 - nowMs) / 1000, end = c + (t0 + d * 1000 - nowMs) / 1000;
+        if (end <= c + 0.05) return;
+        var A = 0.03;
+        var osc = audioCtx.createOscillator();
+        osc.type = 'sine';
+        osc.frequency.value = f;
+        var gain = audioCtx.createGain();
+        if (start >= c) {
+          gain.gain.setValueAtTime(0, start);
+          gain.gain.linearRampToValueAtTime(p, start + A);
+          gain.gain.exponentialRampToValueAtTime(0.0001, end);
+          osc.start(start);
+        } else {
+          // already sounding: come in at the level it had reached
+          var el = c - start;
+          var v = el < A ? p * el / A : p * Math.pow(0.0001 / p, (el - A) / (d - A));
+          gain.gain.setValueAtTime(0.0001, c);
+          gain.gain.exponentialRampToValueAtTime(Math.max(v, 0.0002), c + 0.04);
+          gain.gain.exponentialRampToValueAtTime(0.0001, end);
+          osc.start(c);
+        }
+        osc.connect(gain).connect(out());
+        osc.stop(end);
+        liveTones.push({ f: f, t0: t0, p: p, d: d });
+      }
+      window.addEventListener('pagehide', function () {
+        var now = Date.now();
+        var ringing = liveTones.filter(function (t) { return t.t0 + t.d * 1000 > now + 100; });
+        try { sessionStorage.setItem('crp.ttTones', JSON.stringify({ at: now, tones: ringing })); } catch (e) {}
+      });
+      (function () {
+        var data = null;
+        try { data = JSON.parse(sessionStorage.getItem('crp.ttTones')); sessionStorage.removeItem('crp.ttTones'); } catch (e) {}
+        if (!data || !data.tones || !data.tones.length || Date.now() - data.at > 4000) return;
+        try {
+          if (!audioCtx) {
+            var AC = window.AudioContext || window.webkitAudioContext;
+            if (!AC) return;
+            audioCtx = new AC();
+          }
+          var play = function () { data.tones.forEach(function (t) { toneAt(t.f, t.t0, t.p, t.d); }); };
+          if (audioCtx.state === 'running') play();
+          else audioCtx.resume().then(play, function () {});
+        } catch (e) {}
+      })();
+
+      function playSoftTone(freq, when, peak, decay) {
+        var t0 = Date.now() + (when - audioCtx.currentTime) * 1000;
+        toneAt(freq, t0, peak, decay);
+        toneAt(freq * 2, t0, peak * 0.12, decay * 0.6);
+      }
+
+      function playPianoClick(short) {
+        try {
+          if (!audioCtx) {
+            var AC = window.AudioContext || window.webkitAudioContext;
+            if (!AC) return;
+            audioCtx = new AC();
+          }
+          if (audioCtx.state === 'suspended') { audioCtx.resume(); }
+          var steps = [-2, -1, 1, 2];
+          var next = noteIndex + steps[Math.floor(Math.random() * steps.length)];
+          if (next < 0 || next >= pianoNotes.length) next = noteIndex - (next - noteIndex);
+          noteIndex = next;
+          var now = audioCtx.currentTime;
+          playSoftTone(pianoNotes[noteIndex], now, 0.045, short ? 0.6 : 2.8);
+          // A quieter answering note two scale steps above.
+          var answer = pianoNotes[Math.min(noteIndex + 2, pianoNotes.length - 1)];
+          if (answer !== pianoNotes[noteIndex]) playSoftTone(answer, now + 0.16, 0.018, short ? 0.4 : 2.4);
+        } catch (e) {}
+      }
+
+      // (a click that leaves for another page plays its full note: the next
+      // page picks up its tail)
+      document.addEventListener('click', function (e) {
+        if (e.target.closest('.theme-toggle')) return;
+        playPianoClick();
+      });
+
+      function playThemeSound(toDark) {
+        try {
+          if (!audioCtx) {
+            var AC = window.AudioContext || window.webkitAudioContext;
+            if (!AC) return;
+            audioCtx = new AC();
+          }
+          if (audioCtx.state === 'suspended') { audioCtx.resume(); }
+          var notes = toDark ? [392.00, 329.63, 261.63] : [261.63, 329.63, 392.00];
+          var start = audioCtx.currentTime;
+
+          notes.forEach(function (freq, i) {
+            playSoftTone(freq, start + i * 0.17, 0.05, 2.2);
+          });
+        } catch (e) {}
+      }
+
+      // The loading ring closing plays the same chord as finishing the article.
+      if (window.loaderComplete) playCompletionSound();
+      else document.addEventListener('loadercomplete', playCompletionSound);
+
+      function playCompletionSound() {
+        try {
+          if (!audioCtx) {
+            var AC = window.AudioContext || window.webkitAudioContext;
+            if (!AC) return;
+            audioCtx = new AC();
+          }
+          if (audioCtx.state === 'suspended') { audioCtx.resume(); }
+          // A slow, quiet rising C major arpeggio that rings out.
+          var start = audioCtx.currentTime;
+          [261.63, 329.63, 392.00, 523.25].forEach(function (freq, i) {
+            playSoftTone(freq, start + i * 0.22, 0.04, 2.6);
+          });
+        } catch (e) {}
+      }
+
+      function playExpandSound() {
+        try {
+          if (!audioCtx) {
+            var AC = window.AudioContext || window.webkitAudioContext;
+            if (!AC) return;
+            audioCtx = new AC();
+          }
+          if (audioCtx.state === 'suspended') { audioCtx.resume(); }
+          var freq = 130.81;
+          var now = audioCtx.currentTime;
+
+          var osc = audioCtx.createOscillator();
+          osc.type = 'sine';
+          osc.frequency.value = freq;
+
+          var osc2 = audioCtx.createOscillator();
+          osc2.type = 'sine';
+          osc2.frequency.value = freq * 2;
+
+          var gain = audioCtx.createGain();
+          gain.gain.setValueAtTime(0, now);
+          gain.gain.linearRampToValueAtTime(0.13, now + 0.008);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.7);
+
+          var gain2 = audioCtx.createGain();
+          gain2.gain.setValueAtTime(0, now);
+          gain2.gain.linearRampToValueAtTime(0.03, now + 0.008);
+          gain2.gain.exponentialRampToValueAtTime(0.0001, now + 0.55);
+
+          osc.connect(gain).connect(out());
+          osc2.connect(gain2).connect(out());
+
+          osc.start(now);
+          osc.stop(now + 0.7);
+          osc2.start(now);
+          osc2.stop(now + 0.55);
+        } catch (e) {}
+      }
+
+      document.body.addEventListener('transitionend', function (e) {
+        if (e.target !== document.body) return;
+        if (e.propertyName !== 'padding-left') return;
+        if (document.body.classList.contains('wide')) {
+          playExpandSound();
+        }
+      });
+
+      function spawnRipple(x, y, color) {
+        var ripple = document.createElement('div');
+        ripple.className = 'click-ripple';
+        ripple.style.left = x + 'px';
+        ripple.style.top = y + 'px';
+        ripple.style.borderColor = color;
+        document.body.appendChild(ripple);
+        ripple.addEventListener('animationend', function () {
+          ripple.remove();
+        });
+      }
+
+      // the envelope copies the email address
+      (function () {
+        var btn = document.querySelector('.email-btn');
+        var note = btn.querySelector('.ctl-note');
+        var timer;
+        btn.addEventListener('click', function () {
+          var email = btn.getAttribute('data-email');
+          var done = function () {
+            note.textContent = 'Email copied';
+            btn.classList.add('copied');
+            clearTimeout(timer);
+            timer = setTimeout(function () { btn.classList.remove('copied'); setTimeout(function () { note.textContent = 'Copy email'; }, 250); }, 1800);
+          };
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(email).then(done, function () { note.textContent = email; btn.classList.add('copied'); });
+          } else {
+            var t = document.createElement('textarea');
+            t.value = email; t.style.position = 'fixed'; t.style.opacity = '0';
+            document.body.appendChild(t); t.select();
+            try { document.execCommand('copy'); done(); } catch (err) { note.textContent = email; btn.classList.add('copied'); }
+            t.remove();
+          }
+        });
+      })();
+
+      document.addEventListener('click', function (e) {
+        var iconBtn = e.target.closest('.pdf-btn, .email-btn, .theme-toggle, .back-arrow, .scroll-top-btn, .next-screen, .menu-btn, .sidenote-ref, .sidenote-label');
+        var x, y;
+        if (iconBtn) {
+          var rect = iconBtn.getBoundingClientRect();
+          x = rect.left + rect.width / 2;
+          y = rect.top + rect.height / 2;
+        } else {
+          x = e.clientX;
+          y = e.clientY;
+        }
+        spawnRipple(x, y, getComputedStyle(e.target).color);
+      });
+    })();
+  </script>
+  <script src="assets/tools.js?v=95888483" data-search-scope=".article-body, .endnotes" data-search-exclude="#overview" data-hide-until="#overview"></script>
+</body>
+</html>
