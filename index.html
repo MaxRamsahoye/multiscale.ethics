@@ -272,10 +272,16 @@
 
     /* on the golden yellow band, every link is white */
     html.band-gold:not([data-theme]) :is(#overview, .in-band) a:not(.heading-link),
-    html.band-gold:not([data-theme]) .site-footer a,
+    html.band-gold:not([data-theme]) .site-footer a:not(.heading-link),
     html[data-theme="dark"] :is(#overview, .in-band) a:not(.heading-link),
-    html[data-theme="dark"] .site-footer a {
+    html[data-theme="dark"] .site-footer a:not(.heading-link) {
       color: #ffffff;
+    }
+
+    /* the footer's title in black on the golden band */
+    html.band-gold:not([data-theme]) .site-footer .footer-title a,
+    html[data-theme="dark"] .site-footer .footer-title a {
+      color: #000000;
     }
 
     /* the author's name stays in the text colour, at the top and in the footer */
@@ -1114,19 +1120,113 @@
       color: var(--muted);
     }
 
-    /* "Part I" above a part's heading */
-    .article-body .part-label {
-      margin: 0 0 8px;
-      font-family: var(--serif);
-      font-style: italic;
-      color: var(--muted);
+
+    /* drawn figures: isometric tiles in the golden palette; labels in the text colour */
+    .article-body .fig-svg {
+      display: block;
+      width: 100%;
+      height: auto;
+      overflow: visible;
     }
 
-    /* the closing asterisks */
-    .article-body .end-mark {
-      margin-top: 56px;
-      text-align: center;
-      letter-spacing: 0.4em;
+    .fig-label {
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 30px;
+      font-weight: 400;
+      fill: var(--canvas-ink);
+    }
+
+    .fig-sublabel {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 24px;
+      fill: var(--muted);
+    }
+
+    .fig-leader {
+      fill: none;
+      stroke: var(--muted);
+      stroke-width: 1.2;
+    }
+
+    /* the tiles settle into place one after another as the figure scrolls in */
+    .fig-anim .tile {
+      transform-box: fill-box;
+      transform-origin: center;
+    }
+
+    .fig-anim.fig-waiting .tile {
+      opacity: 0;
+    }
+
+    .fig-anim.fig-shown .tile {
+      animation: fig-tile-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0ms) both;
+    }
+
+    @keyframes fig-tile-in {
+      from { opacity: 0; transform: translateY(-28px); }
+      to { opacity: 1; transform: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .fig-anim.fig-waiting .tile { opacity: 1; }
+      .fig-anim.fig-shown .tile { animation: none; }
+    }
+
+    /* the three theories as a table: the theory column shaded light to dark */
+    .theories-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      text-align: left;
+      color: var(--canvas-ink);
+    }
+
+    .theories-table thead th {
+      background: #875200;
+      color: #fde27a;
+      font-weight: 600;
+      padding: 14px 18px;
+    }
+
+    .theories-table tbody th,
+    .theories-table td {
+      vertical-align: top;
+      padding: 18px;
+      border-bottom: 2px solid #c9a03a;
+    }
+
+    .theories-table tbody th {
+      width: 26%;
+      color: #3a2a00;
+      font-weight: 400;
+      border-bottom-color: var(--canvas-bg);
+    }
+
+    .theories-table .t-name {
+      display: block;
+      font-weight: 600;
+      font-size: 1.2em;
+      line-height: 1.3;
+      margin-bottom: 8px;
+    }
+
+    .theories-table .t-consequentialism th { background: #fde27a; }
+    .theories-table .t-deontology th { background: #f5be2c; }
+    .theories-table .t-virtue th { background: #d6920a; }
+
+    @media (max-width: 640px) {
+      .theories-table thead { display: none; }
+      .theories-table,
+      .theories-table tbody,
+      .theories-table tr,
+      .theories-table tbody th,
+      .theories-table td { display: block; width: auto; }
+      .theories-table tr { margin-bottom: 20px; }
+      .theories-table td { border-bottom-width: 1px; padding: 12px 4px; }
+      .theories-table td:last-child { border-bottom-width: 2px; }
     }
 
     .article-body h2 {
@@ -1851,6 +1951,20 @@
       }
     }
 
+    /* with room to spare, the quote on one line beside the title (running
+       on into the right margin, as the article's title does) */
+    @media (min-width: 1181px) {
+      .footer-head {
+        width: max-content;
+        max-width: none;
+      }
+
+      .site-footer .footer-inner .footer-subtitle {
+        flex: none;
+        white-space: nowrap;
+      }
+    }
+
     .site-footer .footer-inner .footer-url {
       margin-top: 56px;
     }
@@ -2310,11 +2424,6 @@
 
               <h2><a class="heading-link" href="#overview">Overview</a></h2>
 
-              <figure class="article-figure">
-                <img src="images/image1.gif" alt="Agency decomposing and emerging across scales" loading="lazy" onerror="this.closest('figure').hidden = true">
-                <figcaption>decomposition and emergence of agency across scales</figcaption>
-              </figure>
-
               <p>In <em>Scale</em>, West proposes that there are universal laws that govern complex systems across scales: from cells to cities to civilisations. Whilst West was concerned with the biophysical and material &ndash; growth, entropy, self-reproduction &ndash; we may also inquire into the interaction of <em>ethics across scales</em>.</p>
 
               <p>I call this paradigm of thought &lsquo;Multi-Scale Ethics&rsquo;: how do we reconceptualise ethics accounting for the grand dimensions of modern global civilisation, particularly from the standpoint of the individual within it?</p>
@@ -2323,19 +2432,52 @@
             </section>
 
             <section id="ethical-theories">
+              <figure class="article-figure fig-anim" id="figure-scales">
+                <svg class="fig-svg" viewBox="0 0 760 520" role="img" aria-labelledby="fig-scales-title">
+                <title id="fig-scales-title">Three isometric tiles of growing size, stacked apart: Individual, Collective, Civilisational</title>
+                <g class="tile " style="--d:0ms"><polygon fill="#efc441" points="218,60 250,76 250,86 218,70"/><polygon fill="#d9a92a" points="250,76 282,60 282,70 250,86"/><polygon fill="#fde27a" points="250,44 282,60 250,76 218,60"/></g>
+                <text class="fig-label tile" style="--d:150ms" x="352" y="74.0">Individual</text>
+                <g class="tile " style="--d:220ms"><polygon fill="#e0a21c" points="154,190 250,238 250,248 154,200"/><polygon fill="#bf8612" points="250,238 346,190 346,200 250,248"/><polygon fill="#f5be2c" points="250,142 346,190 250,238 154,190"/></g>
+                <text class="fig-label tile" style="--d:370ms" x="416" y="204.0">Collective</text>
+                <g class="tile " style="--d:440ms"><polygon fill="#b97a06" points="20,400 250,515 250,527 20,412"/><polygon fill="#8f5c00" points="250,515 480,400 480,412 250,527"/><polygon fill="#d6920a" points="250,285 480,400 250,515 20,400"/></g>
+                <text class="fig-label tile" style="--d:590ms" x="550" y="415.0">Civilisational</text>
+                </svg>
+                <figcaption>decomposition and emergence of agency across scales</figcaption>
+              </figure>
+
               <h2 data-toc="Ethical Theories"><a class="heading-link" href="#ethical-theories">Ethical Theories: Consequentialism, Deontology, Virtue</a></h2>
 
               <p>Anyone who has taken moral philosophy 101, will know that there are three major theories of normative ethics (i.e how we ought to act):</p>
 
-              <figure class="article-figure">
-                <img src="images/image3.png" alt="The three major theories of normative ethics: consequentialism, deontology and virtue ethics" loading="lazy" onerror="this.closest('figure').hidden = true">
+              <figure class="article-figure figure-table">
+                <table class="theories-table">
+                  <thead>
+                    <tr><th scope="col">Theory</th><th scope="col">Core idea</th><th scope="col">Key theory or tradition</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr class="t-consequentialism">
+                      <th scope="row"><span class="t-name">Consequentialism</span><span class="t-focus">Focus on Outcomes</span></th>
+                      <td>An action is morally right if it produces the best overall consequences or outcomes.</td>
+                      <td><strong>Utilitarianism</strong> (associated with thinkers like Jeremy Bentham and John Stuart Mill), which argues for actions that maximize happiness or well-being for the greatest number of people.</td>
+                    </tr>
+                    <tr class="t-deontology">
+                      <th scope="row"><span class="t-name">Deontology</span><span class="t-focus">Focus on Duties and Rules</span></th>
+                      <td>An action is morally right if it conforms to an inherent moral duty, rule, or obligation, regardless of the consequences.</td>
+                      <td><strong>Kantian ethics</strong> (associated with Immanuel Kant), which emphasizes the Categorical Imperative&mdash;treating people as ends in themselves rather than mere means, and acting only on rules you would will to be universal laws.</td>
+                    </tr>
+                    <tr class="t-virtue">
+                      <th scope="row"><span class="t-name">Virtue Ethics</span><span class="t-focus">Focus on Character</span></th>
+                      <td>Morality is not primarily about following rules or calculating outcomes, but about developing a good moral character and cultivating virtues (such as honesty, courage, and compassion).</td>
+                      <td>Rooted in ancient philosophers like <strong>Aristotle</strong>, asking not just &ldquo;What should I do?&rdquo; but &ldquo;What kind of person should I be?&rdquo;</td>
+                    </tr>
+                  </tbody>
+                </table>
               </figure>
 
               <p>Now the way these three theories are often presented and discussed is as if they are <em>competing</em>; as if they are mutually exclusive and you must choose one. You&rsquo;re either a cold consequentialist, a loyal deontologist or a self-righteous virtue ethicist. And regardless of which you are, you must fight (to the philosophical death!) against those misguided moralists who advocate for the other two. Against this norm, I want to propose an alternative: that each of these theories are memetic adaptations to various scales of action. In this way, the moral philosopher becomes a macrohistorian and anthropologist; &ndash; descending their ivory tower of abstraction into the cultural evolution of civilisation.</p>
             </section>
 
-            <section id="human-societies" class="divided">
-              <p class="part-label">Part I</p>
+            <section id="human-societies">
               <h2 data-toc="Human Societies"><a class="heading-link" href="#human-societies">Human Societies: Tribal, City, Nation</a></h2>
 
               <p>By &lsquo;memetic adaptation&rsquo; I mean that an idea &ndash; in this case a normative idea, generative of moral behaviour &ndash; proliferates and persists because it affords advantages within a select environment &ndash; in this case, new <em>socio-political scales</em>. On this cultural evolutionary account, no theory is the &lsquo;one true theory of morality&rsquo;, but each has a special suitability for coordination at a particular scale of human social organisation.</p>
@@ -2364,18 +2506,24 @@
 
               <p>This overlaps with what post-rationalist and cognitive scientist Anna Riedl calls <em>&lsquo;autopoethics&rsquo;</em>: a portmanteau combining <em>autopoiesis</em> meaning the self-reproduction of a complex system (a body, a social body, a civilisation) with <em>ethics</em>.</p>
 
-              <figure class="article-figure">
-                <img src="images/image2.gif" alt="Virtue, deontology and consequentialism as nested, concentric scales of one ethical system" loading="lazy" onerror="this.closest('figure').hidden = true">
+              <figure class="article-figure fig-anim" id="figure-stack">
+                <svg class="fig-svg" viewBox="0 0 760 500" role="img" aria-labelledby="fig-stack-title">
+                <title id="fig-stack-title">A stepped stack of three nested tiles: virtue ethics (tribe) at the centre, within deontology (city), within consequentialism (state)</title>
+                <g class="tile " style="--d:440ms"><polygon fill="#b97a06" points="20,330 250,445 250,461 20,346"/><polygon fill="#8f5c00" points="250,445 480,330 480,346 250,461"/><polygon fill="#d6920a" points="250,215 480,330 250,445 20,330"/></g>
+                <g class="tile " style="--d:220ms"><polygon fill="#e0a21c" points="100,314 250,389 250,405 100,330"/><polygon fill="#bf8612" points="250,389 400,314 400,330 250,405"/><polygon fill="#f5be2c" points="250,239 400,314 250,389 100,314"/></g>
+                <g class="tile " style="--d:0ms"><polygon fill="#efc441" points="178,298 250,334 250,350 178,314"/><polygon fill="#d9a92a" points="250,334 322,298 322,314 250,350"/><polygon fill="#fde27a" points="250,262 322,298 250,334 178,298"/></g>
+                <g class="tile" style="--d:590ms"><polyline class="fig-leader" points="474,330 510,405 560,405"/><text class="fig-label" x="572" y="401">Consequentialism</text><text class="fig-sublabel" x="572" y="429">State</text></g>
+                <g class="tile" style="--d:370ms"><polyline class="fig-leader" points="394,314 430,235 560,235"/><text class="fig-label" x="572" y="231">Deontology</text><text class="fig-sublabel" x="572" y="259">City</text></g>
+                <g class="tile" style="--d:150ms"><polyline class="fig-leader" points="316,298 352,130 560,130"/><text class="fig-label" x="572" y="126">Virtue Ethics</text><text class="fig-sublabel" x="572" y="154">Tribe</text></g>
+                </svg>
                 <figcaption>concentric cultural evolution of major ethical theories as a holistic nested system</figcaption>
               </figure>
             </section>
 
-            <section id="closing-thoughts" class="divided">
+            <section id="closing-thoughts">
               <h2><a class="heading-link" href="#closing-thoughts">Closing Thoughts</a></h2>
 
               <p>As civilisation has adapted and scaled, human ethics have changed in a commensurate process of cultural evolution. Through this macrohistorical lens, virtue ethics, deontology and consequentialism can be seen anew as parts of a unified theory and complex adaptive system of ethics: all are deeply necessary, whilst neither are sufficient alone to guide us.</p>
-
-              <p class="end-mark" aria-hidden="true">***</p>
             </section>
           </div>
         </article>
@@ -3288,6 +3436,23 @@
       });
     })();
   </script>
+
+    <script>
+      // drawn figures wait off-screen, then their tiles settle in once
+      (function () {
+        var figs = document.querySelectorAll('.fig-anim');
+        if (!window.IntersectionObserver || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (!e.isIntersecting) return;
+            e.target.classList.remove('fig-waiting');
+            e.target.classList.add('fig-shown');
+            io.unobserve(e.target);
+          });
+        }, { threshold: 0.35 });
+        figs.forEach(function (f) { f.classList.add('fig-waiting'); io.observe(f); });
+      })();
+    </script>
   <script src="assets/tools.js?v=95888483" data-search-scope=".article-body, .endnotes" data-search-exclude="#overview" data-hide-until="#overview"></script>
 </body>
 </html>
