@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link id="favicon-ico" rel="icon" href="favicon/favicon-light.ico?v=p" sizes="any">
-  <link id="favicon-32" rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32-light.png?v=p">
-  <link id="favicon-192" rel="icon" type="image/png" sizes="192x192" href="favicon/favicon-192-light.png?v=p">
-  <link id="favicon-apple" rel="apple-touch-icon" href="favicon/apple-touch-icon-light.png?v=p">
+  <link id="favicon-ico" rel="icon" href="favicon/favicon-light.ico?v=e" sizes="any">
+  <link id="favicon-32" rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32-light.png?v=e">
+  <link id="favicon-192" rel="icon" type="image/png" sizes="192x192" href="favicon/favicon-192-light.png?v=e">
+  <link id="favicon-apple" rel="apple-touch-icon" href="favicon/apple-touch-icon-light.png?v=e">
   <script>
     (function () {
       try {
@@ -29,33 +29,33 @@
       try {
         // no theme chosen yet: follow the system setting
         var sys = window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-        var t = localStorage.getItem('crp.theme');
+        var t = localStorage.getItem('mse.theme');
         // a theme chosen with t holds only until the system setting changes
-        if (t && localStorage.getItem('crp.themeSystem') !== sys) { t = null; localStorage.removeItem('crp.theme'); }
+        if (t && localStorage.getItem('mse.themeSystem') !== sys) { t = null; localStorage.removeItem('mse.theme'); }
         t = t || sys;
         if (t === 'dark') {
           document.documentElement.setAttribute('data-theme', t);
         }
         if (t === 'dark') {
           var suffix = 'dark';
-          document.getElementById('favicon-ico').href = 'favicon/favicon-' + suffix + '.ico?v=p';
-          document.getElementById('favicon-32').href = 'favicon/favicon-32-' + suffix + '.png?v=p';
-          document.getElementById('favicon-192').href = 'favicon/favicon-192-' + suffix + '.png?v=p';
-          document.getElementById('favicon-apple').href = 'favicon/apple-touch-icon-' + suffix + '.png?v=p';
+          document.getElementById('favicon-ico').href = 'favicon/favicon-' + suffix + '.ico?v=e';
+          document.getElementById('favicon-32').href = 'favicon/favicon-32-' + suffix + '.png?v=e';
+          document.getElementById('favicon-192').href = 'favicon/favicon-192-' + suffix + '.png?v=e';
+          document.getElementById('favicon-apple').href = 'favicon/apple-touch-icon-' + suffix + '.png?v=e';
         }
       } catch (e) {}
       try {
-        if (localStorage.getItem('crp.blueLinks') !== 'off') document.documentElement.classList.add('colour');  // blue links (c): on by default
+        if (localStorage.getItem('mse.blueLinks') !== 'off') document.documentElement.classList.add('colour');  // blue links (c): on by default
         // ET Bembo headings are the default; f switches to Inter and back
-        if (localStorage.getItem('crp.headings') !== 'sans') document.documentElement.classList.add('serif-headings');
-        // the band colour (b): midnight green by default, or sepia, midnight blue or black
-        var band = localStorage.getItem('crp.bandColour') || 'green';
-        if (band === 'purple') band = 'green';  // the default band was purple before it was green
-        if (band === 'green' || band === 'midnight' || band === 'black') document.documentElement.classList.add('band-' + band);
+        if (localStorage.getItem('mse.headings') !== 'sans') document.documentElement.classList.add('serif-headings');
+        // the band colour (b): golden yellow by default, or midnight green, sepia, midnight blue or black
+        // (stored under this site's own key, so the choice never reaches the other sites at this address)
+        var band = localStorage.getItem('mse.bandColour') || 'gold';
+        if (band === 'gold' || band === 'green' || band === 'midnight' || band === 'black') document.documentElement.classList.add('band-' + band);
         // design 2 is the default; d switches to design 1 and back
-        if (localStorage.getItem('crp.design') !== '1') document.documentElement.classList.add('design-2');
+        if (localStorage.getItem('mse.design') !== '1') document.documentElement.classList.add('design-2');
         // the Overview's shaded band is the default; h switches to dividing lines
-        if (localStorage.getItem('crp.overviewStyle') === 'lines') document.documentElement.classList.add('overview-lines');
+        if (localStorage.getItem('mse.overviewStyle') === 'lines') document.documentElement.classList.add('overview-lines');
       } catch (e) {}
     })();
   </script>
@@ -179,19 +179,29 @@
       --canvas-ink: #ffffff;
       --canvas-accent: #ffffff;
       --canvas-track-tint: rgba(255, 255, 255, 0.15);
-      --selection-bg: rgba(148, 218, 183, 0.35);
-      --note-highlight: #174b33;
-      --rule: #133e26;
+      --selection-bg: rgba(232, 177, 14, 0.35);
+      --note-highlight: #4a3a0a;
+      --rule: #3a2f10;
       --muted: #8c8c8c;
-      --link-blue: #8dd9aa;
-      /* the midnight green, as with the white theme's default band */
-      --inverse-bg: #0a2d1b;
-      --inverse-ink: #fbf6ec;
-      --inverse-link: #8dd9aa;
+      --link-blue: #f2c94c;
+      /* the golden yellow, as with the white theme's default band */
+      --inverse-bg: #e8b10e;
+      --inverse-ink: #1a1400;
+      --inverse-link: #1a3a9c;
     }
 
-    /* b (white theme only) cycles the Overview and footer: midnight green
-       (the default), light sepia (above), midnight blue, black */
+    /* b (white theme only) cycles the Overview and footer: golden yellow
+       (the default), midnight green, light sepia (above), midnight blue, black */
+    html.band-gold:not([data-theme]) {
+      /* links and highlights a deep gold, rather than blue */
+      --link-blue: #8a6100;
+      --selection-bg: rgba(232, 177, 14, 0.3);
+      --note-highlight: #fbefc4;
+      --inverse-bg: #e8b10e;
+      --inverse-ink: #1a1400;
+      --inverse-link: #1a3a9c;
+    }
+
     html.band-green:not([data-theme]) {
       /* links and highlights green, rather than blue */
       --link-blue: #167e49;
@@ -1238,12 +1248,18 @@
       --inverse-bg-alt: color-mix(in srgb, var(--inverse-bg) 80%, #000);
     }
 
-    :root:not([data-theme]):not(.band-green):not(.band-midnight):not(.band-black) {
+    :root:not([data-theme]):not(.band-gold):not(.band-green):not(.band-midnight):not(.band-black) {
       --inverse-bg-alt: #f1e6d0;
     }
 
     html.band-black:not([data-theme]) {
       --inverse-bg-alt: color-mix(in srgb, var(--inverse-bg) 88%, #fff);
+    }
+
+    /* a warmer, deeper gold on the golden yellow band (white theme default and dark theme) */
+    html.band-gold:not([data-theme]),
+    html[data-theme="dark"] {
+      --inverse-bg-alt: #cf9a05;
     }
 
     html[data-theme="midnight"] {
@@ -1621,6 +1637,11 @@
       font-size: clamp(16px, calc((100vw - 48px) / 20), 22px);
       line-height: 1.35;
       text-wrap: balance;
+    }
+
+    /* the species name roman within the italic quotation */
+    .site-footer .footer-subtitle .upright {
+      font-style: normal;
     }
 
     .site-footer .footer-subtitle .hang {
@@ -2017,9 +2038,9 @@
       }
 
       // Default: the grid. The ring stays as the fallback, for anyone who
-      // prefers reduced motion (or who sets localStorage['crp.loader'] = 'ring').
+      // prefers reduced motion (or who sets localStorage['mse.loader'] = 'ring').
       var useRing = false;
-      try { useRing = localStorage.getItem('crp.loader') === 'ring'; } catch (e) {}
+      try { useRing = localStorage.getItem('mse.loader') === 'ring'; } catch (e) {}
       if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) useRing = true;
       if (!useRing) {
         // the tiles, column by column (Meta, Macro, Civilisational), each
@@ -2309,8 +2330,8 @@
     <footer class="site-footer">
       <div class="footer-inner">
       <div class="footer-head">
-      <p class="footer-subtitle"><em><span class="hang">“</span>Very young to the field whose paradigm they change”</em></p>
-      <p class="footer-title"><a class="heading-link" href="./">civilisationalparadigm</a></p>
+      <p class="footer-subtitle"><em><span class="hang">“</span><span class="upright">Homo sapiens</span> are the only species (so far) with richly cumulative culture”</em> &ndash;&nbsp;Dennett</p>
+      <p class="footer-title"><a class="heading-link" href="./">multiscale.ethics</a></p>
       </div>
       <!-- hidden: remove the hidden attribute to show the menu again -->
       <nav class="footer-sitemap" aria-label="Sitemap" hidden>
@@ -2735,7 +2756,7 @@
 
       function showOverview() {
         document.body.classList.add('overview-shown');
-        try { sessionStorage.setItem('crp.overviewShown', '1'); } catch (e) {}
+        try { sessionStorage.setItem('mse.overviewShown', '1'); } catch (e) {}
       }
       window.showOverview = showOverview;
 
@@ -2763,10 +2784,10 @@
           fromSite = !!document.referrer && (function (r, s) { return r.origin === s.origin && r.pathname.indexOf(s.pathname) === 0; })(new URL(document.referrer), new URL('./', location.href));
         } catch (e) {}
         var seen = false;
-        try { seen = sessionStorage.getItem('crp.overviewShown') === '1'; } catch (e) {}
+        try { seen = sessionStorage.getItem('mse.overviewShown') === '1'; } catch (e) {}
         // (back and forward within the tab count as moving within the site)
         if (nav && nav.type === 'back_forward') fromSite = true;
-        if (reload || !fromSite) { try { sessionStorage.removeItem('crp.overviewShown'); } catch (e) {} }
+        if (reload || !fromSite) { try { sessionStorage.removeItem('mse.overviewShown'); } catch (e) {} }
         else if (seen && isDesign2()) showOverview();
       })();
       // a link straight to a section needs the whole article there at once
@@ -2852,15 +2873,15 @@
 
       function setFavicons(isDark) {
         var suffix = isDark ? 'dark' : 'light';
-        document.getElementById('favicon-ico').href = 'favicon/favicon-' + suffix + '.ico?v=p';
-        document.getElementById('favicon-32').href = 'favicon/favicon-32-' + suffix + '.png?v=p';
-        document.getElementById('favicon-192').href = 'favicon/favicon-192-' + suffix + '.png?v=p';
-        document.getElementById('favicon-apple').href = 'favicon/apple-touch-icon-' + suffix + '.png?v=p';
+        document.getElementById('favicon-ico').href = 'favicon/favicon-' + suffix + '.ico?v=e';
+        document.getElementById('favicon-32').href = 'favicon/favicon-32-' + suffix + '.png?v=e';
+        document.getElementById('favicon-192').href = 'favicon/favicon-192-' + suffix + '.png?v=e';
+        document.getElementById('favicon-apple').href = 'favicon/apple-touch-icon-' + suffix + '.png?v=e';
       }
 
       function currentTheme() {
         var stored;
-        try { stored = localStorage.getItem('crp.theme'); } catch (e) {}
+        try { stored = localStorage.getItem('mse.theme'); } catch (e) {}
         if (THEMES.indexOf(stored) !== -1) return stored;
         // no theme chosen yet: follow the system setting
         return systemDark && systemDark.matches ? 'dark' : 'light';
@@ -2875,13 +2896,13 @@
           root.setAttribute('data-theme', theme);
         }
         setFavicons(DARK_THEMES.indexOf(theme) !== -1);
-        if (!fromSystem) try { localStorage.setItem('crp.theme', theme); localStorage.setItem('crp.themeSystem', systemDark && systemDark.matches ? 'dark' : 'light'); } catch (e) {}
+        if (!fromSystem) try { localStorage.setItem('mse.theme', theme); localStorage.setItem('mse.themeSystem', systemDark && systemDark.matches ? 'dark' : 'light'); } catch (e) {}
       }
 
       // until a theme is chosen here (t), the page follows the system as it changes
       if (systemDark && systemDark.addEventListener) systemDark.addEventListener('change', function () {
         // a change of the system setting wins over a theme chosen with t
-        try { localStorage.removeItem('crp.theme'); } catch (e) {}
+        try { localStorage.removeItem('mse.theme'); } catch (e) {}
         applyTheme(currentTheme(), true);
       });
 
@@ -2903,25 +2924,25 @@
       });
 
       // b cycles the Overview and footer colours (white theme); c toggles the blue accent.
-      var BANDS = ['green', '', 'midnight', 'black'];  // '' is light sepia; green is the default
+      var BANDS = ['gold', 'green', '', 'midnight', 'black'];  // '' is light sepia; gold is the default
 
       function cycleBand() {
         var current = BANDS.filter(function (b) { return b && root.classList.contains('band-' + b); })[0] || '';
         var next = BANDS[(BANDS.indexOf(current) + 1) % BANDS.length];
         BANDS.forEach(function (b) { if (b) root.classList.remove('band-' + b); });
         if (next) root.classList.add('band-' + next);
-        try { localStorage.setItem('crp.bandColour', next || 'sepia'); } catch (err) {}
+        try { localStorage.setItem('mse.bandColour', next || 'sepia'); } catch (err) {}
       }
 
       function toggleColour() {
         var on = root.classList.toggle('colour');
-        try { localStorage.setItem('crp.blueLinks', on ? 'on' : 'off'); } catch (err) {}
+        try { localStorage.setItem('mse.blueLinks', on ? 'on' : 'off'); } catch (err) {}
       }
 
       // d switches between the two designs (see design 2 in the styles)
       function toggleDesign() {
         var on = root.classList.toggle('design-2');
-        try { localStorage.setItem('crp.design', on ? '2' : '1'); } catch (err) {}
+        try { localStorage.setItem('mse.design', on ? '2' : '1'); } catch (err) {}
         if (on && window.scrollY > 10 && window.showOverview) window.showOverview(true);
         if (window.placeOverview) window.placeOverview();
       }
@@ -2929,14 +2950,14 @@
       // f switches headings and subheadings to ET Bembo and back
       function toggleSerifHeadings() {
         var on = root.classList.toggle('serif-headings');
-        try { localStorage.setItem('crp.headings', on ? 'serif' : 'sans'); } catch (err) {}
+        try { localStorage.setItem('mse.headings', on ? 'serif' : 'sans'); } catch (err) {}
       }
 
       // h switches the Overview between its shaded band and short dividing lines
       function toggleOverviewLines() {
         var on = root.classList.toggle('overview-lines');
         if (window.placeOverview) window.placeOverview();
-        try { localStorage.setItem('crp.overviewStyle', on ? 'lines' : 'band'); } catch (err) {}
+        try { localStorage.setItem('mse.overviewStyle', on ? 'lines' : 'band'); } catch (err) {}
       }
 
 
@@ -3018,11 +3039,11 @@
       window.addEventListener('pagehide', function () {
         var now = Date.now();
         var ringing = liveTones.filter(function (t) { return t.t0 + t.d * 1000 > now + 100; });
-        try { sessionStorage.setItem('crp.ttTones', JSON.stringify({ at: now, tones: ringing })); } catch (e) {}
+        try { sessionStorage.setItem('mse.ttTones', JSON.stringify({ at: now, tones: ringing })); } catch (e) {}
       });
       (function () {
         var data = null;
-        try { data = JSON.parse(sessionStorage.getItem('crp.ttTones')); sessionStorage.removeItem('crp.ttTones'); } catch (e) {}
+        try { data = JSON.parse(sessionStorage.getItem('mse.ttTones')); sessionStorage.removeItem('mse.ttTones'); } catch (e) {}
         if (!data || !data.tones || !data.tones.length || Date.now() - data.at > 4000) return;
         try {
           if (!audioCtx) {
