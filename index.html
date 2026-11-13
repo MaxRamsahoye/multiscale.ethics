@@ -271,8 +271,10 @@
     }
 
     /* on the golden yellow band, every link is white */
-    html.band-gold:not([data-theme]) :is(#overview, .in-band, .site-footer) a,
-    html[data-theme="dark"] :is(#overview, .in-band, .site-footer) a {
+    html.band-gold:not([data-theme]) :is(#overview, .in-band) a:not(.heading-link),
+    html.band-gold:not([data-theme]) .site-footer a,
+    html[data-theme="dark"] :is(#overview, .in-band) a:not(.heading-link),
+    html[data-theme="dark"] .site-footer a {
       color: #ffffff;
     }
 
@@ -1088,6 +1090,43 @@
       font-weight: 400;
       font-synthesis: none;
       -webkit-text-stroke: 0.35px currentColor;
+    }
+
+    /* figures: the image across the text column, a small italic caption beneath */
+    .article-body .article-figure {
+      max-width: 760px;
+      margin: 40px 0;
+      text-align: center;
+    }
+
+    .article-body .article-figure img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      margin: 0 auto;
+    }
+
+    .article-body .article-figure figcaption {
+      margin-top: 12px;
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 0.9em;
+      color: var(--muted);
+    }
+
+    /* "Part I" above a part's heading */
+    .article-body .part-label {
+      margin: 0 0 8px;
+      font-family: var(--serif);
+      font-style: italic;
+      color: var(--muted);
+    }
+
+    /* the closing asterisks */
+    .article-body .end-mark {
+      margin-top: 56px;
+      text-align: center;
+      letter-spacing: 0.4em;
     }
 
     .article-body h2 {
@@ -2171,7 +2210,7 @@
     <a class="site-title" href="./">Multi-<br>Scale<br>Ethics</a>
 
     <nav class="toc" aria-label="Contents" data-upcoming='[]'>
-      <p class="toc-label">Civilisation Research</p>
+      <p class="toc-label">Multi-Scale Ethics</p>
       <ol></ol>
     </nav>
   </div>
@@ -2254,9 +2293,90 @@
             <p class="article-author"><a class="author-link" href="https://maxramsahoye.github.io/max/" target="_blank" rel="noopener">Max Ramsahoye</a></p>
             <h1 class="article-title"><a class="heading-link title-top" href="#"><span class="title-line">Multi-Scale Ethics:</span> <span class="title-line">The Cultural Evolution of</span> <span class="title-line">Major Ethical Theories</span></a></h1>
             <p class="article-subtitle">Reconciling theories of normative action <em>across scales, systems and societies</em></p>
+            <button class="next-screen" type="button" data-target="overview" aria-label="Continue to the overview">
+              <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1" stroke-linejoin="round">
+                <polygon points="14,19.469 21.031,8.531 14,11.813 6.969,8.531"/>
+              </svg>
+            </button>
           </div>
 
           <div class="article-body">
+            <section id="overview">
+              <button class="next-screen next-screen-overview" type="button" data-target="ethical-theories" aria-label="Continue to the next section">
+                <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1" stroke-linejoin="round">
+                <polygon points="14,19.469 21.031,8.531 14,11.813 6.969,8.531"/>
+              </svg>
+              </button>
+
+              <h2><a class="heading-link" href="#overview">Overview</a></h2>
+
+              <figure class="article-figure">
+                <img src="images/image1.gif" alt="Agency decomposing and emerging across scales" loading="lazy" onerror="this.closest('figure').hidden = true">
+                <figcaption>decomposition and emergence of agency across scales</figcaption>
+              </figure>
+
+              <p>In <em>Scale</em>, West proposes that there are universal laws that govern complex systems across scales: from cells to cities to civilisations. Whilst West was concerned with the biophysical and material &ndash; growth, entropy, self-reproduction &ndash; we may also inquire into the interaction of <em>ethics across scales</em>.</p>
+
+              <p>I call this paradigm of thought &lsquo;Multi-Scale Ethics&rsquo;: how do we reconceptualise ethics accounting for the grand dimensions of modern global civilisation, particularly from the standpoint of the individual within it?</p>
+
+              <p>First I set out the three major ethical theories, deontology, virtue ethics and consequentialism. Then I attempt to reconcile them as memetic adaptations to various scales of human societies, tracing how moral norms changed game-theoretically as populations moved from tribes to cities to nations. Finally I consider classes of agent, comparing the ethical dynamics between individuals, collectives and civilisation in relationality to each other.</p>
+            </section>
+
+            <section id="ethical-theories">
+              <h2 data-toc="Ethical Theories"><a class="heading-link" href="#ethical-theories">Ethical Theories: Consequentialism, Deontology, Virtue</a></h2>
+
+              <p>Anyone who has taken moral philosophy 101, will know that there are three major theories of normative ethics (i.e how we ought to act):</p>
+
+              <figure class="article-figure">
+                <img src="images/image3.png" alt="The three major theories of normative ethics: consequentialism, deontology and virtue ethics" loading="lazy" onerror="this.closest('figure').hidden = true">
+              </figure>
+
+              <p>Now the way these three theories are often presented and discussed is as if they are <em>competing</em>; as if they are mutually exclusive and you must choose one. You&rsquo;re either a cold consequentialist, a loyal deontologist or a self-righteous virtue ethicist. And regardless of which you are, you must fight (to the philosophical death!) against those misguided moralists who advocate for the other two. Against this norm, I want to propose an alternative: that each of these theories are memetic adaptations to various scales of action. In this way, the moral philosopher becomes a macrohistorian and anthropologist; &ndash; descending their ivory tower of abstraction into the cultural evolution of civilisation.</p>
+            </section>
+
+            <section id="human-societies" class="divided">
+              <p class="part-label">Part I</p>
+              <h2 data-toc="Human Societies"><a class="heading-link" href="#human-societies">Human Societies: Tribal, City, Nation</a></h2>
+
+              <p>By &lsquo;memetic adaptation&rsquo; I mean that an idea &ndash; in this case a normative idea, generative of moral behaviour &ndash; proliferates and persists because it affords advantages within a select environment &ndash; in this case, new <em>socio-political scales</em>. On this cultural evolutionary account, no theory is the &lsquo;one true theory of morality&rsquo;, but each has a special suitability for coordination at a particular scale of human social organisation.</p>
+
+              <h3 id="virtue-tribe"><a class="heading-link" href="#virtue-tribe">Virtue is the Ethics of the Tribe</a></h3>
+
+              <p>Okay, so in the proverbial beginning of human society &ndash; the hunter-gatherer tribe and then the agricultural village &ndash; the population was relatively small-scale. In anthropological terms, it was below what has been termed the Dunbar Number: the (cognitive-affective) upper limit of approximately 150 people an individual can relationally track and maintain bonds with. Part of the reason for this is that you are not just modelling your own relationship with all other actors (a 1-150, hub and spoke), but also everyone&rsquo;s relationships to each other (a complex web), resulting in a combinatorial explosion in theory of minds.</p>
+
+              <p>Anyways, below this number Virtue Ethics is functional on its own &ndash; without needing explicit rules or complex calculations &ndash; as there can be a record of reputations and characters across the shared social cognition (the <em>co-</em>extended mind) of the group (a distributed ledger of sorts). To put it bluntly, if you&rsquo;re a dick &ndash; if you exhibit vice &ndash; people will find out and you&rsquo;ll be treated accordingly as an unpleasant presence in the community (through &lsquo;gossip&rsquo;). On the other hand, if you&rsquo;re wise, just and courageous &ndash; if you exhibit virtue &ndash; others will see this and give you the honour and deference you deserve. Together, in small communities there is a naturally arising (or &lsquo;endogenous&rsquo; in systems speak) process of human reinforcement learning, selecting for virtue and against vice.</p>
+
+              <h3 id="deontology-city"><a class="heading-link" href="#deontology-city">Deontology is the Ethics of the City</a></h3>
+
+              <p>Once you surpass this number &ndash; the population increases beyond 150 &ndash; an individual cannot track everyone and the vicious can begin to get away with bad behaviour. At this scale, you now need rules, principles and duties to follow, to codify moral behaviour independent of live social cognition. In other words, at the city-scale deontology becomes the new moral theory.</p>
+
+              <p>In a larger-scale of social group &ndash; into the hundreds and thousands &ndash; an individual routinely interacts with strangers whose reputations they have no prior access to. Deontology (rule-based ethics) solves this information asymmetry as instead of needing to know the <em>particulars</em> of who you are dealing with (their character), you only need to know the <em>universal</em> cultural norms governing the interaction. That is, there is an implicit trust that they have been socialised to adhere to shared conventions such as &lsquo;manners&rsquo; or &lsquo;commandments&rsquo;. Such rule-sets standardise behavior, making social interactions predictable even when trust cannot be established relationally over time (through repeated interactions that form interpersonal trust). This pre-established, iterative game-theory gives rise to a high-trust society.</p>
+
+              <h3 id="consequentialism-state"><a class="heading-link" href="#consequentialism-state">Consequentialism is the Ethics of the State</a></h3>
+
+              <p>So now move up from cities to networks of cities and the state that rules over them all. Absolute rules of action are definitionally inflexible and so are at best heuristics (rules of thumb) versus a methodology that is adaptive to the changing circumstances of the world, especially at larger-scales (of population, economy and infrastructure) as complexity increases.</p>
+
+              <p>To govern at the macro-level, decision-makers are forced to adopt consequentialism, evaluating an action on whether it minimises overall suffering and maximises overall welfare for the population in aggregate. At the scale of a mega-metropolis, nation-state or global empire, governance is a matter of system-wide optimisation. <em>Seeing like a state</em> &ndash; to inhabit the moral phenomenology of <em>the Leviathan</em> &ndash; is to attune to &lsquo;the greatest happiness of the greatest number&rsquo;; and in many cases to enact the tyranny of the majority, in a way that violates the principles (non-instrumentality) and virtues (fairness) that we hold individuals too.</p>
+
+              <h3 id="ethics-stack"><a class="heading-link" href="#ethics-stack">A Hybrid Ethics Stack is the Ethics of Civilisation</a></h3>
+
+              <p>To bring this all together &ndash; to unify the three theories of ethics &ndash; we can conceptualise the ethics of civilisation as a hybrid <em>ethics stack</em> (i.e like a &lsquo;tech stack&rsquo; &ndash; that&rsquo;s right us humanities boys can play with this metaphor too): with theories operating at different scales and emergently producing a higher-order ethical synergy that neither could achieve alone (which is pretty cool when you think about it ;).</p>
+
+              <p>This overlaps with what post-rationalist and cognitive scientist Anna Riedl calls <em>&lsquo;autopoethics&rsquo;</em>: a portmanteau combining <em>autopoiesis</em> meaning the self-reproduction of a complex system (a body, a social body, a civilisation) with <em>ethics</em>.</p>
+
+              <figure class="article-figure">
+                <img src="images/image2.gif" alt="Virtue, deontology and consequentialism as nested, concentric scales of one ethical system" loading="lazy" onerror="this.closest('figure').hidden = true">
+                <figcaption>concentric cultural evolution of major ethical theories as a holistic nested system</figcaption>
+              </figure>
+            </section>
+
+            <section id="closing-thoughts" class="divided">
+              <h2><a class="heading-link" href="#closing-thoughts">Closing Thoughts</a></h2>
+
+              <p>As civilisation has adapted and scaled, human ethics have changed in a commensurate process of cultural evolution. Through this macrohistorical lens, virtue ethics, deontology and consequentialism can be seen anew as parts of a unified theory and complex adaptive system of ethics: all are deeply necessary, whilst neither are sufficient alone to guide us.</p>
+
+              <p class="end-mark" aria-hidden="true">***</p>
+            </section>
           </div>
         </article>
       </main>
