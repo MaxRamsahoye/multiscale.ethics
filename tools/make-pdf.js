@@ -91,9 +91,14 @@ const CSS = `
   figure { margin: 16pt 0; break-inside: avoid; text-align: center; }
   figure .fig-svg { display: block; width: 82%; height: auto; margin: 0 auto; overflow: visible; }
   figcaption { margin-top: 6pt; font-style: italic; font-size: 11pt; color: #777; }
-  .fig-label { font-family: 'IBM Plex Sans', sans-serif; font-size: 30px; fill: #000; }
-  .fig-sublabel { font-family: 'ET Bembo', serif; font-style: italic; font-size: 24px; fill: #777; }
-  .fig-leader { fill: none; stroke: #999; stroke-width: 1.2; }
+  .fig-label { font-family: 'IBM Plex Sans', sans-serif; font-size: 27px; fill: #000; }
+  .fig-label-ring { text-anchor: middle; font-weight: 600; font-size: 25px; }
+  .ring-disc { stroke-width: 3.5; }
+  /* the two diagrams each small, on a page of their own, centred on it */
+  #figure-scales, #figure-rings { break-before: page; break-after: page; box-sizing: border-box; min-height: 245mm; margin: 0; display: flex; flex-direction: column; justify-content: center; }
+  #figure-scales .fig-svg { width: 62%; }
+  #figure-rings .fig-svg { width: 48%; }
+  figure + h2, figure + h3 { margin-top: 0; }
   .theories-table { width: 100%; border-collapse: collapse; font-family: 'IBM Plex Sans', sans-serif; font-size: 8.5pt; line-height: 1.5; text-align: left; }
   .theories-table thead th { background: #875200; color: #fde27a; font-weight: 600; padding: 7pt 9pt; }
   .theories-table tbody th, .theories-table td { vertical-align: top; padding: 9pt; border-bottom: 1.5pt solid #c9a03a; }
@@ -108,7 +113,8 @@ const CSS = `
 (async () => {
   const exe = process.env.CHROMIUM || (process.env.PLAYWRIGHT_BROWSERS_PATH ? path.join(process.env.PLAYWRIGHT_BROWSERS_PATH, 'chromium') : undefined);
   const browser = await chromium.launch(exe ? { executablePath: exe } : {});
-  const page = await browser.newPage();
+  // no scripts: the animated figures stay at the still frames written into the page
+  const page = await (await browser.newContext({ javaScriptEnabled: false })).newPage();
   // read the article out of the page as it is written, before any script runs
   await page.goto('file://' + path.join(ROOT, 'index.html'), { waitUntil: 'domcontentloaded' });
   const parts = await page.evaluate(() => {
