@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Render the article as The Civilisation Research Paradigm.pdf (named after the
+// Render the article as Multi-Scale Ethics.pdf (named after the
 // article, so that it saves under its title however the browser fetches it),
 // the file the PDF icon on the Article page downloads.
 //
@@ -15,7 +15,7 @@ const path = require('path');
 const { chromium } = require('playwright');
 
 const ROOT = path.resolve(__dirname, '..');
-const OUT = path.join(ROOT, 'The Civilisation Research Paradigm.pdf');
+const OUT = path.join(ROOT, 'Multi-Scale Ethics.pdf');
 
 const CSS = `
   @font-face { font-family: 'ET Bembo'; src: url('fonts/ETBembo-RomanOSF.woff2') format('woff2'); font-weight: 400; font-style: normal; }
