@@ -569,57 +569,45 @@
       stroke: var(--link);
     }
 
-    .loader.loader-stacking > svg:not(.loader-grid) {
+    .loader.loader-stacking > svg:not(.loader-rings) {
       display: none;
     }
 
-    /* the default loading screen: the nine subframes of civilisation
-       research as a three-by-three grid, a column for each cluster. Meta
-       (left) arrives first, then Macro (right), then Civilisational (centre),
-       which the other two inform; once the page is ready the grid turns the
-       accent, the Civilisational column strongest */
-    .loader svg.loader-grid {
+    /* the default loading screen: the article's concentric rings in small,
+       without labels. Virtue ethics grows first, then deontology around it,
+       then consequentialism around both; translucent gold, deepening where
+       they overlap */
+    .loader svg.loader-rings {
       width: 84px;
       height: 84px;
       overflow: visible;
       transform: none;
-      --t-side: color-mix(in srgb, var(--canvas-ink) 16%, var(--canvas-bg));
-      --t-core: color-mix(in srgb, var(--canvas-ink) 42%, var(--canvas-bg));
     }
 
-    .loader-grid rect {
-      fill: var(--t-side);
+    .loader-rings circle {
+      stroke-width: 1;
       transform-box: fill-box;
       transform-origin: center;
       opacity: 0;
-      transition: fill 0.45s ease var(--turn, 0ms);
-      animation: loader-tile-in var(--dur) cubic-bezier(0.22, 1, 0.36, 1) var(--delay) forwards;
+      animation: loader-ring-in var(--dur) cubic-bezier(0.22, 1, 0.36, 1) var(--delay) forwards;
     }
 
-    .loader-grid rect.core {
-      fill: var(--t-core);
-    }
-
-    .loader.loader-complete .loader-grid {
-      --t-side: color-mix(in srgb, var(--link-blue) 50%, var(--canvas-bg));
-      --t-core: var(--link-blue);
-    }
-
-    /* still waiting for the page once the grid is built: a slow wave runs
-       across it, column by column */
-    .loader-grid.loader-waiting rect {
+    /* still waiting for the page once the rings are drawn: they breathe,
+       from the centre outward */
+    .loader-rings.loader-waiting circle {
       opacity: 1;
-      animation: loader-tile-wave 1.5s ease-in-out var(--wave) infinite;
+      transform: none;
+      animation: loader-ring-wait 1.6s ease-in-out var(--wave) infinite;
     }
 
-    @keyframes loader-tile-in {
-      from { opacity: 0; transform: translateY(-10px) scale(0.6); }
+    @keyframes loader-ring-in {
+      from { opacity: 0; transform: scale(var(--from)); }
       to { opacity: 1; transform: none; }
     }
 
-    @keyframes loader-tile-wave {
+    @keyframes loader-ring-wait {
       0%, 100% { opacity: 1; }
-      50% { opacity: 0.45; }
+      50% { opacity: 0.55; }
     }
 
     .page {
@@ -1162,8 +1150,8 @@
       width: 100%;
       border-collapse: collapse;
       font-family: 'IBM Plex Sans', sans-serif;
-      font-size: 15px;
-      line-height: 1.6;
+      font-size: 13px;
+      line-height: 1.55;
       text-align: left;
       color: var(--canvas-ink);
     }
@@ -1192,7 +1180,7 @@
     .theories-table .t-name {
       display: block;
       font-weight: 600;
-      font-size: 1.2em;
+      font-size: 1.15em;
       line-height: 1.3;
       margin-bottom: 8px;
     }
@@ -1768,9 +1756,65 @@
       text-wrap: balance;
     }
 
-    /* the species name roman within the italic quotation */
-    .site-footer .footer-subtitle .upright {
+    /* the Ethical Theories heading on one line, scaled down to fit the text
+       column where the column is narrower than it */
+    html.serif-headings .article-body #ethical-theories > h2 {
+      white-space: nowrap;
+      font-size: min(1.45em, calc(min(660px, 100vw - 48px) / 23));
+    }
+
+    @media (min-width: 1181px) {
+      html.serif-headings .article-body #ethical-theories > h2 {
+        font-size: min(1.45em, calc(min(760px, 100vw - 480px) / 23));
+      }
+    }
+
+    /* the quotation's source: an asterisk that shows it on hover or focus */
+    /* the note sits above the quotation's start, so it stays on screen */
+    .site-footer .footer-inner .footer-subtitle {
+      position: relative;
+    }
+
+    .quote-note {
+      position: static;
+      display: inline-block;
+      margin-left: 2px;
       font-style: normal;
+      cursor: help;
+      vertical-align: 0.25em;
+      font-size: 0.85em;
+      line-height: 1;
+      outline: none;
+    }
+
+    .quote-note-text {
+      position: absolute;
+      bottom: calc(100% + 10px);
+      left: 0;
+      width: max-content;
+      max-width: min(360px, 80vw);
+      padding: 8px 12px;
+      background: var(--canvas-ink);
+      color: var(--canvas-bg);
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 13px;
+      line-height: 1.45;
+      white-space: normal;
+      text-align: left;
+      opacity: 0;
+      transform: translateY(4px);
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .quote-note-text em {
+      font-style: italic;
+    }
+
+    .quote-note:hover .quote-note-text,
+    .quote-note:focus .quote-note-text {
+      opacity: 1;
+      transform: none;
     }
 
     .site-footer .footer-subtitle .hang {
@@ -2186,8 +2230,7 @@
         // The page script plays the completion chord on this.
         window.loaderComplete = true;
         document.dispatchEvent(new Event('loadercomplete'));
-        // the finished grid (already the accent from the moment the last
-        // tile landed) holds a moment, then fades away
+        // the finished rings hold a moment, then fade away
         var stacking = loader.classList.contains('loader-stacking');
         var hold = stacking ? Math.max(200, 650 - (performance.now() - (window.loaderBlueAt || 0))) : 200;
         loader.classList.add('loader-complete');
@@ -2197,32 +2240,32 @@
         }, hold);
       }
 
-      // Default: the grid. The ring stays as the fallback, for anyone who
+      // Default: the rings. The progress ring stays as the fallback, for anyone who
       // prefers reduced motion (or who sets localStorage['mse.loader'] = 'ring').
       var useRing = false;
       try { useRing = localStorage.getItem('mse.loader') === 'ring'; } catch (e) {}
       if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) useRing = true;
       if (!useRing) {
-        // the tiles, column by column (Meta, Macro, Civilisational), each
-        // column top to bottom, with a short pause between columns
-        var TILE = 24, GAP = 6, STEP = 130, PAUSE = 140, DUR = 520, MAX_WAIT = 7000;
-        var COLS = [0, 2, 1];   // grid columns in the order they arrive
-        var rects = '', k = 0, last = 0;
-        COLS.forEach(function (col, c) {
-          for (var row = 0; row < 3; row++, k++) {
-            var delay = k * STEP + c * PAUSE;
-            last = delay;
-            rects += '<rect' + (col === 1 ? ' class="core"' : '') + ' x="' + col * (TILE + GAP) + '" y="' + row * (TILE + GAP) +
-              '" width="' + TILE + '" height="' + TILE + '" rx="3" style="--delay:' + delay + 'ms;--dur:' + DUR + 'ms;--turn:' + (col * 90 + row * 40) +
-              'ms;--wave:' + (col * 180 + row * 60) + 'ms"/>';
-          }
+        // the rings, inside out: each grows from the edge of the one within it
+        var STEP = 600, DUR = 620, MAX_WAIT = 7000;
+        var RINGS = [
+          { r: 13.4, from: 0, fill: '#fad76e', alpha: 0.30, stroke: '#f2c64f' },
+          { r: 28.2, from: 13.4, fill: '#f7c85a', alpha: 0.30, stroke: '#efc04a' },
+          { r: 48, from: 28.2, fill: '#eaa528', alpha: 0.232, stroke: '#eab650' }
+        ];
+        var circles = '', last = 0;
+        RINGS.forEach(function (ring, k) {
+          var delay = 120 + k * STEP;
+          last = delay;
+          circles = '<circle cx="50" cy="50" r="' + ring.r + '" stroke="' + ring.stroke +
+            '" style="fill:' + ring.fill + ';fill-opacity:' + ring.alpha + ';--delay:' + delay + 'ms;--dur:' + DUR + 'ms;--from:' + (ring.from / ring.r).toFixed(3) + ';--wave:' + (k * 220) + 'ms"/>' + circles;
         });
-        loader.insertAdjacentHTML('beforeend', '<svg class="loader-grid" viewBox="0 0 84 84">' + rects + '</svg>');
+        loader.insertAdjacentHTML('beforeend', '<svg class="loader-rings" viewBox="0 0 100 100">' + circles + '</svg>');
         loader.classList.add('loader-stacking');
-        var grid = loader.querySelector('.loader-grid');
+        var grid = loader.querySelector('.loader-rings');
         var built = last + DUR + 120;
         var t0 = performance.now();
-        // a soft note as each column completes, rising a step each time (the
+        // a soft note as each ring settles, rising a step each time (the
         // browser may hold sound back until the page has been interacted with)
         var layerCtx = null;
         function layerSound(i) {
@@ -2250,10 +2293,10 @@
           } catch (e) {}
         }
         for (var n = 0; n < 3; n++) {
-          setTimeout(layerSound.bind(null, n), (n * 3 + 2) * STEP + n * PAUSE + DUR * 0.55);
+          setTimeout(layerSound.bind(null, n), 120 + n * STEP + DUR * 0.55);
         }
-        // turn the accent the moment the last tile lands (the ease-out has it
-        // settled well before its animation formally ends)
+        // the last ring is all but settled (the ease-out has it there well
+        // before its animation formally ends)
         setTimeout(function () {
           window.loaderBlueAt = performance.now();
           loader.classList.add('loader-complete');
@@ -2511,7 +2554,7 @@
     <footer class="site-footer">
       <div class="footer-inner">
       <div class="footer-head">
-      <p class="footer-subtitle"><em><span class="hang">“</span><span class="upright">Homo sapiens</span> are the only species (so far) with richly cumulative culture”</em> &ndash;&nbsp;Dennett</p>
+      <p class="footer-subtitle"><em><span class="hang">“</span>Homo sapiens are the only species (so far) with richly cumulative culture”</em><span class="quote-note" tabindex="0" role="note" aria-label="Source: From Bacteria to Bach and Back: The Evolution of Minds by Daniel Dennett (2017)">*<span class="quote-note-text" aria-hidden="true"><em>From Bacteria to Bach and Back: The Evolution of Minds</em> by Daniel Dennett (2017)</span></span></p>
       <p class="footer-title"><a class="heading-link" href="./">multiscale.ethics</a></p>
       </div>
       <!-- hidden: remove the hidden attribute to show the menu again -->
