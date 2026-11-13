@@ -100,8 +100,8 @@ const CSS = `
   #figure-rings .fig-svg { width: 48%; }
   figure + h2, figure + h3 { margin-top: 0; }
   .theories-table { width: 100%; border-collapse: collapse; font-family: 'IBM Plex Sans', sans-serif; font-size: 8.5pt; line-height: 1.5; text-align: left; }
-  .theories-table thead th { background: #875200; color: #fde27a; font-weight: 600; padding: 7pt 9pt; }
-  .theories-table tbody th, .theories-table td { vertical-align: top; padding: 9pt; border-bottom: 1.5pt solid #c9a03a; }
+  .theories-table thead th { background: #e8b10e; color: #1a1400; font-weight: 600; padding: 7pt 9pt; }
+  .theories-table tbody th, .theories-table td { vertical-align: top; padding: 9pt; border-bottom: 1.5pt solid #e8b10e; }
   .theories-table tbody th { width: 26%; color: #3a2a00; font-weight: 400; border-bottom-color: #fff; }
   .theories-table .t-name { display: block; font-weight: 600; font-size: 1.2em; margin-bottom: 4pt; }
   .theories-table .t-consequentialism th { background: #fde27a; }
