@@ -27,15 +27,15 @@ const CSS = `
   @page {
     size: A4;
     margin: 24mm 24mm 22mm;
-    @bottom-left { content: 'civilisationalparadigm'; font-family: 'IBM Plex Sans', sans-serif; font-size: 8pt; color: #167e49; vertical-align: middle; }
+    @bottom-left { content: 'multiscale.ethics'; font-family: 'IBM Plex Sans', sans-serif; font-size: 8pt; color: #8a6100; vertical-align: middle; }
     @bottom-right { content: counter(page); font-family: 'IBM Plex Sans', sans-serif; font-size: 8pt; color: #777; vertical-align: middle; }
   }
   @page :first {
-    @top-right { content: 'Civilisational\\A Paradigm'; white-space: pre; font-family: 'IBM Plex Sans', sans-serif; font-weight: 500; font-size: 10pt; line-height: 1.15; letter-spacing: 0.06em; text-transform: uppercase; text-align: right; vertical-align: bottom; padding-bottom: 2mm; color: #000; }
+    @top-right { content: 'Multi-\\A Scale\\A Ethics'; white-space: pre; font-family: 'IBM Plex Sans', sans-serif; font-weight: 500; font-size: 10pt; line-height: 1.15; letter-spacing: 0.06em; text-transform: uppercase; text-align: right; vertical-align: bottom; padding-bottom: 2mm; color: #000; }
   }
   html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   body { margin: 0; font-family: 'ET Bembo', Georgia, serif; font-size: 13.5pt; line-height: 1.42; color: #000; }
-  a { color: #167e49; text-decoration: none; }
+  a { color: #8a6100; text-decoration: none; }
   .amp { font-style: normal; }
   /* the title on a page of its own, a little below the middle */
   .title-page { padding-top: 92mm; break-after: page; }
@@ -48,21 +48,18 @@ const CSS = `
   h1 .title-line { display: block; white-space: nowrap; }
   .subtitle { margin: 0; font-weight: 600; font-size: 14.5pt; line-height: 1.3; }
   section { margin: 0 0 8pt; }
-  section.divided { margin-top: 22pt; padding-top: 22pt; border-top: 1.5pt solid #000; }
-  section.divided > h2:first-child { margin-top: 0; }
   h2 { margin: 28pt 0 9pt; font-size: 20pt; font-weight: 600; line-height: 1.2; break-after: avoid; }
   h3 { margin: 20pt 0 7pt; font-size: 15.5pt; font-weight: 600; font-style: normal; break-after: avoid; }
   h4, h5 { margin: 16pt 0 5pt; font-size: 13.5pt; font-weight: 600; break-after: avoid; }
   p { margin: 0 0 9pt; orphans: 3; widows: 3; }
-  /* the sections in the site's band (the Overview, then Basis and Contents
-     together) on pages of their own in its midnight green, edge to edge,
-     their text centred on the page */
-  @page band { margin: 0; background: #0a2d1b; @bottom-left { content: none; } @bottom-right { content: none; } }
+  /* the sections in the site's band (the Overview) on a page of their own
+     in its golden yellow, edge to edge, their text centred on the page */
+  @page band { margin: 0; background: #e8b10e; @bottom-left { content: none; } @bottom-right { content: none; } }
   .band-page {
     page: band; break-before: page; break-inside: avoid;
     box-sizing: border-box; min-height: 296.5mm; padding: 24mm;
     display: flex; flex-direction: column; justify-content: center;
-    background: #0a2d1b; color: #fbf6ec;
+    background: #e8b10e; color: #1a1400;
   }
   .band-page a { color: inherit; text-decoration: underline; text-underline-offset: 2pt; }
   /* a little smaller than the article's text, so that the Overview keeps to its page */
@@ -71,9 +68,9 @@ const CSS = `
   .band-page section + section { margin-top: 26pt; }
   .band-page h2 { margin-top: 0; }
   .band-page section > :last-child { margin-bottom: 0; }
-  /* the darker band of the site (Basis): edge to edge across its page, in
-     the darker shade of the midnight green */
-  .band-page section.band-alt { margin: 0 -24mm; padding: 16mm 24mm; background: #092617; }
+  /* the darker band of the site: edge to edge across its page, in the
+     deeper gold */
+  .band-page section.band-alt { margin: 0 -24mm; padding: 16mm 24mm; background: #cf9a05; }
   /* first on its page, it runs up to the top edge: the top of the page, not
      a band across it, and what follows sits below it rather than centred */
   .band-page:has(> section.band-alt:first-child) { justify-content: flex-start; }
@@ -90,6 +87,21 @@ const CSS = `
   .live-sub li::before { content: '\\25CB\\00a0\\00a0'; font-size: 0.75em; vertical-align: 0.1em; }
   #contents .live-list:not(.live-sub) { font-family: 'IBM Plex Sans', sans-serif; font-size: 10.5pt; }
   #contents .live-sub { font-size: 9pt; }
+  /* the drawn figures and the table of theories, as on the site */
+  figure { margin: 16pt 0; break-inside: avoid; text-align: center; }
+  figure .fig-svg { display: block; width: 82%; height: auto; margin: 0 auto; overflow: visible; }
+  figcaption { margin-top: 6pt; font-style: italic; font-size: 11pt; color: #777; }
+  .fig-label { font-family: 'IBM Plex Sans', sans-serif; font-size: 30px; fill: #000; }
+  .fig-sublabel { font-family: 'ET Bembo', serif; font-style: italic; font-size: 24px; fill: #777; }
+  .fig-leader { fill: none; stroke: #999; stroke-width: 1.2; }
+  .theories-table { width: 100%; border-collapse: collapse; font-family: 'IBM Plex Sans', sans-serif; font-size: 8.5pt; line-height: 1.5; text-align: left; }
+  .theories-table thead th { background: #875200; color: #fde27a; font-weight: 600; padding: 7pt 9pt; }
+  .theories-table tbody th, .theories-table td { vertical-align: top; padding: 9pt; border-bottom: 1.5pt solid #c9a03a; }
+  .theories-table tbody th { width: 26%; color: #3a2a00; font-weight: 400; border-bottom-color: #fff; }
+  .theories-table .t-name { display: block; font-weight: 600; font-size: 1.2em; margin-bottom: 4pt; }
+  .theories-table .t-consequentialism th { background: #fde27a; }
+  .theories-table .t-deontology th { background: #f5be2c; }
+  .theories-table .t-virtue th { background: #d6920a; }
   hr { border: 0; border-top: 0.75pt solid #999; margin: 16pt 0; }
 `;
 
@@ -124,7 +136,7 @@ const CSS = `
   });
   const doc = '<!doctype html><html><head><meta charset="utf-8"><base href="file://' + ROOT + '/">' +
     '<title>' + parts.titleText + '</title>' +
-    '<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Inter:wght@700&display=swap" rel="stylesheet">' +
+    '<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Inter:wght@700&display=swap" rel="stylesheet">' +
     '<style>' + CSS + '</style></head><body>' +
     '<div class="title-page"><p class="author">' + parts.author + '</p><h1>' + parts.title + '</h1><p class="subtitle">' + parts.subtitle + '</p></div>' +
     parts.bandPages.map((h) => '<div class="band-page">' + h + '</div>').join('') +
