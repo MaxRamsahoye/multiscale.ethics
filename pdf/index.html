@@ -2259,6 +2259,12 @@
       .site-title { top: 22px; right: 24px; }
     }
 
+    /* the site's name stays pinned in the top right as the pages scroll
+       (on phones it scrolls away, clear of the pages and the bar) */
+    @media (min-width: 901px) {
+      .site-title { position: fixed; }
+    }
+
     /* the bar: the title, the page count, zoom, and the file itself */
     .pv-bar {
       position: relative;
