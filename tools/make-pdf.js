@@ -109,6 +109,13 @@ const CSS = `
   .theories-table .t-consequentialism th { background: #fde27a; }
   .theories-table .t-deontology th { background: #f5be2c; }
   .theories-table .t-virtue th { background: #d6920a; }
+  /* the notes, numbered, after the article */
+  sup.note-ref { font-family: 'IBM Plex Sans', sans-serif; font-size: 0.6em; line-height: 0; margin-left: 1pt; color: #8a6100; }
+  .notes { break-before: page; }
+  .notes h2 { margin-top: 0; }
+  .notes ol { list-style: decimal; padding-left: 1.4em; font-size: 11pt; line-height: 1.45; }
+  .notes li { padding-left: 0; text-indent: 0; margin-bottom: 8pt; }
+  .notes li::before { content: none; }
   hr { border: 0; border-top: 0.75pt solid #999; margin: 16pt 0; }
 `;
 
@@ -122,6 +129,18 @@ const CSS = `
   const parts = await page.evaluate(() => {
     const q = (s) => document.querySelector(s);
     const body = q('.article-body').cloneNode(true);
+    // sidenotes become numbered notes at the end, their markers superscript numbers
+    const notes = [];
+    body.querySelectorAll('.sidenote-ref').forEach((ref) => {
+      const note = body.querySelector(ref.getAttribute('href'));
+      if (!note) { ref.remove(); return; }
+      note.querySelectorAll('.sidenote-label').forEach((n) => n.remove());
+      notes.push(note.innerHTML.trim());
+      const sup = document.createElement('sup');
+      sup.className = 'note-ref';
+      sup.textContent = notes.length;
+      ref.replaceWith(sup);
+    });
     body.querySelectorAll('button, .sidenote, .sidenote-label').forEach((n) => n.remove());
     // headings lose their self-links, keeping their text
     body.querySelectorAll('.heading-link').forEach((a) => a.replaceWith(...a.childNodes));
@@ -139,7 +158,7 @@ const CSS = `
       subtitle: q('.article-subtitle').innerHTML,
       // the Overview on one page, the sections after it in the band on another
       bandPages: n ? [html(sections.slice(0, 1))].concat(n > 1 ? [html(sections.slice(1, n))] : []) : [],
-      rest: html(sections.slice(n)),
+      rest: html(sections.slice(n)) + (notes.length ? '<section class="notes"><h2>Notes</h2><ol>' + notes.map((h) => '<li>' + h + '</li>').join('') + '</ol></section>' : ''),
     };
   });
   const doc = '<!doctype html><html><head><meta charset="utf-8"><base href="file://' + ROOT + '/">' +
