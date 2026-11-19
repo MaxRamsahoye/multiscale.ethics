@@ -1810,29 +1810,42 @@
       }
     }
 
-    /* a sidenote centred beside the whole of its passage (Moral
-       Convergence) rather than level with its marker */
-    @media (min-width: 1181px) {
-      .article-body .note-centred {
-        position: relative;
-        max-width: 760px;
-      }
-
-      .article-body .note-centred .sidenote {
-        position: absolute;
-        float: none;
-        top: 50%;
-        left: calc(100% + 40px);
-        width: 200px;
-        margin: 0;
-        transform: translateY(-50%);
-      }
+    /* a quotation set apart in the text: indented, in italics, with room
+       above and below, its source beneath */
+    .article-body .article-quote {
+      max-width: 760px;
+      margin: 64px 0;
+      padding: 0 40px;
     }
 
-    @media (min-width: 1801px) {
-      .article-body .note-centred .sidenote {
-        left: calc(100% + 120px);
-        width: 300px;
+    .article-body .article-quote p {
+      margin: 0;
+      font-style: italic;
+    }
+
+    .article-body .article-quote footer {
+      margin-top: 14px;
+      font-size: 0.85em;
+      color: var(--muted);
+    }
+
+    .article-body .article-quote footer cite {
+      font-style: italic;
+    }
+
+    .article-body .article-quote footer a {
+      color: inherit;
+      font-weight: 400;
+    }
+
+    .article-body .article-quote + h3 {
+      margin-top: 0;
+    }
+
+    @media (max-width: 700px) {
+      .article-body .article-quote {
+        padding: 0 0 0 18px;
+        border-left: 2px solid var(--inverse-bg);
       }
     }
 
