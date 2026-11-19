@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Render the article as Multi-Scale Ethics.pdf (named after the
 // article, so that it saves under its title however the browser fetches it),
-// the file the PDF icon on the Article page downloads.
+// the file the PDF viewer (pdf/, made by tools/make-pdf-viewer.py) shows.
 //
 // Usage (from the repository root): node tools/make-pdf.js
 // Needs Playwright (NODE_PATH=$(npm root -g) where it is installed globally)
