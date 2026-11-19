@@ -92,7 +92,7 @@ const CSS = `
   /* the drawn figures and the table of theories, as on the site */
   figure { margin: 16pt 0; break-inside: avoid; text-align: center; }
   figure .fig-svg { display: block; width: 82%; height: auto; margin: 0 auto; overflow: visible; }
-  figcaption { margin-top: 6pt; font-style: italic; font-size: 11pt; color: #777; }
+  figcaption { margin-top: 18pt; font-style: italic; font-size: 11pt; color: #777; }
   .fig-label { font-family: 'IBM Plex Sans', sans-serif; font-size: 27px; fill: #000; }
   .fig-label-ring { text-anchor: middle; font-weight: 600; font-size: 34px; }
   .ring-disc { stroke-width: 3.5; }
