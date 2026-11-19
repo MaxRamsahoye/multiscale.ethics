@@ -235,6 +235,11 @@ body_top = '''<body>
     </svg>
   </a>
   <a class="site-title" href="../">Multi-<br>Scale<br>Ethics</a>
+  <button class="scroll-top-btn" type="button" aria-label="Scroll to top">
+    <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1" stroke-linejoin="round">
+      <polygon points="14,9.078 20.328,18.922 14,15.969 7.672,18.922"/>
+    </svg>
+  </button>
 
   '''
 I = lambda d: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + d + '</svg>'
@@ -322,6 +327,12 @@ main = '''<main class="pv-main">
       var redraw = 0;
       function again() { clearTimeout(redraw); redraw = setTimeout(function () { pages.forEach(function (p, i) { var r = p.getBoundingClientRect(); if (r.bottom > -1200 && r.top < window.innerHeight + 1200) draw(i); }); }, 150); }
       window.addEventListener('resize', again);
+      // the up arrow in the bottom right, once the first page has scrolled by
+      var up = document.querySelector('.scroll-top-btn');
+      function showUp() { up.classList.toggle('visible', window.scrollY > window.innerHeight * 0.6); }
+      window.addEventListener('scroll', showUp, { passive: true });
+      showUp();
+      up.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
       document.querySelectorAll('[data-zoom]').forEach(function (b) {
         b.addEventListener('click', function () {
           var at = pages.length ? (window.scrollY + window.innerHeight / 2) / document.documentElement.scrollHeight : 0;
