@@ -1810,6 +1810,32 @@
       }
     }
 
+    /* a sidenote centred beside the whole of its passage (Moral
+       Convergence) rather than level with its marker */
+    @media (min-width: 1181px) {
+      .article-body .note-centred {
+        position: relative;
+        max-width: 760px;
+      }
+
+      .article-body .note-centred .sidenote {
+        position: absolute;
+        float: none;
+        top: 50%;
+        left: calc(100% + 40px);
+        width: 200px;
+        margin: 0;
+        transform: translateY(-50%);
+      }
+    }
+
+    @media (min-width: 1801px) {
+      .article-body .note-centred .sidenote {
+        left: calc(100% + 120px);
+        width: 300px;
+      }
+    }
+
     /* the quotation's source: an asterisk that shows it on hover or focus */
     /* the note sits above the quotation's start, so it stays on screen */
     .site-footer .footer-inner .footer-subtitle {
