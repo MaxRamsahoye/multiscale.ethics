@@ -49,7 +49,7 @@ style = '''
       top: 0;
       right: 0;
       bottom: 0;
-      width: 14px;
+      width: 21px;
       cursor: pointer;
       touch-action: none;
     }
@@ -60,7 +60,7 @@ style = '''
       position: absolute;
       top: 0;
       right: 0;
-      width: 4px;
+      width: 6px;
     }
 
     .pv-progress::before {
@@ -77,7 +77,7 @@ style = '''
     .pv-progress:hover .pv-progress-fill,
     .pv-progress.dragging::before,
     .pv-progress.dragging .pv-progress-fill {
-      width: 6px;
+      width: 9px;
     }
 
     /* the site's name stays pinned in the top right as the pages scroll
