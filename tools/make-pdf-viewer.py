@@ -14,7 +14,11 @@ head = re.sub(r'\n  <link rel="canonical"[^>]*>', '', head)
 PDF = '../Multi-Scale%20Ethics.pdf'
 style = '''
   <style>
-    body { margin: 0; background: var(--canvas-bg); color: var(--canvas-ink); }
+    body { margin: 0; padding: 0; background: var(--canvas-bg); color: var(--canvas-ink); }
+
+    /* (the bar's distance from the top as padding, so that it stays with the
+       bar rather than moving the whole page down) */
+    .pv-main { padding-top: 14px; }
 
     /* back to the article at the top left; the site's name at the top right */
     .back-arrow {
@@ -43,8 +47,10 @@ style = '''
       align-items: center;
       justify-content: space-between;
       gap: 24px;
-      width: min(100% - 48px, 900px);
-      margin: 84px auto 0;
+      /* at the very top, level with the back arrow and the site's name,
+         and clear of both */
+      width: min(100% - 320px, 900px);
+      margin: 0 auto;
       padding: 16px 0;
       background: var(--canvas-bg);
       border-bottom: 1px solid color-mix(in srgb, currentColor 16%, transparent);
@@ -199,7 +205,8 @@ style = '''
     }
 
     @media (max-width: 600px) {
-      .pv-bar { margin-top: 84px; width: calc(100% - 32px); }
+      .pv-main { padding-top: 84px; }
+      .pv-bar { width: calc(100% - 32px); }
     }
 
     @media (max-width: 900px) {
@@ -231,7 +238,7 @@ main = '''<main class="pv-main">
       <div class="pv-tools">
         <span class="pv-count" aria-live="polite">&ndash;</span>
         <button class="pv-zoom" type="button" data-zoom="-1" aria-label="Zoom out">''' + I('<circle cx="11" cy="11" r="6.5"/><path d="M8 11h6M16 16l4.5 4.5"/>') + '''</button>
-        <span class="pv-zoom pv-pct" aria-live="polite">100%</span>
+        <span class="pv-zoom pv-pct" aria-live="polite">90%</span>
         <button class="pv-zoom" type="button" data-zoom="1" aria-label="Zoom in">''' + I('<circle cx="11" cy="11" r="6.5"/><path d="M8 11h6M11 8v6M16 16l4.5 4.5"/>') + '''</button>
         <a href="''' + PDF + '''" download="Multi-Scale Ethics.pdf" aria-label="Download the PDF">''' + I('<path d="M4 15v3.5A1.5 1.5 0 0 0 5.5 20h13a1.5 1.5 0 0 0 1.5-1.5V15"/><path d="M12 4v11"/><path d="M8 11l4 4 4-4"/>') + '''<span>Download</span></a>
       </div>
@@ -249,8 +256,8 @@ main = '''<main class="pv-main">
       if (!window.pdfjsLib) { list.innerHTML = '<p class="pv-note">The viewer could not load. <a href="' + URL_ + '">Open the PDF directly.</a></p>'; return; }
       pdfjsLib.GlobalWorkerOptions.workerSrc = '../assets/pdfjs/pdf.worker.min.js';
       // (the browser's own PDF viewer's steps, as percentages of the page at
-      // its actual size: A4, 794px wide)
-      var ZOOMS = [25, 33, 50, 67, 75, 80, 90, 100, 110, 125, 150, 175, 200, 250, 300, 400, 500], z = 7, pdf, pages = [], drawn = new Map();
+      // its actual size: A4, 794px wide; 90% to begin with)
+      var ZOOMS = [25, 33, 50, 67, 75, 80, 90, 100, 110, 125, 150, 175, 200, 250, 300, 400, 500], z = 6, pdf, pages = [], drawn = new Map();
       // (the zoom as a percentage of the page at its actual size: A4, 794px wide)
       var pct = document.querySelector('.pv-pct');
       function setWidth() {
