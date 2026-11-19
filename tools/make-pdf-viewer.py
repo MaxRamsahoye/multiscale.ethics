@@ -38,6 +38,48 @@ style = '''
       .site-title { top: 22px; right: 24px; }
     }
 
+    /* reading progress down the right-hand edge, in the accent colour, in
+       place of the browser's scrollbar; click or drag along it to move */
+    html { scrollbar-width: none; }
+    html::-webkit-scrollbar { display: none; }
+
+    .pv-progress {
+      position: fixed;
+      z-index: 30;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 14px;
+      cursor: pointer;
+      touch-action: none;
+    }
+
+    .pv-progress::before,
+    .pv-progress-fill {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 4px;
+    }
+
+    .pv-progress::before {
+      bottom: 0;
+      background: color-mix(in srgb, var(--inverse-bg) 20%, transparent);
+    }
+
+    .pv-progress-fill {
+      height: 0;
+      background: var(--inverse-bg);
+    }
+
+    .pv-progress:hover::before,
+    .pv-progress:hover .pv-progress-fill,
+    .pv-progress.dragging::before,
+    .pv-progress.dragging .pv-progress-fill {
+      width: 6px;
+    }
+
     /* the site's name stays pinned in the top right as the pages scroll
        (on phones it scrolls away, clear of the pages and the bar) */
     @media (min-width: 901px) {
@@ -235,6 +277,7 @@ body_top = '''<body>
     </svg>
   </a>
   <a class="site-title" href="../">Multi-<br>Scale<br>Ethics</a>
+  <div class="pv-progress" role="scrollbar" aria-controls="pv-pages" aria-orientation="vertical" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Reading progress"><div class="pv-progress-fill"></div></div>
   <button class="scroll-top-btn" type="button" aria-label="Scroll to top">
     <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1" stroke-linejoin="round">
       <polygon points="14,9.078 20.328,18.922 14,15.969 7.672,18.922"/>
@@ -254,7 +297,7 @@ main = '''<main class="pv-main">
         <a href="''' + PDF + '''" download="Multi-Scale Ethics.pdf" aria-label="Download the PDF">''' + I('<path d="M4 15v3.5A1.5 1.5 0 0 0 5.5 20h13a1.5 1.5 0 0 0 1.5-1.5V15"/><path d="M12 4v11"/><path d="M8 11l4 4 4-4"/>') + '''<span>Download</span></a>
       </div>
     </div></div>
-    <div class="pv-pages" aria-label="The pages of the PDF"></div>
+    <div class="pv-pages" id="pv-pages" aria-label="The pages of the PDF"></div>
   </main>
 
   <script src="../assets/pdfjs/pdf.min.js"></script>
@@ -333,6 +376,30 @@ main = '''<main class="pv-main">
       window.addEventListener('scroll', showUp, { passive: true });
       showUp();
       up.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+      // the progress bar: filled to how far down the pages the window is;
+      // pressed or dragged, it moves the window to that point
+      var bar_ = document.querySelector('.pv-progress'), fill = bar_.firstElementChild;
+      function progress() {
+        var max = document.documentElement.scrollHeight - window.innerHeight;
+        var f = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+        fill.style.height = (f * 100).toFixed(2) + '%';
+        bar_.setAttribute('aria-valuenow', Math.round(f * 100));
+      }
+      window.addEventListener('scroll', progress, { passive: true });
+      window.addEventListener('resize', progress);
+      new ResizeObserver(progress).observe(document.body);
+      progress();
+      function seek(e) {
+        var max = document.documentElement.scrollHeight - window.innerHeight;
+        window.scrollTo(0, Math.min(1, Math.max(0, e.clientY / window.innerHeight)) * max);
+      }
+      bar_.addEventListener('pointerdown', function (e) {
+        bar_.setPointerCapture(e.pointerId); bar_.classList.add('dragging'); seek(e); e.preventDefault();
+      });
+      bar_.addEventListener('pointermove', function (e) { if (bar_.classList.contains('dragging')) seek(e); });
+      ['pointerup', 'pointercancel'].forEach(function (t) {
+        bar_.addEventListener(t, function () { bar_.classList.remove('dragging'); });
+      });
       document.querySelectorAll('[data-zoom]').forEach(function (b) {
         b.addEventListener('click', function () {
           var at = pages.length ? (window.scrollY + window.innerHeight / 2) / document.documentElement.scrollHeight : 0;
