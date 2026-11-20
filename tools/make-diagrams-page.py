@@ -39,14 +39,6 @@ FIGURES = [
         'html': block('<figure class="article-figure figure-table">', '</figure>'),
     },
     {
-        'id': 'scale-ladder',
-        'title': 'The Scale Ladder',
-        'where': 'Part I',
-        'anchor': 'human-societies',
-        'desc': 'Tribe, city, state and civilisation on one axis of population, with Dunbar&rsquo;s number as the first threshold, and the ethic adapted to each scale.',
-        'html': D['ladder'],
-    },
-    {
         'id': 'scale-profiles',
         'title': 'Scale Profiles',
         'where': 'Part I',
@@ -77,14 +69,6 @@ FIGURES = [
         'anchor': 'wrong-scales',
         'desc': 'Each theory against each scale: native where it was adapted, and alienating, vague or complicated where it was not.',
         'html': D['fit'],
-    },
-    {
-        'id': 'agent-classes',
-        'title': 'Conflicts between Agent Classes',
-        'where': 'Part III',
-        'anchor': 'agent-classes',
-        'desc': 'The individual, the collective and the civilisational, each with its own ethic, and the conflict where each pair meets.',
-        'html': D['triangle'],
     },
     {
         'id': 'concentric-ethics',

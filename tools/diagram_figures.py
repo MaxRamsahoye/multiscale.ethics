@@ -1,7 +1,6 @@
 # The Diagrams page's own figures (those not taken from the article): drawn
 # here as SVG and HTML in the site's golden palette, and placed by
 # tools/make-diagrams-page.py.
-import math
 
 LIGHT = ('#fce278', '#eac859', '#c89a28')   # top, left side, right side
 MID = ('#f5be28', '#d69e18', '#a5750e')
@@ -22,48 +21,6 @@ def slab(cx, cy, w, h, t, c):
 def figure(fid, svg, caption, extra=''):
     return ('<figure class="article-figure dg-figure%s" id="%s">\n%s\n  <figcaption>%s</figcaption>\n</figure>'
             % (extra, fid, svg, caption))
-
-
-# ---- 1. the scale ladder ------------------------------------------------------
-def scale_ladder():
-    X0, X1 = 170, 590            # the axis: 10 to 10 billion, on a log scale
-    def x(p):
-        return X0 + (math.log10(p) - 1) / 9 * (X1 - X0)
-    rows = [
-        ('Tribe', 'up to ~150', 30, 150, [LIGHT[0]], 'Virtue'),
-        ('City', 'thousands to millions', 2e3, 3e7, [MID[0]], 'Deontology'),
-        ('State', 'millions to billions', 1e6, 1.4e9, [DARK[0]], 'Consequentialism'),
-        ('Civilisation', '~8 billion', 2.5e9, 8.1e9, [LIGHT[0], MID[0], DARK[0]], 'A hybrid stack'),
-    ]
-    s = ['<svg class="fig-svg dg-svg" viewBox="0 0 760 360" role="img" aria-labelledby="fig-ladder-title">',
-         '<title id="fig-ladder-title">The scales of human society on a population axis from ten to ten billion: '
-         'the tribe, up to about 150 people, with virtue; the city, thousands to millions, with deontology; the state, '
-         'millions to billions, with consequentialism; and civilisation, about eight billion, with a hybrid stack of all three. '
-         'Dunbar&rsquo;s number, about 150, marks the threshold between the tribe and the city.</title>']
-    # gridlines and axis
-    labels = ['10', '100', '1k', '10k', '100k', '1M', '10M', '100M', '1B', '10B']
-    for i, lab in enumerate(labels):
-        gx = x(10 ** (i + 1))
-        s.append('<line class="dg-grid" x1="%g" y1="44" x2="%g" y2="292"/>' % (gx, gx))
-        s.append('<text class="dg-tick" x="%g" y="316">%s</text>' % (gx, lab))
-    s.append('<text class="dg-axis" x="%g" y="344">people</text>' % ((X0 + X1) / 2))
-    # Dunbar's number
-    dx = x(150)
-    s.append('<line class="dg-dunbar" x1="%g" y1="34" x2="%g" y2="292"/>' % (dx, dx))
-    s.append('<text class="dg-note" x="%g" y="24">Dunbar&rsquo;s number &asymp; 150</text>' % dx)
-    for i, (name, size, lo, hi, cols, ethic) in enumerate(rows):
-        y = 70 + i * 60
-        x0, x1 = x(lo), x(hi)
-        if len(cols) == 1:
-            s.append('<rect x="%g" y="%g" width="%g" height="22" rx="3" fill="%s"/>' % (x0, y - 11, x1 - x0, cols[0]))
-        else:   # the three theories, together
-            for k, c in enumerate(cols):
-                s.append('<rect x="%g" y="%g" width="%g" height="%g" fill="%s"/>' % (x0, y - 11 + k * 22 / 3, x1 - x0, 22 / 3 + 0.4, c))
-        s.append('<text class="dg-label" x="0" y="%g">%s</text>' % (y - 2, name))
-        s.append('<text class="dg-sub" x="0" y="%g">%s</text>' % (y + 16, size))
-        s.append('<text class="dg-ethic" x="%g" y="%g">%s</text>' % (X1 + 22, y + 6, ethic))
-    s.append('</svg>')
-    return figure('figure-ladder', '\n'.join(s), 'the scales of human society, and the ethics adapted to each')
 
 
 # ---- 4. the hybrid ethics stack -------------------------------------------------
@@ -87,40 +44,6 @@ def ethics_stack():
         s.append('<text class="dg-sub" x="%g" y="%g">%s</text>' % (lx, cy + t / 2 + 18, sub))
     s.append('</svg>')
     return figure('figure-ethics-stack', '\n'.join(s), 'the ethics of civilisation as a hybrid ethics stack')
-
-
-# ---- 6. the agent-class triangle --------------------------------------------------
-def agent_triangle():
-    nodes = {
-        'civ': (380, 150, 64, DARK[0], 'Civilisational', 'consequence'),
-        'ind': (150, 410, 30, LIGHT[0], 'Individual', 'character'),
-        'col': (610, 410, 46, MID[0], 'Collective', 'rules'),
-    }
-    edges = [
-        ('ind', 'col', 'conscience against rules', 0, 34, 'middle'),
-        ('col', 'civ', 'the multipolar trap', 18, 0, 'start'),
-        ('ind', 'civ', 'rounding error / mere means', -18, 0, 'end'),
-    ]
-    s = ['<svg class="fig-svg dg-svg" viewBox="0 0 760 520" role="img" aria-labelledby="fig-triangle-title">',
-         '<title id="fig-triangle-title">The three classes of agent as a triangle: the individual, guided by character; the collective, '
-         'by rules; and the civilisational, by consequence. Between individual and collective: conscience against rules. Between '
-         'collective and civilisational: the multipolar trap. Between individual and civilisational: the individual as a rounding '
-         'error, or as a mere means.</title>']
-    for a, b, text, ox, oy, anchor in edges:
-        (x1, y1, r1, *_), (x2, y2, r2, *_) = nodes[a], nodes[b]
-        d = math.hypot(x2 - x1, y2 - y1)
-        ux, uy = (x2 - x1) / d, (y2 - y1) / d
-        s.append('<line class="dg-edge" x1="%g" y1="%g" x2="%g" y2="%g"/>' % (x1 + ux * (r1 + 12), y1 + uy * (r1 + 12), x2 - ux * (r2 + 12), y2 - uy * (r2 + 12)))
-        mx, my = (x1 + x2) / 2 + ox, (y1 + y2) / 2 + oy
-        s.append('<text class="dg-edge-label" x="%g" y="%g" text-anchor="%s">%s</text>' % (mx, my, anchor, text))
-    for key, (nx, ny, r, c, name, ethic) in nodes.items():
-        s.append('<circle cx="%g" cy="%g" r="%g" fill="%s"/>' % (nx, ny, r, c))
-        # (the topmost node labelled above itself, clear of its edges)
-        below = ny + r + 26 if key != 'civ' else ny - r - 38
-        s.append('<text class="dg-label" x="%g" y="%g" text-anchor="middle">%s</text>' % (nx, below, name))
-        s.append('<text class="dg-sub" x="%g" y="%g" text-anchor="middle">%s</text>' % (nx, below + 20, ethic))
-    s.append('</svg>')
-    return figure('figure-agent-triangle', '\n'.join(s), 'conflicts between the classes of agent')
 
 
 # ---- A. theory &times; scale --------------------------------------------------------
@@ -178,15 +101,7 @@ CSS = '''
     .dg-svg text { font-family: 'IBM Plex Sans', sans-serif; fill: var(--canvas-ink); }
     .dg-svg .dg-label { font-size: 18px; font-weight: 500; }
     .dg-svg .dg-sub { font-family: var(--serif); font-style: italic; font-size: 16px; fill: var(--muted); }
-    .dg-svg .dg-ethic { font-family: var(--serif); font-style: italic; font-size: 18px; }
-    .dg-svg .dg-tick { font-size: 12px; fill: var(--muted); text-anchor: middle; }
-    .dg-svg .dg-axis { font-size: 12px; fill: var(--muted); text-anchor: middle; letter-spacing: 0.06em; text-transform: uppercase; }
-    .dg-svg .dg-note { font-size: 13px; fill: var(--muted); text-anchor: middle; }
-    .dg-svg .dg-grid { stroke: color-mix(in srgb, var(--canvas-ink) 8%, transparent); stroke-width: 1; }
-    .dg-svg .dg-dunbar { stroke: var(--inverse-bg); stroke-width: 1.5; stroke-dasharray: 4 4; }
     .dg-svg .dg-leader { fill: none; stroke: var(--muted); stroke-width: 1; }
-    .dg-svg .dg-edge { stroke: var(--muted); stroke-width: 1.2; }
-    .dg-svg .dg-edge-label { font-family: var(--serif); font-style: italic; font-size: 18px; }
 
     /* the matrices: shaded where a theory is native, plain where it strains */
     .fit-table td { width: 24.6%; }
@@ -248,9 +163,7 @@ def label_cells(table_html, columns):
 
 def figures():
     return {
-        'ladder': scale_ladder(),
         'stack': ethics_stack(),
-        'triangle': agent_triangle(),
         'fit': label_cells(fit_matrix(), ['Individual', 'Collective', 'Civilisational']),
         'profiles': label_cells(scale_profiles(), ['Population', 'How trust works', 'Ethic', 'Where it strains']),
     }

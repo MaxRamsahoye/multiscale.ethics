@@ -2401,15 +2401,7 @@
     .dg-svg text { font-family: 'IBM Plex Sans', sans-serif; fill: var(--canvas-ink); }
     .dg-svg .dg-label { font-size: 18px; font-weight: 500; }
     .dg-svg .dg-sub { font-family: var(--serif); font-style: italic; font-size: 16px; fill: var(--muted); }
-    .dg-svg .dg-ethic { font-family: var(--serif); font-style: italic; font-size: 18px; }
-    .dg-svg .dg-tick { font-size: 12px; fill: var(--muted); text-anchor: middle; }
-    .dg-svg .dg-axis { font-size: 12px; fill: var(--muted); text-anchor: middle; letter-spacing: 0.06em; text-transform: uppercase; }
-    .dg-svg .dg-note { font-size: 13px; fill: var(--muted); text-anchor: middle; }
-    .dg-svg .dg-grid { stroke: color-mix(in srgb, var(--canvas-ink) 8%, transparent); stroke-width: 1; }
-    .dg-svg .dg-dunbar { stroke: var(--inverse-bg); stroke-width: 1.5; stroke-dasharray: 4 4; }
     .dg-svg .dg-leader { fill: none; stroke: var(--muted); stroke-width: 1; }
-    .dg-svg .dg-edge { stroke: var(--muted); stroke-width: 1.2; }
-    .dg-svg .dg-edge-label { font-family: var(--serif); font-style: italic; font-size: 18px; }
 
     /* the matrices: shaded where a theory is native, plain where it strains */
     .fit-table td { width: 24.6%; }
@@ -2478,12 +2470,10 @@
             <p class="dg-desc">The diagrams and tables of <em>Multi-Scale Ethics</em>, gathered in one place.</p>
             <ol class="dg-index">
                 <li><a href="#three-theories">The Three Theories</a></li>
-                <li><a href="#scale-ladder">The Scale Ladder</a></li>
                 <li><a href="#scale-profiles">Scale Profiles</a></li>
                 <li><a href="#hybrid-ethics-stack">The Hybrid Ethics Stack</a></li>
                 <li><a href="#agency-across-scales">Agency across Scales</a></li>
                 <li><a href="#theory-scale-fit">Theories at the Wrong Scales</a></li>
-                <li><a href="#agent-classes">Conflicts between Agent Classes</a></li>
                 <li><a href="#concentric-ethics">Concentric Ethics</a></li>
             </ol>
           </div>
@@ -2516,60 +2506,6 @@
               </tr>
               </tbody>
               </table>
-              </figure>
-            </section>
-
-            <section class="dg-item" id="scale-ladder">
-              <h2><a class="heading-link" href="#scale-ladder">The Scale Ladder</a></h2>
-              <p class="dg-meta">In the article: <a href="../#human-societies">Part I</a></p>
-              <p>Tribe, city, state and civilisation on one axis of population, with Dunbar&rsquo;s number as the first threshold, and the ethic adapted to each scale.</p>
-
-              <figure class="article-figure dg-figure" id="figure-ladder">
-              <svg class="fig-svg dg-svg" viewBox="0 0 760 360" role="img" aria-labelledby="fig-ladder-title">
-              <title id="fig-ladder-title">The scales of human society on a population axis from ten to ten billion: the tribe, up to about 150 people, with virtue; the city, thousands to millions, with deontology; the state, millions to billions, with consequentialism; and civilisation, about eight billion, with a hybrid stack of all three. Dunbar&rsquo;s number, about 150, marks the threshold between the tribe and the city.</title>
-              <line class="dg-grid" x1="170" y1="44" x2="170" y2="292"/>
-              <text class="dg-tick" x="170" y="316">10</text>
-              <line class="dg-grid" x1="216.667" y1="44" x2="216.667" y2="292"/>
-              <text class="dg-tick" x="216.667" y="316">100</text>
-              <line class="dg-grid" x1="263.333" y1="44" x2="263.333" y2="292"/>
-              <text class="dg-tick" x="263.333" y="316">1k</text>
-              <line class="dg-grid" x1="310" y1="44" x2="310" y2="292"/>
-              <text class="dg-tick" x="310" y="316">10k</text>
-              <line class="dg-grid" x1="356.667" y1="44" x2="356.667" y2="292"/>
-              <text class="dg-tick" x="356.667" y="316">100k</text>
-              <line class="dg-grid" x1="403.333" y1="44" x2="403.333" y2="292"/>
-              <text class="dg-tick" x="403.333" y="316">1M</text>
-              <line class="dg-grid" x1="450" y1="44" x2="450" y2="292"/>
-              <text class="dg-tick" x="450" y="316">10M</text>
-              <line class="dg-grid" x1="496.667" y1="44" x2="496.667" y2="292"/>
-              <text class="dg-tick" x="496.667" y="316">100M</text>
-              <line class="dg-grid" x1="543.333" y1="44" x2="543.333" y2="292"/>
-              <text class="dg-tick" x="543.333" y="316">1B</text>
-              <line class="dg-grid" x1="590" y1="44" x2="590" y2="292"/>
-              <text class="dg-tick" x="590" y="316">10B</text>
-              <text class="dg-axis" x="380" y="344">people</text>
-              <line class="dg-dunbar" x1="224.884" y1="34" x2="224.884" y2="292"/>
-              <text class="dg-note" x="224.884" y="24">Dunbar&rsquo;s number &asymp; 150</text>
-              <rect x="192.266" y="59" width="32.6186" height="22" rx="3" fill="#fce278"/>
-              <text class="dg-label" x="0" y="68">Tribe</text>
-              <text class="dg-sub" x="0" y="86">up to ~150</text>
-              <text class="dg-ethic" x="612" y="76">Virtue</text>
-              <rect x="277.381" y="119" width="194.884" height="22" rx="3" fill="#f5be28"/>
-              <text class="dg-label" x="0" y="128">City</text>
-              <text class="dg-sub" x="0" y="146">thousands to millions</text>
-              <text class="dg-ethic" x="612" y="136">Deontology</text>
-              <rect x="403.333" y="179" width="146.819" height="22" rx="3" fill="#d6920a"/>
-              <text class="dg-label" x="0" y="188">State</text>
-              <text class="dg-sub" x="0" y="206">millions to billions</text>
-              <text class="dg-ethic" x="612" y="196">Consequentialism</text>
-              <rect x="561.904" y="239" width="23.8254" height="7.73333" fill="#fce278"/>
-              <rect x="561.904" y="246.333" width="23.8254" height="7.73333" fill="#f5be28"/>
-              <rect x="561.904" y="253.667" width="23.8254" height="7.73333" fill="#d6920a"/>
-              <text class="dg-label" x="0" y="248">Civilisation</text>
-              <text class="dg-sub" x="0" y="266">~8 billion</text>
-              <text class="dg-ethic" x="612" y="256">A hybrid stack</text>
-              </svg>
-              <figcaption>the scales of human society, and the ethics adapted to each</figcaption>
               </figure>
             </section>
 
@@ -2646,34 +2582,6 @@
               </tbody>
               </table>
               <figcaption>each theory at its native scale, and the problems of applying it at the wrong one</figcaption>
-              </figure>
-            </section>
-
-            <section class="dg-item" id="agent-classes">
-              <h2><a class="heading-link" href="#agent-classes">Conflicts between Agent Classes</a></h2>
-              <p class="dg-meta">In the article: <a href="../#agent-classes">Part III</a></p>
-              <p>The individual, the collective and the civilisational, each with its own ethic, and the conflict where each pair meets.</p>
-
-              <figure class="article-figure dg-figure" id="figure-agent-triangle">
-              <svg class="fig-svg dg-svg" viewBox="0 0 760 520" role="img" aria-labelledby="fig-triangle-title">
-              <title id="fig-triangle-title">The three classes of agent as a triangle: the individual, guided by character; the collective, by rules; and the civilisational, by consequence. Between individual and collective: conscience against rules. Between collective and civilisational: the multipolar trap. Between individual and civilisational: the individual as a rounding error, or as a mere means.</title>
-              <line class="dg-edge" x1="192" y1="410" x2="552" y2="410"/>
-              <text class="dg-edge-label" x="380" y="444" text-anchor="middle">conscience against rules</text>
-              <line class="dg-edge" x1="571.571" y1="366.558" x2="430.356" y2="206.924"/>
-              <text class="dg-edge-label" x="513" y="280" text-anchor="start">the multipolar trap</text>
-              <line class="dg-edge" x1="177.828" y1="378.542" x2="329.644" y2="206.924"/>
-              <text class="dg-edge-label" x="247" y="280" text-anchor="end">rounding error / mere means</text>
-              <circle cx="380" cy="150" r="64" fill="#d6920a"/>
-              <text class="dg-label" x="380" y="48" text-anchor="middle">Civilisational</text>
-              <text class="dg-sub" x="380" y="68" text-anchor="middle">consequence</text>
-              <circle cx="150" cy="410" r="30" fill="#fce278"/>
-              <text class="dg-label" x="150" y="466" text-anchor="middle">Individual</text>
-              <text class="dg-sub" x="150" y="486" text-anchor="middle">character</text>
-              <circle cx="610" cy="410" r="46" fill="#f5be28"/>
-              <text class="dg-label" x="610" y="482" text-anchor="middle">Collective</text>
-              <text class="dg-sub" x="610" y="502" text-anchor="middle">rules</text>
-              </svg>
-              <figcaption>conflicts between the classes of agent</figcaption>
               </figure>
             </section>
 
