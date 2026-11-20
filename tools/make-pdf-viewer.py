@@ -300,6 +300,7 @@ main = '''<main class="pv-main">
     <div class="pv-pages" id="pv-pages" aria-label="The pages of the PDF"></div>
   </main>
 
+  <script src="../assets/tools.js?v=''' + re.search(r'assets/tools\.js\?v=([0-9a-f]+)', H).group(1) + '''" data-no-menu></script>
   <script src="../assets/pdfjs/pdf.min.js"></script>
   <script>
     // each page drawn as it comes near the screen, at the screen's own

@@ -63,9 +63,56 @@
   style.textContent = css;
   document.head.appendChild(style);
 
+  /* ---------- theme (t) ---------- */
+
+  // The article has its own theme button and t shortcut; every other page of
+  // the site gets the same shortcut here: t switches light and dark, the choice
+  // kept (as on the article) until the system setting changes, and the
+  // favicons follow.
+  (function () {
+    if (document.querySelector('.theme-toggle')) return;
+    var systemDark = window.matchMedia ? matchMedia('(prefers-color-scheme: dark)') : null;
+    function current() {
+      var t;
+      try { t = localStorage.getItem('mse.theme'); } catch (e) {}
+      if (t === 'light' || t === 'dark') return t;
+      return systemDark && systemDark.matches ? 'dark' : 'light';
+    }
+    function favicons(dark) {
+      ['favicon-ico', 'favicon-32', 'favicon-192', 'favicon-apple'].forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el) el.href = el.getAttribute('href').replace(dark ? '-light' : '-dark', dark ? '-dark' : '-light');
+      });
+    }
+    function apply(theme, remember) {
+      if (theme === 'dark') root.setAttribute('data-theme', 'dark'); else root.removeAttribute('data-theme');
+      favicons(theme === 'dark');
+      if (remember) try { localStorage.setItem('mse.theme', theme); localStorage.setItem('mse.themeSystem', systemDark && systemDark.matches ? 'dark' : 'light'); } catch (e) {}
+    }
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== 't' && e.key !== 'T') return;
+      if (e.metaKey || e.ctrlKey || e.altKey || typing()) return;
+      apply(current() === 'dark' ? 'light' : 'dark', true);
+    });
+    if (systemDark && systemDark.addEventListener) systemDark.addEventListener('change', function () {
+      // (a change of the system setting wins over a theme chosen with t)
+      try { localStorage.removeItem('mse.theme'); } catch (e) {}
+      apply(current(), false);
+    });
+  })();
+
+  // (any page: a theme chosen in another tab of the site is taken up here too)
+  window.addEventListener('storage', function (e) {
+    if (e.key !== 'mse.theme') return;
+    var dark = e.newValue === 'dark' || (!e.newValue && window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches);
+    if (dark) root.setAttribute('data-theme', 'dark'); else root.removeAttribute('data-theme');
+  });
+
   /* ---------- top menu ---------- */
 
   (function () {
+    // (a page with its own bar across the top, the PDF viewer, goes without)
+    if (script.hasAttribute('data-no-menu')) return;
     var base = new URL('../', script.src);
     var pages = [['Article', ''], ['Diagrams', 'diagrams/']];
     var nav = document.createElement('nav');
