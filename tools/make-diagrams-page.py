@@ -146,7 +146,20 @@ STYLE = '''
 
     .dg-meta a { color: inherit; }
 
-    /* ---- the meta-page: a group heading, then a grid of cards ---- */
+    /* ---- the meta-page: a group heading, then a grid of cards, three
+       across: wider than the text column where there is room, centred on it ---- */
+    .dg-wide {
+      --dg-w: min(1060px, 100vw - 120px);
+      width: var(--dg-w);
+      margin-left: calc((100% - var(--dg-w)) / 2);
+    }
+
+    @media (max-width: 1180px) {
+      .dg-wide { width: auto; margin-left: 0; }
+    }
+
+    .dg-wide .dg-card-desc { font-size: 17px; }
+
     .dg-group { margin: 72px 0 0; }
 
     .dg-group-title {
@@ -163,8 +176,8 @@ STYLE = '''
 
     .dg-cards {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 40px 32px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 40px 28px;
       margin: 0;
       padding: 0;
       list-style: none;
@@ -274,6 +287,10 @@ STYLE = '''
     @media (max-width: 640px) {
       .dg-cards { grid-template-columns: minmax(0, 1fr); }
     }
+
+    @media (min-width: 641px) and (max-width: 900px) {
+      .dg-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
 ''' + diagram_figures.CSS + '''  </style>
 '''
 
@@ -331,7 +348,7 @@ THUMB_SCRIPT = '''  <script>
 '''
 
 
-def page(depth, title, path, desc, back_href, back_label, content, scripts):
+def page(depth, title, path, desc, back_href, back_label, content, scripts, footer=True):
     up = '../' * depth
     return (head_for(depth, title, path, desc) + STYLE + '</head>\n<body>\n'
             + BACK.format(href=back_href, label=back_label, home=up)
@@ -344,7 +361,7 @@ def page(depth, title, path, desc, back_href, back_label, content, scripts):
       </main>
     </div>
 
-    ''' + footer_for(depth) + '''
+    ''' + (footer_for(depth) if footer else '') + '''
   </div>
 
 ''' + scripts + '  <script src="' + up + 'assets/tools.js?v=' + TOOLS_V + '"></script>\n' + UP_SCRIPT + '</body>\n</html>\n')
@@ -376,11 +393,12 @@ for kind, name in GROUPS:
           </section>
 '''.format(kind=kind, name=name, cards='\n'.join(card(f) for f in FIGURES if f['kind'] == kind))
 
-meta = '''          <div class="dg-top">
+meta = '''          <div class="dg-wide">
+          <div class="dg-top">
             <h1 class="dg-title">Diagrams</h1>
             <p class="dg-desc">The diagrams and tables of <em>Multi-Scale Ethics</em>, gathered in one place.</p>
           </div>
-''' + groups
+''' + groups + '          </div>\n'
 
 os.makedirs('diagrams', exist_ok=True)
 open('diagrams/index.html', 'w').write(page(
@@ -415,6 +433,6 @@ for i, f in enumerate(FIGURES):
     open('diagrams/%s/index.html' % f['slug'], 'w').write(page(
         2, f['title'], 'diagrams/%s/' % f['slug'], html.unescape(f['desc']),
         '../', 'Back to all diagrams', content,
-        '  <script src="../../assets/figures.js?v=2"></script>\n'))
+        '  <script src="../../assets/figures.js?v=2"></script>\n', footer=False))
 
 print('Wrote diagrams/index.html and %d figure pages' % len(FIGURES))

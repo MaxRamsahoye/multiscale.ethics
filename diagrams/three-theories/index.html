@@ -2349,7 +2349,20 @@
 
     .dg-meta a { color: inherit; }
 
-    /* ---- the meta-page: a group heading, then a grid of cards ---- */
+    /* ---- the meta-page: a group heading, then a grid of cards, three
+       across: wider than the text column where there is room, centred on it ---- */
+    .dg-wide {
+      --dg-w: min(1060px, 100vw - 120px);
+      width: var(--dg-w);
+      margin-left: calc((100% - var(--dg-w)) / 2);
+    }
+
+    @media (max-width: 1180px) {
+      .dg-wide { width: auto; margin-left: 0; }
+    }
+
+    .dg-wide .dg-card-desc { font-size: 17px; }
+
     .dg-group { margin: 72px 0 0; }
 
     .dg-group-title {
@@ -2366,8 +2379,8 @@
 
     .dg-cards {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 40px 32px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 40px 28px;
       margin: 0;
       padding: 0;
       list-style: none;
@@ -2476,6 +2489,10 @@
 
     @media (max-width: 640px) {
       .dg-cards { grid-template-columns: minmax(0, 1fr); }
+    }
+
+    @media (min-width: 641px) and (max-width: 900px) {
+      .dg-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
 
     /* the Diagrams page's own figures */
@@ -2589,22 +2606,7 @@
       </main>
     </div>
 
-    <footer class="site-footer">
-      <div class="footer-inner">
-      <div class="footer-head">
-      <p class="footer-subtitle"><em><span class="hang">“</span>Homo sapiens are the only species (so far) with richly cumulative culture”</em><span class="quote-note" tabindex="0" role="note" aria-label="Source: From Bacteria to Bach and Back: The Evolution of Minds by Daniel Dennett (2017)">*<span class="quote-note-text" aria-hidden="true"><em>From Bacteria to Bach and Back: The Evolution of Minds</em> by Daniel Dennett (2017)</span></span></p>
-      <p class="footer-title"><a class="heading-link" href="../../">multiscale.ethics</a></p>
-      </div>
-      <nav class="footer-sitemap" aria-label="Sitemap">
-        <ol>
-          <li><a href="../../">Article</a></li>
-          <li><a href="../../diagrams/">Diagrams</a></li>
-          <li><a href="../../pdf/">PDF</a></li>
-          <li><a class="footer-contact" href="mailto:maxjosephholly@outlook.com" data-email="maxjosephholly@outlook.com">Contact</a></li>
-        </ol>
-      </nav>
-      </div>
-    </footer>
+    
   </div>
 
   <script src="../../assets/figures.js?v=2"></script>

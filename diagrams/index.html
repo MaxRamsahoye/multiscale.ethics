@@ -2349,7 +2349,20 @@
 
     .dg-meta a { color: inherit; }
 
-    /* ---- the meta-page: a group heading, then a grid of cards ---- */
+    /* ---- the meta-page: a group heading, then a grid of cards, three
+       across: wider than the text column where there is room, centred on it ---- */
+    .dg-wide {
+      --dg-w: min(1060px, 100vw - 120px);
+      width: var(--dg-w);
+      margin-left: calc((100% - var(--dg-w)) / 2);
+    }
+
+    @media (max-width: 1180px) {
+      .dg-wide { width: auto; margin-left: 0; }
+    }
+
+    .dg-wide .dg-card-desc { font-size: 17px; }
+
     .dg-group { margin: 72px 0 0; }
 
     .dg-group-title {
@@ -2366,8 +2379,8 @@
 
     .dg-cards {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 40px 32px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 40px 28px;
       margin: 0;
       padding: 0;
       list-style: none;
@@ -2478,6 +2491,10 @@
       .dg-cards { grid-template-columns: minmax(0, 1fr); }
     }
 
+    @media (min-width: 641px) and (max-width: 900px) {
+      .dg-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
     /* the Diagrams page's own figures */
     .article-body .dg-figure .dg-svg { max-width: 680px; margin: 0 auto; }
     .dg-svg text { font-family: 'IBM Plex Sans', sans-serif; fill: var(--canvas-ink); }
@@ -2549,6 +2566,7 @@
     <div class="layout-grid">
       <main class="main-area">
         <article>
+          <div class="dg-wide">
           <div class="dg-top">
             <h1 class="dg-title">Diagrams</h1>
             <p class="dg-desc">The diagrams and tables of <em>Multi-Scale Ethics</em>, gathered in one place.</p>
@@ -2696,6 +2714,7 @@
               </li>
             </ul>
           </section>
+          </div>
         </article>
       </main>
     </div>
