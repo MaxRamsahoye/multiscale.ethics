@@ -1850,6 +1850,28 @@
       }
     }
 
+    /* the site's pages in a single row beneath the footer's title and quote */
+    .site-footer .footer-sitemap {
+      align-self: start;
+      margin-top: 22px;
+    }
+
+    .site-footer .footer-sitemap ol {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 28px;
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 15px;
+    }
+
+    .site-footer .footer-sitemap a {
+      border-bottom: 1px solid transparent;
+    }
+
+    .site-footer .footer-sitemap a:hover {
+      border-bottom-color: currentColor;
+    }
+
     /* the quotation's source: an asterisk that shows it on hover or focus */
     /* the note sits above the quotation's start, so it stays on screen */
     .site-footer .footer-inner .footer-subtitle {
@@ -2703,10 +2725,11 @@
       <p class="footer-subtitle"><em><span class="hang">“</span>Homo sapiens are the only species (so far) with richly cumulative culture”</em><span class="quote-note" tabindex="0" role="note" aria-label="Source: From Bacteria to Bach and Back: The Evolution of Minds by Daniel Dennett (2017)">*<span class="quote-note-text" aria-hidden="true"><em>From Bacteria to Bach and Back: The Evolution of Minds</em> by Daniel Dennett (2017)</span></span></p>
       <p class="footer-title"><a class="heading-link" href="./">multiscale.ethics</a></p>
       </div>
-      <!-- hidden: remove the hidden attribute to show the menu again -->
-      <nav class="footer-sitemap" aria-label="Sitemap" hidden>
+      <nav class="footer-sitemap" aria-label="Sitemap">
         <ol>
           <li><a href="./">Article</a></li>
+          <li><a href="diagrams/">Diagrams</a></li>
+          <li><a href="pdf/">PDF</a></li>
           <li><a class="footer-contact" href="mailto:maxjosephholly@outlook.com" data-email="maxjosephholly@outlook.com">Contact</a></li>
         </ol>
       </nav>

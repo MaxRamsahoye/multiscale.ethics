@@ -1849,6 +1849,28 @@
       }
     }
 
+    /* the site's pages in a single row beneath the footer's title and quote */
+    .site-footer .footer-sitemap {
+      align-self: start;
+      margin-top: 22px;
+    }
+
+    .site-footer .footer-sitemap ol {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 28px;
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 15px;
+    }
+
+    .site-footer .footer-sitemap a {
+      border-bottom: 1px solid transparent;
+    }
+
+    .site-footer .footer-sitemap a:hover {
+      border-bottom-color: currentColor;
+    }
+
     /* the quotation's source: an asterisk that shows it on hover or focus */
     /* the note sits above the quotation's start, so it stays on screen */
     .site-footer .footer-inner .footer-subtitle {
