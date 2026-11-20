@@ -74,7 +74,7 @@ FIGURES = [
     {
         'kind': 'table', 'slug': 'wrong-scales', 'title': 'Theories at the Wrong Scales',
         'where': 'Part II', 'anchor': 'wrong-scales',
-        'desc': 'Each theory against each scale: native where it was adapted, and strained everywhere else &ndash; alienating, rigid, unpredictable, vague, complicated or negligible.',
+        'desc': 'Each theory against each scale: native where it was adapted, and unfit elsewhere &ndash; alienating, rigid, unpredictable, vague, complicated or negligible.',
         'html': D['fit'],
     },
 ]
