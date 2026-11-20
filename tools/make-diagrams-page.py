@@ -403,7 +403,7 @@ meta = '''          <div class="dg-wide">
 os.makedirs('diagrams', exist_ok=True)
 open('diagrams/index.html', 'w').write(page(
     1, 'Diagrams', 'diagrams/', 'The diagrams and tables of Multi-Scale Ethics, gathered in one place.',
-    '../', 'Back to the article', meta, ''))
+    '../', 'Back to the article', meta, '', footer=False))
 # (the cards' figures drawn still, as they first appear: no animation script on the meta-page)
 s = open('diagrams/index.html').read()
 s = s.replace('  <script src="../assets/tools.js', THUMB_SCRIPT + '  <script src="../assets/tools.js', 1)
