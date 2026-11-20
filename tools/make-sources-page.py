@@ -183,7 +183,7 @@ style = '''
       padding-bottom: 10px;
       border-bottom: 1px solid var(--rule);
       font-family: 'IBM Plex Sans', sans-serif;
-      font-size: 13px;
+      font-size: 16px;
       font-weight: 500;
       letter-spacing: 0.08em;
       text-transform: uppercase;
