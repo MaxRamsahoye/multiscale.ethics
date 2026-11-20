@@ -61,16 +61,16 @@
   // other way up)
   function scalesState(t) {
     t = ((t % SCALES_LOOP) + SCALES_LOOP) % SCALES_LOOP;
-    var flip;
+    var flip, turned = false;
     if (t < PHASE) { flip = 0; }
     else if (t < PHASE + FLIP) { flip = ease((t - PHASE) / FLIP); t = 0; }
-    else if (t < 2 * PHASE + FLIP) { flip = 1; t -= PHASE + FLIP; }
+    else if (t < 2 * PHASE + FLIP) { flip = 1; t -= PHASE + FLIP; turned = true; }
     else { flip = 1 - ease((t - 2 * PHASE - FLIP) / FLIP); t = 0; }
-    return {
-      flip: flip,
-      col: { split: ramp(t, 1100, 1460) * (1 - ramp(t, 5410, 5590)), spread: ramp(t, 1460, 1820) * (1 - ramp(t, 5230, 5410)) },
-      civ: { split: ramp(t, 2530, 2890) * (1 - ramp(t, 5770, 5950)), spread: ramp(t, 2890, 3210) * (1 - ramp(t, 5590, 5770)) }
-    };
+    // the tile nearer the top goes first: the collective, then the
+    // civilisational; once turned over, the civilisational, then the collective
+    var first = { split: ramp(t, 1100, 1460) * (1 - ramp(t, 5410, 5590)), spread: ramp(t, 1460, 1820) * (1 - ramp(t, 5230, 5410)) };
+    var second = { split: ramp(t, 2530, 2890) * (1 - ramp(t, 5770, 5950)), spread: ramp(t, 2890, 3210) * (1 - ramp(t, 5590, 5770)) };
+    return { flip: flip, col: turned ? second : first, civ: turned ? first : second };
   }
 
   function drawScales(t) {
