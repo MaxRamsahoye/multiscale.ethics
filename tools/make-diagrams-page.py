@@ -42,9 +42,9 @@ D = diagram_figures.figures()
 # in each group, in the order they come in the article
 FIGURES = [
     {
-        'kind': 'diagram', 'slug': 'hybrid-ethics-stack', 'title': 'The Hybrid Ethics Stack',
+        'kind': 'diagram', 'slug': 'civilisational-ethics-stack', 'title': 'The Civilisational Ethics Stack',
         'where': 'Part I', 'anchor': 'ethics-stack',
-        'desc': 'The concentric rings lifted apart into a stack: consequentialism the broadest layer, deontology within it and virtue at the core, each at the scale it was adapted to.',
+        'desc': 'The concentric rings lifted apart into a hybrid stack: consequentialism the broadest layer, deontology within it and virtue at the core, each at the scale it was adapted to.',
         'html': D['stack'],
     },
     {
