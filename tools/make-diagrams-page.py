@@ -7,6 +7,8 @@
 import os, re
 
 H = open('index.html').read()
+# (the shared script, at the version the article loads: the find bar and the top menu)
+TOOLS_V = re.search(r'assets/tools\.js\?v=([0-9a-f]+)', H).group(1)
 
 # ---- the head, one folder down ----------------------------------------------
 head = H[:H.index('</head>')]
@@ -206,6 +208,7 @@ body = '''<body>
   </div>
 
   <script src="../assets/figures.js?v=2"></script>
+  <script src="../assets/tools.js?v=''' + TOOLS_V + '''"></script>
   <script>
     // the up arrow, once the first screen has scrolled by
     (function () {

@@ -48,7 +48,7 @@
     '  font-family: Inter, sans-serif; font-size: 13px; border-radius: 999px; pointer-events: none;',
     '  transform: translate(-50%, -100%); opacity: 0; transition: opacity 0.2s ease; }',
     '.copy-toast.show { opacity: 1; }',
-    // the top menu: the site's pages across the top centre (hidden for now)
+    // the top menu: the site's pages across the top centre
     '.top-nav { position: absolute; z-index: 30; top: 36px; left: 50%; transform: translateX(-50%);',
     '  display: flex; gap: 36px; margin: 0; padding: 0; list-style: none;',
     '  font-family: Inter, sans-serif; font-size: 15px; letter-spacing: -0.005em; white-space: nowrap; }',
@@ -67,12 +67,10 @@
 
   (function () {
     var base = new URL('../', script.src);
-    var pages = [['Article', '']];
+    var pages = [['Article', ''], ['Diagrams', 'diagrams/']];
     var nav = document.createElement('nav');
     nav.className = 'top-nav';
     nav.setAttribute('aria-label', 'Pages');
-    // hidden: remove this line to show the menu again
-    nav.hidden = true;
     pages.forEach(function (pg) {
       var a = document.createElement('a');
       var url = new URL(pg[1], base);
