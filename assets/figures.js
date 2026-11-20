@@ -75,18 +75,22 @@
 
   function drawScales(t) {
     var st = scalesState(t), out = '';
-    // the turn: heights mirrored about the middle as the stack rotates, each
-    // tile flattening towards edge-on halfway and opening out again the right
-    // way up; the higher drawn first, the lower covering it
-    var c = Math.cos(Math.PI * st.flip), k = Math.max(Math.abs(c), 0.03);
+    // the turn: the stack revolves about a vertical axis through its middle,
+    // each tile swinging out sideways on its way past the others and coming
+    // to rest at the mirrored height, always the right way up. The heights
+    // follow the cosine of the turn and the sideways swing its sine (the
+    // higher tiles out to the left, the lower to the right); the higher
+    // tiles pass in front of the lower, and at rest the lowest is drawn last
+    var a = Math.PI * st.flip, c = Math.cos(a), sn = Math.sin(a);
     var placed = TILES.map(function (T) {
-      return { T: T, cy: MID + (T.cy - MID) * c };
-    }).sort(function (a, b) { return a.cy - b.cy; });
+      var r = T.cy - MID;
+      return { T: T, cy: MID + r * c, dx: r * sn * 0.75, depth: -r * sn };
+    }).sort(function (p, q) { return sn > 0.001 ? p.depth - q.depth : p.cy - q.cy; });
     placed.forEach(function (P) {
-      var T = P.T, cy = P.cy;
+      var T = P.T, cy = P.cy, cx = CX + P.dx;
       var s = st[T.key];
       if (!s || s.split <= 0) {
-        out += tile(CX, cy, T.w, PALETTE[T.key], 0, k);
+        out += tile(cx, cy, T.w, PALETTE[T.key], 0);
       } else {
         var from = PALETTE[T.key], to = PALETTE[T.sub];
         var col = { top: mix(from.top, to.top, s.split), left: mix(from.left, to.left, s.split), right: mix(from.right, to.right, s.split) };
@@ -96,14 +100,16 @@
         // back to front, so the nearer tiles cover the sides of those behind
         cells.sort(function (a, b) { return (a[0] + a[1]) - (b[0] + b[1]); });
         cells.forEach(function (ij) {
-          out += tile(CX + (ij[0] - ij[1]) * step, cy + (ij[0] + ij[1]) * step / 2 * k, sw, col, s.split * (1 - s.spread), k);
+          out += tile(cx + (ij[0] - ij[1]) * step, cy + (ij[0] + ij[1]) * step / 2, sw, col, s.split * (1 - s.spread));
         });
       }
-      // (the labels fade as the stack turns edge-on, and return with it)
-      out += '<text class="fig-label" x="' + T.lx + '" y="' + (cy + 9).toFixed(1) + '"' + (k < 1 ? ' opacity="' + Math.pow(k, 1.5).toFixed(2) + '"' : '') + '>' + T.label + '</text>';
+      // (the labels travel with their tiles, fading while the stack turns)
+      var fade = 1 - 0.85 * sn;
+      out += '<text class="fig-label" x="' + (T.lx + P.dx).toFixed(1) + '" y="' + (cy + 9).toFixed(1) + '"' + (fade < 0.999 ? ' opacity="' + fade.toFixed(2) + '"' : '') + '>' + T.label + '</text>';
     });
     return out;
   }
+
 
   // ---- Ethics rings -------------------------------------------------------
   // each ring a translucent gold, so that where they overlap they deepen (on

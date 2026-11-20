@@ -558,6 +558,6 @@ for i, f in enumerate(FIGURES):
     open('diagrams/%s/index.html' % f['slug'], 'w').write(with_side(f['slug'], page(
         2, f['title'], 'diagrams/%s/' % f['slug'], html.unescape(f['desc']),
         '../', 'Back to all diagrams', content,
-        '  <script src="../../assets/figures.js?v=4"></script>\n', footer=False)))
+        '  <script src="../../assets/figures.js?v=5"></script>\n', footer=False)))
 
 print('Wrote diagrams/index.html and %d figure pages' % len(FIGURES))
