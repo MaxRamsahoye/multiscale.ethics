@@ -66,20 +66,19 @@ def ethics_stack():
 def fit_matrix():
     native = lambda cls, text: '<td class="fit %s"><span class="fit-tag">Native</span>%s</td>' % (cls, text)
     misfit = lambda tag, text: '<td class="misfit"><span class="fit-tag">%s</span>%s</td>' % (tag, text)
-    none = '<td class="unset" aria-label="Not discussed">&ndash;</td>'
     rows = [
         ('Consequentialism', 't-consequentialism', [
             misfit('Alienating', 'The impartial calculus estranges a person from their own attachments.'),
-            none,
+            misfit('Unpredictable', 'Case-by-case calculation erodes the predictability that lets strangers trust one another.'),
             native('t-consequentialism', 'System-wide optimisation: the ethics of the state.')]),
         ('Deontology', 't-deontology', [
-            none,
+            misfit('Rigid', 'Rules stand in for knowing someone, where character could be read first-hand.'),
             native('t-deontology', 'Shared rules let strangers trust one another: the ethics of the city.'),
             misfit('Complicated', 'Rules multiply but cannot keep pace with a complex, adaptive system.')]),
         ('Virtue Ethics', 't-virtue', [
             native('t-virtue', 'Character known first-hand: the ethics of the tribe.'),
             misfit('Vague', 'No character to track in a committee; judged by outcomes, it collapses into consequentialism.'),
-            none]),
+            misfit('Negligible', 'One person&rsquo;s character barely registers among billions; it reaches civilisation only through the collectives it shapes.')]),
     ]
     body = '\n'.join('      <tr class="%s"><th scope="row"><span class="t-name">%s</span></th>%s</tr>' % (cls, name, ''.join(cells)) for name, cls, cells in rows)
     return ('<figure class="article-figure figure-table dg-matrix" id="figure-fit">\n'
@@ -136,7 +135,6 @@ CSS = '''
     .fit-table td.t-deontology { background: #f5be2c; }
     .fit-table td.t-virtue { background: #d6920a; }
     .fit-table td.misfit .fit-tag { color: var(--inverse-bg); }
-    .fit-table td.unset { color: var(--muted); text-align: center; vertical-align: middle; }
     .profiles-table tbody tr.s-tribe th { background: #fde27a; }
     .profiles-table tbody tr.s-city th { background: #f5be2c; }
     .profiles-table tbody tr.s-state th { background: #d6920a; }
@@ -151,7 +149,6 @@ CSS = '''
       .article-body .dg-figure .dg-svg { min-width: 580px; }
       .fit-table td { width: auto; }
       .fit-table td.fit::before { color: inherit; opacity: 0.7; }
-      .fit-table td.unset { display: none; }
       .fit-table td::before,
       .profiles-table td::before {
         content: attr(data-col);
