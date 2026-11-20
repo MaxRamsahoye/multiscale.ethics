@@ -2395,6 +2395,64 @@
       .dg-title { font-size: 38px; }
       .dg-desc { font-size: 20px; }
     }
+
+    /* the Diagrams page's own figures */
+    .article-body .dg-figure .dg-svg { max-width: 680px; margin: 0 auto; }
+    .dg-svg text { font-family: 'IBM Plex Sans', sans-serif; fill: var(--canvas-ink); }
+    .dg-svg .dg-label { font-size: 18px; font-weight: 500; }
+    .dg-svg .dg-sub { font-family: var(--serif); font-style: italic; font-size: 16px; fill: var(--muted); }
+    .dg-svg .dg-ethic { font-family: var(--serif); font-style: italic; font-size: 18px; }
+    .dg-svg .dg-tick { font-size: 12px; fill: var(--muted); text-anchor: middle; }
+    .dg-svg .dg-axis { font-size: 12px; fill: var(--muted); text-anchor: middle; letter-spacing: 0.06em; text-transform: uppercase; }
+    .dg-svg .dg-note { font-size: 13px; fill: var(--muted); text-anchor: middle; }
+    .dg-svg .dg-grid { stroke: color-mix(in srgb, var(--canvas-ink) 8%, transparent); stroke-width: 1; }
+    .dg-svg .dg-dunbar { stroke: var(--inverse-bg); stroke-width: 1.5; stroke-dasharray: 4 4; }
+    .dg-svg .dg-leader { fill: none; stroke: var(--muted); stroke-width: 1; }
+    .dg-svg .dg-edge { stroke: var(--muted); stroke-width: 1.2; }
+    .dg-svg .dg-edge-label { font-family: var(--serif); font-style: italic; font-size: 18px; }
+
+    /* the matrices: shaded where a theory is native, plain where it strains */
+    .fit-table td { width: 24.6%; }
+    .fit-table .fit-tag {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .fit-table td.fit { color: #3a2a00; }
+    .fit-table td.t-consequentialism { background: #fde27a; }
+    .fit-table td.t-deontology { background: #f5be2c; }
+    .fit-table td.t-virtue { background: #d6920a; }
+    .fit-table td.misfit .fit-tag { color: var(--inverse-bg); }
+    .fit-table td.unset { color: var(--muted); text-align: center; vertical-align: middle; }
+    .profiles-table tbody tr.s-tribe th { background: #fde27a; }
+    .profiles-table tbody tr.s-city th { background: #f5be2c; }
+    .profiles-table tbody tr.s-state th { background: #d6920a; }
+    .profiles-table tbody tr.s-civilisation th {
+      background: linear-gradient(to bottom, #fde27a 0 33.4%, #f5be2c 33.4% 66.7%, #d6920a 66.7%);
+    }
+
+    @media (max-width: 640px) {
+      /* the drawings kept legible on phones: at a readable size, scrolling
+         sideways within their own frame */
+      .article-body .dg-figure { overflow-x: auto; max-width: calc(100vw - 48px); }
+      .article-body .dg-figure .dg-svg { min-width: 580px; }
+      .fit-table td { width: auto; }
+      .fit-table td.fit::before { color: inherit; opacity: 0.7; }
+      .fit-table td.unset { display: none; }
+      .fit-table td::before,
+      .profiles-table td::before {
+        content: attr(data-col);
+        display: block;
+        margin-bottom: 4px;
+        font-size: 11px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+    }
   </style>
 </head>
 <body>
@@ -2420,7 +2478,12 @@
             <p class="dg-desc">The diagrams and tables of <em>Multi-Scale Ethics</em>, gathered in one place.</p>
             <ol class="dg-index">
                 <li><a href="#three-theories">The Three Theories</a></li>
+                <li><a href="#scale-ladder">The Scale Ladder</a></li>
+                <li><a href="#scale-profiles">Scale Profiles</a></li>
+                <li><a href="#hybrid-ethics-stack">The Hybrid Ethics Stack</a></li>
                 <li><a href="#agency-across-scales">Agency across Scales</a></li>
+                <li><a href="#theory-scale-fit">Theories at the Wrong Scales</a></li>
+                <li><a href="#agent-classes">Conflicts between Agent Classes</a></li>
                 <li><a href="#concentric-ethics">Concentric Ethics</a></li>
             </ol>
           </div>
@@ -2456,6 +2519,104 @@
               </figure>
             </section>
 
+            <section class="dg-item" id="scale-ladder">
+              <h2><a class="heading-link" href="#scale-ladder">The Scale Ladder</a></h2>
+              <p class="dg-meta">In the article: <a href="../#human-societies">Part I</a></p>
+              <p>Tribe, city, state and civilisation on one axis of population, with Dunbar&rsquo;s number as the first threshold, and the ethic adapted to each scale.</p>
+
+              <figure class="article-figure dg-figure" id="figure-ladder">
+              <svg class="fig-svg dg-svg" viewBox="0 0 760 360" role="img" aria-labelledby="fig-ladder-title">
+              <title id="fig-ladder-title">The scales of human society on a population axis from ten to ten billion: the tribe, up to about 150 people, with virtue; the city, thousands to millions, with deontology; the state, millions to billions, with consequentialism; and civilisation, about eight billion, with a hybrid stack of all three. Dunbar&rsquo;s number, about 150, marks the threshold between the tribe and the city.</title>
+              <line class="dg-grid" x1="170" y1="44" x2="170" y2="292"/>
+              <text class="dg-tick" x="170" y="316">10</text>
+              <line class="dg-grid" x1="216.667" y1="44" x2="216.667" y2="292"/>
+              <text class="dg-tick" x="216.667" y="316">100</text>
+              <line class="dg-grid" x1="263.333" y1="44" x2="263.333" y2="292"/>
+              <text class="dg-tick" x="263.333" y="316">1k</text>
+              <line class="dg-grid" x1="310" y1="44" x2="310" y2="292"/>
+              <text class="dg-tick" x="310" y="316">10k</text>
+              <line class="dg-grid" x1="356.667" y1="44" x2="356.667" y2="292"/>
+              <text class="dg-tick" x="356.667" y="316">100k</text>
+              <line class="dg-grid" x1="403.333" y1="44" x2="403.333" y2="292"/>
+              <text class="dg-tick" x="403.333" y="316">1M</text>
+              <line class="dg-grid" x1="450" y1="44" x2="450" y2="292"/>
+              <text class="dg-tick" x="450" y="316">10M</text>
+              <line class="dg-grid" x1="496.667" y1="44" x2="496.667" y2="292"/>
+              <text class="dg-tick" x="496.667" y="316">100M</text>
+              <line class="dg-grid" x1="543.333" y1="44" x2="543.333" y2="292"/>
+              <text class="dg-tick" x="543.333" y="316">1B</text>
+              <line class="dg-grid" x1="590" y1="44" x2="590" y2="292"/>
+              <text class="dg-tick" x="590" y="316">10B</text>
+              <text class="dg-axis" x="380" y="344">people</text>
+              <line class="dg-dunbar" x1="224.884" y1="34" x2="224.884" y2="292"/>
+              <text class="dg-note" x="224.884" y="24">Dunbar&rsquo;s number &asymp; 150</text>
+              <rect x="192.266" y="59" width="32.6186" height="22" rx="3" fill="#fce278"/>
+              <text class="dg-label" x="0" y="68">Tribe</text>
+              <text class="dg-sub" x="0" y="86">up to ~150</text>
+              <text class="dg-ethic" x="612" y="76">Virtue</text>
+              <rect x="277.381" y="119" width="194.884" height="22" rx="3" fill="#f5be28"/>
+              <text class="dg-label" x="0" y="128">City</text>
+              <text class="dg-sub" x="0" y="146">thousands to millions</text>
+              <text class="dg-ethic" x="612" y="136">Deontology</text>
+              <rect x="403.333" y="179" width="146.819" height="22" rx="3" fill="#d6920a"/>
+              <text class="dg-label" x="0" y="188">State</text>
+              <text class="dg-sub" x="0" y="206">millions to billions</text>
+              <text class="dg-ethic" x="612" y="196">Consequentialism</text>
+              <rect x="561.904" y="239" width="23.8254" height="7.73333" fill="#fce278"/>
+              <rect x="561.904" y="246.333" width="23.8254" height="7.73333" fill="#f5be28"/>
+              <rect x="561.904" y="253.667" width="23.8254" height="7.73333" fill="#d6920a"/>
+              <text class="dg-label" x="0" y="248">Civilisation</text>
+              <text class="dg-sub" x="0" y="266">~8 billion</text>
+              <text class="dg-ethic" x="612" y="256">A hybrid stack</text>
+              </svg>
+              <figcaption>the scales of human society, and the ethics adapted to each</figcaption>
+              </figure>
+            </section>
+
+            <section class="dg-item" id="scale-profiles">
+              <h2><a class="heading-link" href="#scale-profiles">Scale Profiles</a></h2>
+              <p class="dg-meta">In the article: <a href="../#human-societies">Part I</a></p>
+              <p>For each scale of society: how many people, how they come to trust one another, the ethic that suits it, and where that ethic strains.</p>
+
+              <figure class="article-figure figure-table dg-matrix" id="figure-profiles">
+              <table class="theories-table profiles-table">
+              <thead><tr><th scope="col">Scale</th><th scope="col">Population</th><th scope="col">How trust works</th><th scope="col">Ethic</th><th scope="col">Where it strains</th></tr></thead>
+              <tbody>
+              <tr class="s-tribe"><th scope="row"><span class="t-name">Tribe</span></th><td data-col="Population">Up to ~150 (Dunbar&rsquo;s number)</td><td data-col="How trust works">Reputation and gossip: a shared ledger of character</td><td data-col="Ethic"><strong>Virtue</strong></td><td data-col="Where it strains">Beyond 150 no one can track everyone, and vice goes unseen</td></tr>
+              <tr class="s-city"><th scope="row"><span class="t-name">City</span></th><td data-col="Population">Hundreds to thousands, and beyond</td><td data-col="How trust works">Shared conventions &ndash; manners, commandments &ndash; among strangers</td><td data-col="Ethic"><strong>Deontology</strong></td><td data-col="Where it strains">Absolute rules are inflexible as complexity grows</td></tr>
+              <tr class="s-state"><th scope="row"><span class="t-name">State</span></th><td data-col="Population">Networks of cities: nations and empires</td><td data-col="How trust works">System-wide optimisation of aggregate welfare</td><td data-col="Ethic"><strong>Consequentialism</strong></td><td data-col="Where it strains">The tyranny of the majority, overriding principles and virtues</td></tr>
+              <tr class="s-civilisation"><th scope="row"><span class="t-name">Civilisation</span></th><td data-col="Population">Global</td><td data-col="How trust works">Each theory at its own scale, in a hybrid ethics stack</td><td data-col="Ethic"><strong>All three, as a stack</strong></td><td data-col="Where it strains">Conflicts between classes of agent; the multipolar trap</td></tr>
+              </tbody>
+              </table>
+              <figcaption>the scales of human society: how each coordinates, and where it gives way</figcaption>
+              </figure>
+            </section>
+
+            <section class="dg-item" id="hybrid-ethics-stack">
+              <h2><a class="heading-link" href="#hybrid-ethics-stack">The Hybrid Ethics Stack</a></h2>
+              <p class="dg-meta">In the article: <a href="../#ethics-stack">Part I</a></p>
+              <p>The ethics of civilisation as a stack: virtue at the base, deontology above it and consequentialism at the top, each at the scale it was adapted to.</p>
+
+              <figure class="article-figure dg-figure" id="figure-ethics-stack">
+              <svg class="fig-svg dg-svg" viewBox="0 0 760 470" role="img" aria-labelledby="fig-stack-title">
+              <title id="fig-stack-title">The ethics of civilisation as a hybrid stack of three layers: virtue at the base, for the individual and the tribe; deontology above it, for the collective and the city; and consequentialism at the top, for the civilisational scale and the state.</title>
+              <polygon fill="#eac859" points="80,330 250,415 250,437 80,352"/><polygon fill="#c89a28" points="250,415 420,330 420,352 250,437"/><polygon fill="#fce278" points="250,245 420,330 250,415 80,330"/>
+              <polygon fill="#d69e18" points="80,220 250,305 250,327 80,242"/><polygon fill="#a5750e" points="250,305 420,220 420,242 250,327"/><polygon fill="#f5be28" points="250,135 420,220 250,305 80,220"/>
+              <polygon fill="#b27406" points="80,110 250,195 250,217 80,132"/><polygon fill="#855404" points="250,195 420,110 420,132 250,217"/><polygon fill="#d6920a" points="250,25 420,110 250,195 80,110"/>
+              <polyline class="dg-leader" points="430,341 478,341"/>
+              <text class="dg-label" x="490" y="339">Virtue</text>
+              <text class="dg-sub" x="490" y="359">the individual &middot; the tribe</text>
+              <polyline class="dg-leader" points="430,231 478,231"/>
+              <text class="dg-label" x="490" y="229">Deontology</text>
+              <text class="dg-sub" x="490" y="249">the collective &middot; the city</text>
+              <polyline class="dg-leader" points="430,121 478,121"/>
+              <text class="dg-label" x="490" y="119">Consequentialism</text>
+              <text class="dg-sub" x="490" y="139">the civilisational &middot; the state</text>
+              </svg>
+              <figcaption>the ethics of civilisation as a hybrid ethics stack</figcaption>
+              </figure>
+            </section>
+
             <section class="dg-item" id="agency-across-scales">
               <h2><a class="heading-link" href="#agency-across-scales">Agency across Scales</a></h2>
               <p class="dg-meta">In the article: <a href="../#figure-scales">Part II</a></p>
@@ -2467,6 +2628,52 @@
               <g class="fig-stage"><polygon fill="#eac859" points="478.0,134.0 510.0,150.0 510.0,160.0 478.0,144.0"/><polygon fill="#c89a28" points="510.0,150.0 542.0,134.0 542.0,144.0 510.0,160.0"/><polygon fill="#fce278" points="510.0,118.0 542.0,134.0 510.0,150.0 478.0,134.0"/><text class="fig-label" x="632" y="143">Individual</text><polygon fill="#eac859" points="478.0,234.0 510.0,250.0 510.0,260.0 478.0,244.0"/><polygon fill="#c89a28" points="510.0,250.0 542.0,234.0 542.0,244.0 510.0,260.0"/><polygon fill="#fce278" points="510.0,218.0 542.0,234.0 510.0,250.0 478.0,234.0"/><polygon fill="#eac859" points="438.0,254.0 470.0,270.0 470.0,280.0 438.0,264.0"/><polygon fill="#c89a28" points="470.0,270.0 502.0,254.0 502.0,264.0 470.0,280.0"/><polygon fill="#fce278" points="470.0,238.0 502.0,254.0 470.0,270.0 438.0,254.0"/><polygon fill="#eac859" points="518.0,254.0 550.0,270.0 550.0,280.0 518.0,264.0"/><polygon fill="#c89a28" points="550.0,270.0 582.0,254.0 582.0,264.0 550.0,280.0"/><polygon fill="#fce278" points="550.0,238.0 582.0,254.0 550.0,270.0 518.0,254.0"/><polygon fill="#eac859" points="398.0,274.0 430.0,290.0 430.0,300.0 398.0,284.0"/><polygon fill="#c89a28" points="430.0,290.0 462.0,274.0 462.0,284.0 430.0,300.0"/><polygon fill="#fce278" points="430.0,258.0 462.0,274.0 430.0,290.0 398.0,274.0"/><polygon fill="#eac859" points="478.0,274.0 510.0,290.0 510.0,300.0 478.0,284.0"/><polygon fill="#c89a28" points="510.0,290.0 542.0,274.0 542.0,284.0 510.0,300.0"/><polygon fill="#fce278" points="510.0,258.0 542.0,274.0 510.0,290.0 478.0,274.0"/><polygon fill="#eac859" points="558.0,274.0 590.0,290.0 590.0,300.0 558.0,284.0"/><polygon fill="#c89a28" points="590.0,290.0 622.0,274.0 622.0,284.0 590.0,300.0"/><polygon fill="#fce278" points="590.0,258.0 622.0,274.0 590.0,290.0 558.0,274.0"/><polygon fill="#eac859" points="438.0,294.0 470.0,310.0 470.0,320.0 438.0,304.0"/><polygon fill="#c89a28" points="470.0,310.0 502.0,294.0 502.0,304.0 470.0,320.0"/><polygon fill="#fce278" points="470.0,278.0 502.0,294.0 470.0,310.0 438.0,294.0"/><polygon fill="#eac859" points="518.0,294.0 550.0,310.0 550.0,320.0 518.0,304.0"/><polygon fill="#c89a28" points="550.0,310.0 582.0,294.0 582.0,304.0 550.0,320.0"/><polygon fill="#fce278" points="550.0,278.0 582.0,294.0 550.0,310.0 518.0,294.0"/><polygon fill="#eac859" points="478.0,314.0 510.0,330.0 510.0,340.0 478.0,324.0"/><polygon fill="#c89a28" points="510.0,330.0 542.0,314.0 542.0,324.0 510.0,340.0"/><polygon fill="#fce278" points="510.0,298.0 542.0,314.0 510.0,330.0 478.0,314.0"/><text class="fig-label" x="712" y="283">Collective</text><polygon fill="#d69e18" points="433.0,408.5 510.0,447.0 510.0,457.0 433.0,418.5"/><polygon fill="#a5750e" points="510.0,447.0 587.0,408.5 587.0,418.5 510.0,457.0"/><polygon fill="#f5be28" points="510.0,370.0 587.0,408.5 510.0,447.0 433.0,408.5"/><polygon fill="#d69e18" points="346.0,452.0 423.0,490.5 423.0,500.5 346.0,462.0"/><polygon fill="#a5750e" points="423.0,490.5 500.0,452.0 500.0,462.0 423.0,500.5"/><polygon fill="#f5be28" points="423.0,413.5 500.0,452.0 423.0,490.5 346.0,452.0"/><polygon fill="#d69e18" points="520.0,452.0 597.0,490.5 597.0,500.5 520.0,462.0"/><polygon fill="#a5750e" points="597.0,490.5 674.0,452.0 674.0,462.0 597.0,500.5"/><polygon fill="#f5be28" points="597.0,413.5 674.0,452.0 597.0,490.5 520.0,452.0"/><polygon fill="#d69e18" points="259.0,495.5 336.0,534.0 336.0,544.0 259.0,505.5"/><polygon fill="#a5750e" points="336.0,534.0 413.0,495.5 413.0,505.5 336.0,544.0"/><polygon fill="#f5be28" points="336.0,457.0 413.0,495.5 336.0,534.0 259.0,495.5"/><polygon fill="#d69e18" points="433.0,495.5 510.0,534.0 510.0,544.0 433.0,505.5"/><polygon fill="#a5750e" points="510.0,534.0 587.0,495.5 587.0,505.5 510.0,544.0"/><polygon fill="#f5be28" points="510.0,457.0 587.0,495.5 510.0,534.0 433.0,495.5"/><polygon fill="#d69e18" points="607.0,495.5 684.0,534.0 684.0,544.0 607.0,505.5"/><polygon fill="#a5750e" points="684.0,534.0 761.0,495.5 761.0,505.5 684.0,544.0"/><polygon fill="#f5be28" points="684.0,457.0 761.0,495.5 684.0,534.0 607.0,495.5"/><polygon fill="#d69e18" points="346.0,539.0 423.0,577.5 423.0,587.5 346.0,549.0"/><polygon fill="#a5750e" points="423.0,577.5 500.0,539.0 500.0,549.0 423.0,587.5"/><polygon fill="#f5be28" points="423.0,500.5 500.0,539.0 423.0,577.5 346.0,539.0"/><polygon fill="#d69e18" points="520.0,539.0 597.0,577.5 597.0,587.5 520.0,549.0"/><polygon fill="#a5750e" points="597.0,577.5 674.0,539.0 674.0,549.0 597.0,587.5"/><polygon fill="#f5be28" points="597.0,500.5 674.0,539.0 597.0,577.5 520.0,539.0"/><polygon fill="#d69e18" points="433.0,582.5 510.0,621.0 510.0,631.0 433.0,592.5"/><polygon fill="#a5750e" points="510.0,621.0 587.0,582.5 587.0,592.5 510.0,631.0"/><polygon fill="#f5be28" points="510.0,544.0 587.0,582.5 510.0,621.0 433.0,582.5"/><text class="fig-label" x="851" y="504.5">Civilisational</text></g>
               </svg>
               <figcaption>decomposition and emergence of agency across scales</figcaption>
+              </figure>
+            </section>
+
+            <section class="dg-item" id="theory-scale-fit">
+              <h2><a class="heading-link" href="#theory-scale-fit">Theories at the Wrong Scales</a></h2>
+              <p class="dg-meta">In the article: <a href="../#wrong-scales">Part II</a></p>
+              <p>Each theory against each scale: native where it was adapted, and alienating, vague or complicated where it was not.</p>
+
+              <figure class="article-figure figure-table dg-matrix" id="figure-fit">
+              <table class="theories-table fit-table">
+              <thead><tr><th scope="col">Theory</th><th scope="col">Individual</th><th scope="col">Collective</th><th scope="col">Civilisational</th></tr></thead>
+              <tbody>
+              <tr class="t-consequentialism"><th scope="row"><span class="t-name">Consequentialism</span></th><td data-col="Individual" class="misfit"><span class="fit-tag">Alienating</span>The impartial calculus estranges a person from their own attachments.</td><td data-col="Collective" class="unset" aria-label="Not discussed">&ndash;</td><td data-col="Civilisational" class="fit t-consequentialism"><span class="fit-tag">Native</span>System-wide optimisation: the ethics of the state.</td></tr>
+              <tr class="t-deontology"><th scope="row"><span class="t-name">Deontology</span></th><td data-col="Individual" class="unset" aria-label="Not discussed">&ndash;</td><td data-col="Collective" class="fit t-deontology"><span class="fit-tag">Native</span>Shared rules let strangers trust one another: the ethics of the city.</td><td data-col="Civilisational" class="misfit"><span class="fit-tag">Complicated</span>Rules multiply but cannot keep pace with a complex, adaptive system.</td></tr>
+              <tr class="t-virtue"><th scope="row"><span class="t-name">Virtue Ethics</span></th><td data-col="Individual" class="fit t-virtue"><span class="fit-tag">Native</span>Character known first-hand: the ethics of the tribe.</td><td data-col="Collective" class="misfit"><span class="fit-tag">Vague</span>No character to track in a committee; judged by outcomes, it collapses into consequentialism.</td><td data-col="Civilisational" class="unset" aria-label="Not discussed">&ndash;</td></tr>
+              </tbody>
+              </table>
+              <figcaption>each theory at its native scale, and the problems of applying it at the wrong one</figcaption>
+              </figure>
+            </section>
+
+            <section class="dg-item" id="agent-classes">
+              <h2><a class="heading-link" href="#agent-classes">Conflicts between Agent Classes</a></h2>
+              <p class="dg-meta">In the article: <a href="../#agent-classes">Part III</a></p>
+              <p>The individual, the collective and the civilisational, each with its own ethic, and the conflict where each pair meets.</p>
+
+              <figure class="article-figure dg-figure" id="figure-agent-triangle">
+              <svg class="fig-svg dg-svg" viewBox="0 0 760 520" role="img" aria-labelledby="fig-triangle-title">
+              <title id="fig-triangle-title">The three classes of agent as a triangle: the individual, guided by character; the collective, by rules; and the civilisational, by consequence. Between individual and collective: conscience against rules. Between collective and civilisational: the multipolar trap. Between individual and civilisational: the individual as a rounding error, or as a mere means.</title>
+              <line class="dg-edge" x1="192" y1="410" x2="552" y2="410"/>
+              <text class="dg-edge-label" x="380" y="444" text-anchor="middle">conscience against rules</text>
+              <line class="dg-edge" x1="571.571" y1="366.558" x2="430.356" y2="206.924"/>
+              <text class="dg-edge-label" x="513" y="280" text-anchor="start">the multipolar trap</text>
+              <line class="dg-edge" x1="177.828" y1="378.542" x2="329.644" y2="206.924"/>
+              <text class="dg-edge-label" x="247" y="280" text-anchor="end">rounding error / mere means</text>
+              <circle cx="380" cy="150" r="64" fill="#d6920a"/>
+              <text class="dg-label" x="380" y="48" text-anchor="middle">Civilisational</text>
+              <text class="dg-sub" x="380" y="68" text-anchor="middle">consequence</text>
+              <circle cx="150" cy="410" r="30" fill="#fce278"/>
+              <text class="dg-label" x="150" y="466" text-anchor="middle">Individual</text>
+              <text class="dg-sub" x="150" y="486" text-anchor="middle">character</text>
+              <circle cx="610" cy="410" r="46" fill="#f5be28"/>
+              <text class="dg-label" x="610" y="482" text-anchor="middle">Collective</text>
+              <text class="dg-sub" x="610" y="502" text-anchor="middle">rules</text>
+              </svg>
+              <figcaption>conflicts between the classes of agent</figcaption>
               </figure>
             </section>
 

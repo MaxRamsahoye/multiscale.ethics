@@ -25,6 +25,10 @@ def block(start, end_tag):
     return H[i:j]
 
 
+# the page's own figures, drawn in tools/diagram_figures.py
+import diagram_figures
+D = diagram_figures.figures()
+
 FIGURES = [
     {
         'id': 'three-theories',
@@ -35,12 +39,52 @@ FIGURES = [
         'html': block('<figure class="article-figure figure-table">', '</figure>'),
     },
     {
+        'id': 'scale-ladder',
+        'title': 'The Scale Ladder',
+        'where': 'Part I',
+        'anchor': 'human-societies',
+        'desc': 'Tribe, city, state and civilisation on one axis of population, with Dunbar&rsquo;s number as the first threshold, and the ethic adapted to each scale.',
+        'html': D['ladder'],
+    },
+    {
+        'id': 'scale-profiles',
+        'title': 'Scale Profiles',
+        'where': 'Part I',
+        'anchor': 'human-societies',
+        'desc': 'For each scale of society: how many people, how they come to trust one another, the ethic that suits it, and where that ethic strains.',
+        'html': D['profiles'],
+    },
+    {
+        'id': 'hybrid-ethics-stack',
+        'title': 'The Hybrid Ethics Stack',
+        'where': 'Part I',
+        'anchor': 'ethics-stack',
+        'desc': 'The ethics of civilisation as a stack: virtue at the base, deontology above it and consequentialism at the top, each at the scale it was adapted to.',
+        'html': D['stack'],
+    },
+    {
         'id': 'agency-across-scales',
         'title': 'Agency across Scales',
         'where': 'Part II',
         'anchor': 'figure-scales',
         'desc': 'The individual, the collective and the civilisational: each larger scale decomposes into the one below it, and emerges from it again.',
         'html': block('<figure class="article-figure" id="figure-scales">', '</figure>'),
+    },
+    {
+        'id': 'theory-scale-fit',
+        'title': 'Theories at the Wrong Scales',
+        'where': 'Part II',
+        'anchor': 'wrong-scales',
+        'desc': 'Each theory against each scale: native where it was adapted, and alienating, vague or complicated where it was not.',
+        'html': D['fit'],
+    },
+    {
+        'id': 'agent-classes',
+        'title': 'Conflicts between Agent Classes',
+        'where': 'Part III',
+        'anchor': 'agent-classes',
+        'desc': 'The individual, the collective and the civilisational, each with its own ethic, and the conflict where each pair meets.',
+        'html': D['triangle'],
     },
     {
         'id': 'concentric-ethics',
@@ -157,7 +201,7 @@ style = '''
       .dg-title { font-size: 38px; }
       .dg-desc { font-size: 20px; }
     }
-  </style>
+''' + diagram_figures.CSS + '''  </style>
 '''
 
 items = '\n'.join(
