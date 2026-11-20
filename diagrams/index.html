@@ -2399,8 +2399,10 @@
     /* the Diagrams page's own figures */
     .article-body .dg-figure .dg-svg { max-width: 680px; margin: 0 auto; }
     .dg-svg text { font-family: 'IBM Plex Sans', sans-serif; fill: var(--canvas-ink); }
-    .dg-svg .dg-label { font-size: 18px; font-weight: 500; }
-    .dg-svg .dg-sub { font-family: var(--serif); font-style: italic; font-size: 16px; fill: var(--muted); }
+    .dg-svg .dg-label { font-size: 20px; font-weight: 500; }
+    /* (the sublabels in the text colour, softened a little, rather than the faint grey) */
+    .dg-svg .dg-sub { font-family: var(--serif); font-style: italic; font-size: 19px; fill: color-mix(in srgb, var(--canvas-ink) 72%, var(--canvas-bg)); }
+    .dg-svg .dg-backing { fill: var(--canvas-bg); }
     .dg-svg .dg-leader { fill: none; stroke: var(--muted); stroke-width: 1; }
 
     /* the matrices: shaded where a theory is native, plain where it strains */
@@ -2531,23 +2533,29 @@
             <section class="dg-item" id="hybrid-ethics-stack">
               <h2><a class="heading-link" href="#hybrid-ethics-stack">The Hybrid Ethics Stack</a></h2>
               <p class="dg-meta">In the article: <a href="../#ethics-stack">Part I</a></p>
-              <p>The ethics of civilisation as a stack: virtue at the base, deontology above it and consequentialism at the top, each at the scale it was adapted to.</p>
+              <p>The concentric rings lifted apart into a stack: consequentialism the broadest layer, deontology within it and virtue at the core, each at the scale it was adapted to.</p>
 
               <figure class="article-figure dg-figure" id="figure-ethics-stack">
-              <svg class="fig-svg dg-svg" viewBox="0 0 760 470" role="img" aria-labelledby="fig-stack-title">
-              <title id="fig-stack-title">The ethics of civilisation as a hybrid stack of three layers: virtue at the base, for the individual and the tribe; deontology above it, for the collective and the city; and consequentialism at the top, for the civilisational scale and the state.</title>
-              <polygon fill="#eac859" points="80,330 250,415 250,437 80,352"/><polygon fill="#c89a28" points="250,415 420,330 420,352 250,437"/><polygon fill="#fce278" points="250,245 420,330 250,415 80,330"/>
-              <polygon fill="#d69e18" points="80,220 250,305 250,327 80,242"/><polygon fill="#a5750e" points="250,305 420,220 420,242 250,327"/><polygon fill="#f5be28" points="250,135 420,220 250,305 80,220"/>
-              <polygon fill="#b27406" points="80,110 250,195 250,217 80,132"/><polygon fill="#855404" points="250,195 420,110 420,132 250,217"/><polygon fill="#d6920a" points="250,25 420,110 250,195 80,110"/>
-              <polyline class="dg-leader" points="430,341 478,341"/>
-              <text class="dg-label" x="490" y="339">Virtue</text>
-              <text class="dg-sub" x="490" y="359">the individual &middot; the tribe</text>
-              <polyline class="dg-leader" points="430,231 478,231"/>
-              <text class="dg-label" x="490" y="229">Deontology</text>
-              <text class="dg-sub" x="490" y="249">the collective &middot; the city</text>
-              <polyline class="dg-leader" points="430,121 478,121"/>
-              <text class="dg-label" x="490" y="119">Consequentialism</text>
-              <text class="dg-sub" x="490" y="139">the civilisational &middot; the state</text>
+              <svg class="fig-svg dg-svg" viewBox="0 30 760 590" role="img" aria-labelledby="fig-stack-title">
+              <title id="fig-stack-title">The ethics of civilisation as a hybrid stack: three gold discs, one above another, the concentric rings lifted apart. Consequentialism, the civilisational scale and the state, is the broadest, at the base; deontology, the collective and the city, above it; and virtue, the individual and the tribe, the smallest, at the top.</title>
+              <path class="dg-backing" d="M50,430 L50,446 A250,125 0 0 0 550,446 L550,430 A250,125 0 0 1 50,430 Z M50,430 A250,125 0 1 0 550,430 A250,125 0 1 0 50,430 Z"/>
+              <path d="M50,430 L50,446 A250,125 0 0 0 550,446 L550,430 A250,125 0 0 1 50,430 Z" fill="#eaa528" fill-opacity="0.57" stroke="#eab650" stroke-width="1.5" stroke-linejoin="round"/>
+              <ellipse cx="300" cy="430" rx="250" ry="125" fill="#eaa528" fill-opacity="0.30" stroke="#eab650" stroke-width="1.5"/>
+              <path class="dg-backing" d="M153,262 L153,278 A147,73.5 0 0 0 447,278 L447,262 A147,73.5 0 0 1 153,262 Z M153,262 A147,73.5 0 1 0 447,262 A147,73.5 0 1 0 153,262 Z"/>
+              <path d="M153,262 L153,278 A147,73.5 0 0 0 447,278 L447,262 A147,73.5 0 0 1 153,262 Z" fill="#f7c85a" fill-opacity="0.80" stroke="#efc04a" stroke-width="1.5" stroke-linejoin="round"/>
+              <ellipse cx="300" cy="262" rx="147" ry="73.5" fill="#f7c85a" fill-opacity="0.42" stroke="#efc04a" stroke-width="1.5"/>
+              <path class="dg-backing" d="M230,110 L230,126 A70,35 0 0 0 370,126 L370,110 A70,35 0 0 1 230,110 Z M230,110 A70,35 0 1 0 370,110 A70,35 0 1 0 230,110 Z"/>
+              <path d="M230,110 L230,126 A70,35 0 0 0 370,126 L370,110 A70,35 0 0 1 230,110 Z" fill="#fad76e" fill-opacity="1.00" stroke="#f2c64f" stroke-width="1.5" stroke-linejoin="round"/>
+              <ellipse cx="300" cy="110" rx="70" ry="35" fill="#fad76e" fill-opacity="0.55" stroke="#f2c64f" stroke-width="1.5"/>
+              <polyline class="dg-leader" points="560,438 586,438"/>
+              <text class="dg-label" x="600" y="435">Consequentialism</text>
+              <text class="dg-sub" x="600" y="458">the civilisational &middot; the state</text>
+              <polyline class="dg-leader" points="457,270 586,270"/>
+              <text class="dg-label" x="600" y="267">Deontology</text>
+              <text class="dg-sub" x="600" y="290">the collective &middot; the city</text>
+              <polyline class="dg-leader" points="380,118 586,118"/>
+              <text class="dg-label" x="600" y="115">Virtue</text>
+              <text class="dg-sub" x="600" y="138">the individual &middot; the tribe</text>
               </svg>
               <figcaption>the ethics of civilisation as a hybrid ethics stack</figcaption>
               </figure>

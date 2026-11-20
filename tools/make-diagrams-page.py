@@ -51,7 +51,7 @@ FIGURES = [
         'title': 'The Hybrid Ethics Stack',
         'where': 'Part I',
         'anchor': 'ethics-stack',
-        'desc': 'The ethics of civilisation as a stack: virtue at the base, deontology above it and consequentialism at the top, each at the scale it was adapted to.',
+        'desc': 'The concentric rings lifted apart into a stack: consequentialism the broadest layer, deontology within it and virtue at the core, each at the scale it was adapted to.',
         'html': D['stack'],
     },
     {

@@ -24,24 +24,40 @@ def figure(fid, svg, caption, extra=''):
 
 
 # ---- 4. the hybrid ethics stack -------------------------------------------------
+# The Concentric Ethics rings, lifted apart into layers and seen at an angle
+# (the 2.5D style of the scales diagram): consequentialism the broadest layer at
+# the base, deontology above it, virtue the smallest at the top. Seen from
+# directly above, the three discs would close back into the concentric rings.
+# Each disc in the rings' own translucent gold, its edge a little deeper.
 def ethics_stack():
-    cx, w, h, t = 250, 170, 85, 22
-    layers = [   # from the base up, drawn in that order
-        ('Virtue', 'the individual &middot; the tribe', 330, LIGHT),
-        ('Deontology', 'the collective &middot; the city', 220, MID),
-        ('Consequentialism', 'the civilisational &middot; the state', 110, DARK),
+    cx, t = 300, 16
+    layers = [   # from the base up, drawn in that order: radius, centre height
+        ('Consequentialism', 'the civilisational &middot; the state', 250, 430, '#eaa528', 0.30, '#eab650'),
+        ('Deontology', 'the collective &middot; the city', 147, 262, '#f7c85a', 0.42, '#efc04a'),
+        ('Virtue', 'the individual &middot; the tribe', 70, 110, '#fad76e', 0.55, '#f2c64f'),
     ]
-    s = ['<svg class="fig-svg dg-svg" viewBox="0 0 760 470" role="img" aria-labelledby="fig-stack-title">',
-         '<title id="fig-stack-title">The ethics of civilisation as a hybrid stack of three layers: virtue at the base, '
-         'for the individual and the tribe; deontology above it, for the collective and the city; and consequentialism at the top, '
-         'for the civilisational scale and the state.</title>']
-    for name, sub, cy, c in layers:
-        s.append(slab(cx, cy, w, h, t, c))
-    for name, sub, cy, c in layers:
-        lx = cx + w + 70
-        s.append('<polyline class="dg-leader" points="%g,%g %g,%g"/>' % (cx + w + 10, cy + t / 2, lx - 12, cy + t / 2))
-        s.append('<text class="dg-label" x="%g" y="%g">%s</text>' % (lx, cy + t / 2 - 2, name))
-        s.append('<text class="dg-sub" x="%g" y="%g">%s</text>' % (lx, cy + t / 2 + 18, sub))
+    s = ['<svg class="fig-svg dg-svg" viewBox="0 30 760 590" role="img" aria-labelledby="fig-stack-title">',
+         '<title id="fig-stack-title">The ethics of civilisation as a hybrid stack: three gold discs, one above another, '
+         'the concentric rings lifted apart. Consequentialism, the civilisational scale and the state, is the broadest, at the base; '
+         'deontology, the collective and the city, above it; and virtue, the individual and the tribe, the smallest, at the top.</title>']
+    for name, sub, rx, cy, fill, alpha, stroke in layers:
+        ry = rx / 2
+        side = ('M%g,%g L%g,%g A%g,%g 0 0 0 %g,%g L%g,%g A%g,%g 0 0 1 %g,%g Z'
+                % (cx - rx, cy, cx - rx, cy + t, rx, ry, cx + rx, cy + t, cx + rx, cy, rx, ry, cx - rx, cy))
+        # (each disc backed in the page's colour, so that it hides the
+        # layers beneath it while keeping the rings' translucent gold)
+        s.append('<path class="dg-backing" d="%s M%g,%g A%g,%g 0 1 0 %g,%g A%g,%g 0 1 0 %g,%g Z"/>'
+                 % (side, cx - rx, cy, rx, ry, cx + rx, cy, rx, ry, cx - rx, cy))
+        s.append('<path d="%s" fill="%s" fill-opacity="%.2f" stroke="%s" stroke-width="1.5" stroke-linejoin="round"/>'
+                 % (side, fill, min(1, alpha * 1.9), stroke))
+        s.append('<ellipse cx="%g" cy="%g" rx="%g" ry="%g" fill="%s" fill-opacity="%.2f" stroke="%s" stroke-width="1.5"/>'
+                 % (cx, cy, rx, ry, fill, alpha, stroke))
+    lx = 600   # the labels in one column, each led out from its disc's edge
+    for name, sub, rx, cy, fill, alpha, stroke in layers:
+        y = cy + t / 2
+        s.append('<polyline class="dg-leader" points="%g,%g %g,%g"/>' % (cx + rx + 10, y, lx - 14, y))
+        s.append('<text class="dg-label" x="%g" y="%g">%s</text>' % (lx, y - 3, name))
+        s.append('<text class="dg-sub" x="%g" y="%g">%s</text>' % (lx, y + 20, sub))
     s.append('</svg>')
     return figure('figure-ethics-stack', '\n'.join(s), 'the ethics of civilisation as a hybrid ethics stack')
 
@@ -99,8 +115,10 @@ CSS = '''
     /* the Diagrams page's own figures */
     .article-body .dg-figure .dg-svg { max-width: 680px; margin: 0 auto; }
     .dg-svg text { font-family: 'IBM Plex Sans', sans-serif; fill: var(--canvas-ink); }
-    .dg-svg .dg-label { font-size: 18px; font-weight: 500; }
-    .dg-svg .dg-sub { font-family: var(--serif); font-style: italic; font-size: 16px; fill: var(--muted); }
+    .dg-svg .dg-label { font-size: 20px; font-weight: 500; }
+    /* (the sublabels in the text colour, softened a little, rather than the faint grey) */
+    .dg-svg .dg-sub { font-family: var(--serif); font-style: italic; font-size: 19px; fill: color-mix(in srgb, var(--canvas-ink) 72%, var(--canvas-bg)); }
+    .dg-svg .dg-backing { fill: var(--canvas-bg); }
     .dg-svg .dg-leader { fill: none; stroke: var(--muted); stroke-width: 1; }
 
     /* the matrices: shaded where a theory is native, plain where it strains */
