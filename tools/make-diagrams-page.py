@@ -269,6 +269,16 @@ STYLE = '''
       width: clamp(180px, 50vw - 460px, 260px);
       transform: translateY(-50%);
       font-family: 'Inter', sans-serif;
+      /* (shown and faded as the article's contents menu is: see the script) */
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.5s ease, visibility 0s linear 0.5s;
+    }
+
+    body.side-open .dg-side {
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 0.3s ease, visibility 0s;
     }
 
     .dg-side .dg-side-label {
@@ -472,8 +482,42 @@ s = open('diagrams/index.html').read()
 s = s.replace('  <script src="../assets/tools.js', THUMB_SCRIPT + '  <script src="../assets/tools.js', 1)
 open('diagrams/index.html', 'w').write(s)
 
+SIDE_SCRIPT = '''  <script>
+    // the menu on the left behaves as the article's contents menu does: shown
+    // on arriving, faded after 1.5 seconds, and back while the pointer is in
+    // the empty column left of the text, or on the menu itself
+    (function () {
+      var HOLD = 1500;
+      var side = document.querySelector('.dg-side'), main = document.querySelector('.main-area');
+      var hovering = false, timer = null;
+      function setOpen(on) { document.body.classList.toggle('side-open', on); }
+      function fadeLater() {
+        clearTimeout(timer);
+        timer = setTimeout(function () { if (!hovering) setOpen(false); }, HOLD);
+      }
+      document.addEventListener('mousemove', function (e) {
+        var inColumn = e.clientX < main.getBoundingClientRect().left || side.contains(e.target);
+        if (inColumn === hovering) return;
+        hovering = inColumn;
+        if (hovering) { clearTimeout(timer); setOpen(true); }
+        else fadeLater();
+      });
+      document.addEventListener('mouseleave', function () {
+        if (hovering) { hovering = false; fadeLater(); }
+      });
+      // (a keyboard user reaching it with Tab finds it shown)
+      side.addEventListener('focusin', function () { clearTimeout(timer); setOpen(true); });
+      side.addEventListener('focusout', fadeLater);
+      setOpen(true);
+      fadeLater();
+    })();
+  </script>
+'''
+
+
 def with_side(slug, doc):
-    return doc.replace('\n  <div class="page">', '\n' + side_menu(slug) + '\n  <div class="page">', 1)
+    doc = doc.replace('\n  <div class="page">', '\n' + side_menu(slug) + '\n  <div class="page">', 1)
+    return doc.replace('</body>', SIDE_SCRIPT + '</body>', 1)
 
 
 def side_menu(current):

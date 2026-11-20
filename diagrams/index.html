@@ -2472,6 +2472,16 @@
       width: clamp(180px, 50vw - 460px, 260px);
       transform: translateY(-50%);
       font-family: 'Inter', sans-serif;
+      /* (shown and faded as the article's contents menu is: see the script) */
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.5s ease, visibility 0s linear 0.5s;
+    }
+
+    body.side-open .dg-side {
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 0.3s ease, visibility 0s;
     }
 
     .dg-side .dg-side-label {
