@@ -256,6 +256,66 @@ STYLE = '''
       margin: 56px 0 0;
     }
 
+    /* a figure's page: every diagram and table down the left, in the manner
+       of the article's contents menu, the current one marked */
+    .dg-side {
+      position: fixed;
+      top: 50%;
+      left: 40px;
+      z-index: 20;
+      width: clamp(180px, 50vw - 460px, 260px);
+      transform: translateY(-50%);
+      font-family: 'Inter', sans-serif;
+    }
+
+    .dg-side .dg-side-label {
+      display: block;
+      margin: 0 0 14px;
+      font-size: 16px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      color: var(--canvas-ink);
+      text-decoration: none;
+    }
+
+    .dg-side .dg-side-label:hover { color: var(--muted); }
+
+    .dg-side-group {
+      margin: 18px 0 6px;
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .dg-side ol {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      font-size: 14px;
+      line-height: 1.35;
+    }
+
+    .dg-side li { margin: 0 0 7px; }
+
+    .dg-side a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .dg-side a:hover { color: var(--canvas-ink); }
+
+    .dg-side a[aria-current="page"] {
+      color: var(--canvas-ink);
+      border-bottom: 1px solid currentColor;
+    }
+
+    @media (max-width: 1180px) {
+      .dg-side { display: none; }
+    }
+
     .dg-pager {
       display: flex;
       justify-content: space-between;
@@ -409,6 +469,24 @@ s = open('diagrams/index.html').read()
 s = s.replace('  <script src="../assets/tools.js', THUMB_SCRIPT + '  <script src="../assets/tools.js', 1)
 open('diagrams/index.html', 'w').write(s)
 
+def with_side(slug, doc):
+    return doc.replace('\n  <div class="page">', '\n' + side_menu(slug) + '\n  <div class="page">', 1)
+
+
+def side_menu(current):
+    """Every diagram and table, by group, for the left of a figure's page."""
+    out = '  <nav class="dg-side" aria-label="Diagrams and tables">\n    <a class="dg-side-label" href="../">Diagrams</a>\n'
+    for kind, name in GROUPS:
+        out += '    <p class="dg-side-group">%s</p>\n    <ol>\n' % name
+        for f in FIGURES:
+            if f['kind'] != kind:
+                continue
+            cur = ' aria-current="page"' if f['slug'] == current else ''
+            out += '      <li><a href="../%s/"%s>%s</a></li>\n' % (f['slug'], cur, f['title'])
+        out += '    </ol>\n'
+    return out + '  </nav>\n'
+
+
 # ---- each figure's own page ----------------------------------------------------------
 for i, f in enumerate(FIGURES):
     prev_f = FIGURES[i - 1] if i > 0 else None
@@ -430,9 +508,9 @@ for i, f in enumerate(FIGURES):
           </div>
 '''.format(group=dict(GROUPS)[f['kind']], figure=indent(f['html'], 12), **f) + pager
     os.makedirs('diagrams/' + f['slug'], exist_ok=True)
-    open('diagrams/%s/index.html' % f['slug'], 'w').write(page(
+    open('diagrams/%s/index.html' % f['slug'], 'w').write(with_side(f['slug'], page(
         2, f['title'], 'diagrams/%s/' % f['slug'], html.unescape(f['desc']),
         '../', 'Back to all diagrams', content,
-        '  <script src="../../assets/figures.js?v=2"></script>\n', footer=False))
+        '  <script src="../../assets/figures.js?v=2"></script>\n', footer=False)))
 
 print('Wrote diagrams/index.html and %d figure pages' % len(FIGURES))

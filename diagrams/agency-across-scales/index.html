@@ -2459,6 +2459,66 @@
       margin: 56px 0 0;
     }
 
+    /* a figure's page: every diagram and table down the left, in the manner
+       of the article's contents menu, the current one marked */
+    .dg-side {
+      position: fixed;
+      top: 50%;
+      left: 40px;
+      z-index: 20;
+      width: clamp(180px, 50vw - 460px, 260px);
+      transform: translateY(-50%);
+      font-family: 'Inter', sans-serif;
+    }
+
+    .dg-side .dg-side-label {
+      display: block;
+      margin: 0 0 14px;
+      font-size: 16px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      color: var(--canvas-ink);
+      text-decoration: none;
+    }
+
+    .dg-side .dg-side-label:hover { color: var(--muted); }
+
+    .dg-side-group {
+      margin: 18px 0 6px;
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .dg-side ol {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      font-size: 14px;
+      line-height: 1.35;
+    }
+
+    .dg-side li { margin: 0 0 7px; }
+
+    .dg-side a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .dg-side a:hover { color: var(--canvas-ink); }
+
+    .dg-side a[aria-current="page"] {
+      color: var(--canvas-ink);
+      border-bottom: 1px solid currentColor;
+    }
+
+    @media (max-width: 1180px) {
+      .dg-side { display: none; }
+    }
+
     .dg-pager {
       display: flex;
       justify-content: space-between;
@@ -2559,6 +2619,22 @@
       <polygon points="14,9.078 20.328,18.922 14,15.969 7.672,18.922"/>
     </svg>
   </button>
+
+  <nav class="dg-side" aria-label="Diagrams and tables">
+    <a class="dg-side-label" href="../">Diagrams</a>
+    <p class="dg-side-group">Diagrams</p>
+    <ol>
+      <li><a href="../hybrid-ethics-stack/">The Hybrid Ethics Stack</a></li>
+      <li><a href="../agency-across-scales/" aria-current="page">Agency across Scales</a></li>
+      <li><a href="../concentric-ethics/">Concentric Ethics</a></li>
+    </ol>
+    <p class="dg-side-group">Tables</p>
+    <ol>
+      <li><a href="../three-theories/">The Three Theories</a></li>
+      <li><a href="../scale-profiles/">Scale Profiles</a></li>
+      <li><a href="../wrong-scales/">Theories at the Wrong Scales</a></li>
+    </ol>
+  </nav>
 
   <div class="page">
     <div class="layout-grid">
