@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- the title, description and preview card first, ahead of any script, for link previews (Slack and others) -->
   <title>Diagrams — Multi-Scale Ethics</title>
-  <meta name="description" content="Reconciling theories of normative action across scales, systems and societies.">
+  <meta name="description" content="The diagrams and tables of Multi-Scale Ethics, gathered in one place.">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="Multi-Scale Ethics">
   <meta property="og:title" content="Multi-Scale Ethics: The Cultural Evolution of Major Ethical Theories">
-  <meta property="og:description" content="Reconciling theories of normative action across scales, systems and societies.">
+  <meta property="og:description" content="The diagrams and tables of Multi-Scale Ethics, gathered in one place.">
   <meta property="og:url" content="https://maxramsahoye.github.io/multiscale.ethics/diagrams/">
   <meta property="og:image" content="https://maxramsahoye.github.io/multiscale.ethics/preview.png?v=3">
   <meta property="og:image:secure_url" content="https://maxramsahoye.github.io/multiscale.ethics/preview.png?v=3">
@@ -21,7 +21,7 @@
   <meta name="author" content="Max Ramsahoye">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Multi-Scale Ethics: The Cultural Evolution of Major Ethical Theories">
-  <meta name="twitter:description" content="Reconciling theories of normative action across scales, systems and societies.">
+  <meta name="twitter:description" content="The diagrams and tables of Multi-Scale Ethics, gathered in one place.">
   <meta name="twitter:image" content="https://maxramsahoye.github.io/multiscale.ethics/preview.png?v=3">
   <link id="favicon-ico" rel="icon" href="../favicon/favicon-light.ico?v=r" sizes="any">
   <link id="favicon-32" rel="icon" type="image/png" sizes="32x32" href="../favicon/favicon-32-light.png?v=r">
@@ -2296,8 +2296,6 @@
   </style>
 
   <style>
-    /* the Diagrams page: a title and a line about it, then each diagram in
-       turn, with where it sits in the article */
     body { padding-top: 0; }
 
     .back-arrow {
@@ -2312,9 +2310,19 @@
       margin: 0; text-align: right;
     }
 
-    .dg-top {
-      padding: 150px 0 40px;
+    .dg-top { padding: 150px 0 24px; }
+
+    .dg-kicker {
+      margin: 0 0 12px;
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
     }
+
+    .dg-kicker a { color: inherit; text-decoration: none; }
+    .dg-kicker a:hover { color: var(--canvas-ink); }
 
     .dg-title {
       margin: 0 0 18px;
@@ -2332,61 +2340,131 @@
       line-height: 1.4;
     }
 
-    /* the list of diagrams, linking down the page */
-    .dg-index {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px 28px;
-      margin: 28px 0 0;
-      padding: 0;
-      list-style: none;
-      font-family: 'IBM Plex Sans', sans-serif;
-      font-size: 15px;
-    }
-
-    .dg-index a {
-      color: var(--muted);
-      text-decoration: none;
-      border-bottom: 1px solid transparent;
-    }
-
-    .dg-index a:hover {
-      color: var(--canvas-ink);
-      border-bottom-color: currentColor;
-    }
-
-    .article-body .dg-item {
-      margin: 0;
-      padding: 72px 0 24px;
-      border-top: 1px solid var(--rule);
-      scroll-margin-top: 24px;
-    }
-
-    .article-body .dg-item + .dg-item {
-      margin-top: 72px;
-    }
-
-    .article-body .dg-item > h2 {
-      margin-bottom: 8px;
-    }
-
     .dg-meta {
-      margin: 0 0 6px !important;
+      margin: 16px 0 0;
       font-family: 'IBM Plex Sans', sans-serif;
       font-size: 14px;
       color: var(--muted);
     }
 
-    .dg-meta a {
-      color: inherit !important;
-      font-weight: 400 !important;
+    .dg-meta a { color: inherit; }
+
+    /* ---- the meta-page: a group heading, then a grid of cards ---- */
+    .dg-group { margin: 72px 0 0; }
+
+    .dg-group-title {
+      margin: 0 0 24px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--rule);
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
     }
 
-    .article-body .dg-item .article-figure,
-    .article-body .dg-item #figure-scales,
-    .article-body .dg-item #figure-rings {
+    .dg-cards {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 40px 32px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .dg-card a {
+      display: block;
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* the figure itself, drawn small: the article's own width, scaled down to
+       the card (by the script below), centred in it */
+    .dg-thumb {
+      position: relative;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      border-radius: 6px;
+      background: color-mix(in srgb, var(--inverse-bg) 7%, var(--canvas-bg));
+      transition: background-color 0.25s ease;
+    }
+
+    .dg-card a:hover .dg-thumb {
+      background: color-mix(in srgb, var(--inverse-bg) 16%, var(--canvas-bg));
+    }
+
+    .dg-thumb-inner {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 760px;
+      transform-origin: top left;
+      pointer-events: none;
+    }
+
+    .dg-thumb .article-figure,
+    .dg-thumb #figure-scales,
+    .dg-thumb #figure-rings {
+      margin: 0 !important;
+    }
+
+    .dg-thumb figcaption { display: none; }
+
+    /* (in a card a drawing is always whole: none of the phone layout's
+       sideways scrolling) */
+    .dg-thumb .dg-figure { max-width: none !important; overflow: visible !important; }
+    .dg-thumb .dg-figure .dg-svg { min-width: 0 !important; }
+
+    .dg-card-title {
+      display: block;
+      margin: 16px 0 6px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 19px;
+      letter-spacing: -0.01em;
+    }
+
+    .dg-card a:hover .dg-card-title {
+      text-decoration: underline;
+      text-decoration-thickness: 1.5px;
+      text-underline-offset: 4px;
+    }
+
+    .dg-card-desc {
+      display: block;
+      font-family: var(--serif);
+      font-size: 18px;
+      line-height: 1.4;
+      color: color-mix(in srgb, var(--canvas-ink) 78%, var(--canvas-bg));
+    }
+
+    /* ---- a figure's own page ---- */
+    .article-body .dg-single .article-figure,
+    .article-body .dg-single #figure-scales,
+    .article-body .dg-single #figure-rings {
       margin: 56px 0 0;
     }
+
+    .dg-pager {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      margin: 96px 0 0;
+      padding-top: 20px;
+      border-top: 1px solid var(--rule);
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 15px;
+    }
+
+    .dg-pager a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    .dg-pager a:hover { color: var(--canvas-ink); }
+    .dg-pager .next { margin-left: auto; text-align: right; }
+    .dg-pager span { display: block; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px; }
 
     @media (max-width: 960px) {
       .back-arrow { top: 28px; left: 24px; }
@@ -2394,6 +2472,10 @@
       .dg-top { padding-top: 110px; }
       .dg-title { font-size: 38px; }
       .dg-desc { font-size: 20px; }
+    }
+
+    @media (max-width: 640px) {
+      .dg-cards { grid-template-columns: minmax(0, 1fr); }
     }
 
     /* the Diagrams page's own figures */
@@ -2470,143 +2552,150 @@
           <div class="dg-top">
             <h1 class="dg-title">Diagrams</h1>
             <p class="dg-desc">The diagrams and tables of <em>Multi-Scale Ethics</em>, gathered in one place.</p>
-            <ol class="dg-index">
-                <li><a href="#three-theories">The Three Theories</a></li>
-                <li><a href="#scale-profiles">Scale Profiles</a></li>
-                <li><a href="#hybrid-ethics-stack">The Hybrid Ethics Stack</a></li>
-                <li><a href="#agency-across-scales">Agency across Scales</a></li>
-                <li><a href="#theory-scale-fit">Theories at the Wrong Scales</a></li>
-                <li><a href="#concentric-ethics">Concentric Ethics</a></li>
-            </ol>
           </div>
-          <div class="article-body">
-            <section class="dg-item" id="three-theories">
-              <h2><a class="heading-link" href="#three-theories">The Three Theories</a></h2>
-              <p class="dg-meta">In the article: <a href="../#ethical-theories">Ethical Theories</a></p>
-              <p>Consequentialism, deontology and virtue ethics: the core idea of each, and the tradition it comes from.</p>
+          <section class="dg-group" aria-labelledby="group-diagram" id="group-diagram">
+            <h2 class="dg-group-title">Diagrams</h2>
+            <ul class="dg-cards">
+              <li class="dg-card">
+                <a href="hybrid-ethics-stack/">
+                  <div class="dg-thumb" data-kind="diagram" aria-hidden="true"><div class="dg-thumb-inner article-body">
+                    <figure class="article-figure dg-figure">
+                    <svg class="fig-svg dg-svg" viewBox="0 30 760 590" role="img">
 
-              <figure class="article-figure figure-table">
-              <table class="theories-table">
-              <thead>
-              <tr><th scope="col">Theory</th><th scope="col">Core idea</th><th scope="col">Key theory or tradition</th></tr>
-              </thead>
-              <tbody>
-              <tr class="t-consequentialism">
-              <th scope="row"><span class="t-name">Consequentialism</span><span class="t-focus">Focus on Outcomes</span></th>
-              <td>An action is morally right if it produces the best overall consequences or outcomes.</td>
-              <td><strong>Utilitarianism</strong> (associated with thinkers like Jeremy Bentham and John Stuart Mill), which argues for actions that maximize happiness or well-being for the greatest number of people.</td>
-              </tr>
-              <tr class="t-deontology">
-              <th scope="row"><span class="t-name">Deontology</span><span class="t-focus">Focus on Duties and Rules</span></th>
-              <td>An action is morally right if it conforms to an inherent moral duty, rule, or obligation, regardless of the consequences.</td>
-              <td><strong>Kantian ethics</strong> (associated with Immanuel Kant), which emphasizes the Categorical Imperative&mdash;treating people as ends in themselves rather than mere means, and acting only on rules you would will to be universal laws.</td>
-              </tr>
-              <tr class="t-virtue">
-              <th scope="row"><span class="t-name">Virtue Ethics</span><span class="t-focus">Focus on Character</span></th>
-              <td>Morality is not primarily about following rules or calculating outcomes, but about developing a good moral character and cultivating virtues (such as honesty, courage, and compassion).</td>
-              <td>Rooted in ancient philosophers like <strong>Aristotle</strong>, asking not just &ldquo;What should I do?&rdquo; but &ldquo;What kind of person should I be?&rdquo;</td>
-              </tr>
-              </tbody>
-              </table>
-              </figure>
-            </section>
-
-            <section class="dg-item" id="scale-profiles">
-              <h2><a class="heading-link" href="#scale-profiles">Scale Profiles</a></h2>
-              <p class="dg-meta">In the article: <a href="../#human-societies">Part I</a></p>
-              <p>For each scale of society: how many people, how they come to trust one another, the ethic that suits it, and where that ethic strains.</p>
-
-              <figure class="article-figure figure-table dg-matrix" id="figure-profiles">
-              <table class="theories-table profiles-table">
-              <thead><tr><th scope="col">Scale</th><th scope="col">Population</th><th scope="col">How trust works</th><th scope="col">Ethic</th><th scope="col">Where it strains</th></tr></thead>
-              <tbody>
-              <tr class="s-tribe"><th scope="row"><span class="t-name">Tribe</span></th><td data-col="Population">Up to ~150 (Dunbar&rsquo;s number)</td><td data-col="How trust works">Reputation and gossip: a shared ledger of character</td><td data-col="Ethic"><strong>Virtue</strong></td><td data-col="Where it strains">Beyond 150 no one can track everyone, and vice goes unseen</td></tr>
-              <tr class="s-city"><th scope="row"><span class="t-name">City</span></th><td data-col="Population">Hundreds to thousands, and beyond</td><td data-col="How trust works">Shared conventions &ndash; manners, commandments &ndash; among strangers</td><td data-col="Ethic"><strong>Deontology</strong></td><td data-col="Where it strains">Absolute rules are inflexible as complexity grows</td></tr>
-              <tr class="s-state"><th scope="row"><span class="t-name">State</span></th><td data-col="Population">Networks of cities: nations and empires</td><td data-col="How trust works">System-wide optimisation of aggregate welfare</td><td data-col="Ethic"><strong>Consequentialism</strong></td><td data-col="Where it strains">The tyranny of the majority, overriding principles and virtues</td></tr>
-              <tr class="s-civilisation"><th scope="row"><span class="t-name">Civilisation</span></th><td data-col="Population">Global</td><td data-col="How trust works">Each theory at its own scale, in a hybrid ethics stack</td><td data-col="Ethic"><strong>All three, as a stack</strong></td><td data-col="Where it strains">Conflicts between classes of agent; the multipolar trap</td></tr>
-              </tbody>
-              </table>
-              <figcaption>the scales of human society: how each coordinates, and where it gives way</figcaption>
-              </figure>
-            </section>
-
-            <section class="dg-item" id="hybrid-ethics-stack">
-              <h2><a class="heading-link" href="#hybrid-ethics-stack">The Hybrid Ethics Stack</a></h2>
-              <p class="dg-meta">In the article: <a href="../#ethics-stack">Part I</a></p>
-              <p>The concentric rings lifted apart into a stack: consequentialism the broadest layer, deontology within it and virtue at the core, each at the scale it was adapted to.</p>
-
-              <figure class="article-figure dg-figure" id="figure-ethics-stack">
-              <svg class="fig-svg dg-svg" viewBox="0 30 760 590" role="img" aria-labelledby="fig-stack-title">
-              <title id="fig-stack-title">The ethics of civilisation as a hybrid stack: three gold discs, one above another, the concentric rings lifted apart. Consequentialism, the civilisational scale and the state, is the broadest, at the base; deontology, the collective and the city, above it; and virtue, the individual and the tribe, the smallest, at the top.</title>
-              <path class="dg-backing" d="M50,430 L50,446 A250,125 0 0 0 550,446 L550,430 A250,125 0 0 1 50,430 Z M50,430 A250,125 0 1 0 550,430 A250,125 0 1 0 50,430 Z"/>
-              <path d="M50,430 L50,446 A250,125 0 0 0 550,446 L550,430 A250,125 0 0 1 50,430 Z" fill="#eaa528" fill-opacity="0.57" stroke="#eab650" stroke-width="1.5" stroke-linejoin="round"/>
-              <ellipse cx="300" cy="430" rx="250" ry="125" fill="#eaa528" fill-opacity="0.30" stroke="#eab650" stroke-width="1.5"/>
-              <path class="dg-backing" d="M153,262 L153,278 A147,73.5 0 0 0 447,278 L447,262 A147,73.5 0 0 1 153,262 Z M153,262 A147,73.5 0 1 0 447,262 A147,73.5 0 1 0 153,262 Z"/>
-              <path d="M153,262 L153,278 A147,73.5 0 0 0 447,278 L447,262 A147,73.5 0 0 1 153,262 Z" fill="#f7c85a" fill-opacity="0.80" stroke="#efc04a" stroke-width="1.5" stroke-linejoin="round"/>
-              <ellipse cx="300" cy="262" rx="147" ry="73.5" fill="#f7c85a" fill-opacity="0.42" stroke="#efc04a" stroke-width="1.5"/>
-              <path class="dg-backing" d="M230,110 L230,126 A70,35 0 0 0 370,126 L370,110 A70,35 0 0 1 230,110 Z M230,110 A70,35 0 1 0 370,110 A70,35 0 1 0 230,110 Z"/>
-              <path d="M230,110 L230,126 A70,35 0 0 0 370,126 L370,110 A70,35 0 0 1 230,110 Z" fill="#fad76e" fill-opacity="1.00" stroke="#f2c64f" stroke-width="1.5" stroke-linejoin="round"/>
-              <ellipse cx="300" cy="110" rx="70" ry="35" fill="#fad76e" fill-opacity="0.55" stroke="#f2c64f" stroke-width="1.5"/>
-              <polyline class="dg-leader" points="560,438 586,438"/>
-              <text class="dg-label" x="600" y="435">Consequentialism</text>
-              <text class="dg-sub" x="600" y="458">the civilisational &middot; the state</text>
-              <polyline class="dg-leader" points="457,270 586,270"/>
-              <text class="dg-label" x="600" y="267">Deontology</text>
-              <text class="dg-sub" x="600" y="290">the collective &middot; the city</text>
-              <polyline class="dg-leader" points="380,118 586,118"/>
-              <text class="dg-label" x="600" y="115">Virtue</text>
-              <text class="dg-sub" x="600" y="138">the individual &middot; the tribe</text>
-              </svg>
-              <figcaption>the ethics of civilisation as a hybrid ethics stack</figcaption>
-              </figure>
-            </section>
-
-            <section class="dg-item" id="agency-across-scales">
-              <h2><a class="heading-link" href="#agency-across-scales">Agency across Scales</a></h2>
-              <p class="dg-meta">In the article: <a href="../#figure-scales">Part II</a></p>
-              <p>The individual, the collective and the civilisational: each larger scale decomposes into the one below it, and emerges from it again.</p>
-
-              <figure class="article-figure" id="figure-scales">
-              <svg class="fig-svg" data-figure="scales" viewBox="250 95 780 550" role="img" aria-labelledby="fig-scales-title">
-              <title id="fig-scales-title">Three isometric tiles of growing size, labelled Individual, Collective and Civilisational; each larger tile splits into a three-by-three grid of the scale below it and closes up again</title>
-              <g class="fig-stage"><polygon fill="#eac859" points="478.0,134.0 510.0,150.0 510.0,160.0 478.0,144.0"/><polygon fill="#c89a28" points="510.0,150.0 542.0,134.0 542.0,144.0 510.0,160.0"/><polygon fill="#fce278" points="510.0,118.0 542.0,134.0 510.0,150.0 478.0,134.0"/><text class="fig-label" x="632" y="143">Individual</text><polygon fill="#eac859" points="478.0,234.0 510.0,250.0 510.0,260.0 478.0,244.0"/><polygon fill="#c89a28" points="510.0,250.0 542.0,234.0 542.0,244.0 510.0,260.0"/><polygon fill="#fce278" points="510.0,218.0 542.0,234.0 510.0,250.0 478.0,234.0"/><polygon fill="#eac859" points="438.0,254.0 470.0,270.0 470.0,280.0 438.0,264.0"/><polygon fill="#c89a28" points="470.0,270.0 502.0,254.0 502.0,264.0 470.0,280.0"/><polygon fill="#fce278" points="470.0,238.0 502.0,254.0 470.0,270.0 438.0,254.0"/><polygon fill="#eac859" points="518.0,254.0 550.0,270.0 550.0,280.0 518.0,264.0"/><polygon fill="#c89a28" points="550.0,270.0 582.0,254.0 582.0,264.0 550.0,280.0"/><polygon fill="#fce278" points="550.0,238.0 582.0,254.0 550.0,270.0 518.0,254.0"/><polygon fill="#eac859" points="398.0,274.0 430.0,290.0 430.0,300.0 398.0,284.0"/><polygon fill="#c89a28" points="430.0,290.0 462.0,274.0 462.0,284.0 430.0,300.0"/><polygon fill="#fce278" points="430.0,258.0 462.0,274.0 430.0,290.0 398.0,274.0"/><polygon fill="#eac859" points="478.0,274.0 510.0,290.0 510.0,300.0 478.0,284.0"/><polygon fill="#c89a28" points="510.0,290.0 542.0,274.0 542.0,284.0 510.0,300.0"/><polygon fill="#fce278" points="510.0,258.0 542.0,274.0 510.0,290.0 478.0,274.0"/><polygon fill="#eac859" points="558.0,274.0 590.0,290.0 590.0,300.0 558.0,284.0"/><polygon fill="#c89a28" points="590.0,290.0 622.0,274.0 622.0,284.0 590.0,300.0"/><polygon fill="#fce278" points="590.0,258.0 622.0,274.0 590.0,290.0 558.0,274.0"/><polygon fill="#eac859" points="438.0,294.0 470.0,310.0 470.0,320.0 438.0,304.0"/><polygon fill="#c89a28" points="470.0,310.0 502.0,294.0 502.0,304.0 470.0,320.0"/><polygon fill="#fce278" points="470.0,278.0 502.0,294.0 470.0,310.0 438.0,294.0"/><polygon fill="#eac859" points="518.0,294.0 550.0,310.0 550.0,320.0 518.0,304.0"/><polygon fill="#c89a28" points="550.0,310.0 582.0,294.0 582.0,304.0 550.0,320.0"/><polygon fill="#fce278" points="550.0,278.0 582.0,294.0 550.0,310.0 518.0,294.0"/><polygon fill="#eac859" points="478.0,314.0 510.0,330.0 510.0,340.0 478.0,324.0"/><polygon fill="#c89a28" points="510.0,330.0 542.0,314.0 542.0,324.0 510.0,340.0"/><polygon fill="#fce278" points="510.0,298.0 542.0,314.0 510.0,330.0 478.0,314.0"/><text class="fig-label" x="712" y="283">Collective</text><polygon fill="#d69e18" points="433.0,408.5 510.0,447.0 510.0,457.0 433.0,418.5"/><polygon fill="#a5750e" points="510.0,447.0 587.0,408.5 587.0,418.5 510.0,457.0"/><polygon fill="#f5be28" points="510.0,370.0 587.0,408.5 510.0,447.0 433.0,408.5"/><polygon fill="#d69e18" points="346.0,452.0 423.0,490.5 423.0,500.5 346.0,462.0"/><polygon fill="#a5750e" points="423.0,490.5 500.0,452.0 500.0,462.0 423.0,500.5"/><polygon fill="#f5be28" points="423.0,413.5 500.0,452.0 423.0,490.5 346.0,452.0"/><polygon fill="#d69e18" points="520.0,452.0 597.0,490.5 597.0,500.5 520.0,462.0"/><polygon fill="#a5750e" points="597.0,490.5 674.0,452.0 674.0,462.0 597.0,500.5"/><polygon fill="#f5be28" points="597.0,413.5 674.0,452.0 597.0,490.5 520.0,452.0"/><polygon fill="#d69e18" points="259.0,495.5 336.0,534.0 336.0,544.0 259.0,505.5"/><polygon fill="#a5750e" points="336.0,534.0 413.0,495.5 413.0,505.5 336.0,544.0"/><polygon fill="#f5be28" points="336.0,457.0 413.0,495.5 336.0,534.0 259.0,495.5"/><polygon fill="#d69e18" points="433.0,495.5 510.0,534.0 510.0,544.0 433.0,505.5"/><polygon fill="#a5750e" points="510.0,534.0 587.0,495.5 587.0,505.5 510.0,544.0"/><polygon fill="#f5be28" points="510.0,457.0 587.0,495.5 510.0,534.0 433.0,495.5"/><polygon fill="#d69e18" points="607.0,495.5 684.0,534.0 684.0,544.0 607.0,505.5"/><polygon fill="#a5750e" points="684.0,534.0 761.0,495.5 761.0,505.5 684.0,544.0"/><polygon fill="#f5be28" points="684.0,457.0 761.0,495.5 684.0,534.0 607.0,495.5"/><polygon fill="#d69e18" points="346.0,539.0 423.0,577.5 423.0,587.5 346.0,549.0"/><polygon fill="#a5750e" points="423.0,577.5 500.0,539.0 500.0,549.0 423.0,587.5"/><polygon fill="#f5be28" points="423.0,500.5 500.0,539.0 423.0,577.5 346.0,539.0"/><polygon fill="#d69e18" points="520.0,539.0 597.0,577.5 597.0,587.5 520.0,549.0"/><polygon fill="#a5750e" points="597.0,577.5 674.0,539.0 674.0,549.0 597.0,587.5"/><polygon fill="#f5be28" points="597.0,500.5 674.0,539.0 597.0,577.5 520.0,539.0"/><polygon fill="#d69e18" points="433.0,582.5 510.0,621.0 510.0,631.0 433.0,592.5"/><polygon fill="#a5750e" points="510.0,621.0 587.0,582.5 587.0,592.5 510.0,631.0"/><polygon fill="#f5be28" points="510.0,544.0 587.0,582.5 510.0,621.0 433.0,582.5"/><text class="fig-label" x="851" y="504.5">Civilisational</text></g>
-              </svg>
-              <figcaption>decomposition and emergence of agency across scales</figcaption>
-              </figure>
-            </section>
-
-            <section class="dg-item" id="theory-scale-fit">
-              <h2><a class="heading-link" href="#theory-scale-fit">Theories at the Wrong Scales</a></h2>
-              <p class="dg-meta">In the article: <a href="../#wrong-scales">Part II</a></p>
-              <p>Each theory against each scale: native where it was adapted, and alienating, vague or complicated where it was not.</p>
-
-              <figure class="article-figure figure-table dg-matrix" id="figure-fit">
-              <table class="theories-table fit-table">
-              <thead><tr><th scope="col">Theory</th><th scope="col">Individual</th><th scope="col">Collective</th><th scope="col">Civilisational</th></tr></thead>
-              <tbody>
-              <tr class="t-consequentialism"><th scope="row"><span class="t-name">Consequentialism</span></th><td data-col="Individual" class="misfit"><span class="fit-tag">Alienating</span>The impartial calculus estranges a person from their own attachments.</td><td data-col="Collective" class="unset" aria-label="Not discussed">&ndash;</td><td data-col="Civilisational" class="fit t-consequentialism"><span class="fit-tag">Native</span>System-wide optimisation: the ethics of the state.</td></tr>
-              <tr class="t-deontology"><th scope="row"><span class="t-name">Deontology</span></th><td data-col="Individual" class="unset" aria-label="Not discussed">&ndash;</td><td data-col="Collective" class="fit t-deontology"><span class="fit-tag">Native</span>Shared rules let strangers trust one another: the ethics of the city.</td><td data-col="Civilisational" class="misfit"><span class="fit-tag">Complicated</span>Rules multiply but cannot keep pace with a complex, adaptive system.</td></tr>
-              <tr class="t-virtue"><th scope="row"><span class="t-name">Virtue Ethics</span></th><td data-col="Individual" class="fit t-virtue"><span class="fit-tag">Native</span>Character known first-hand: the ethics of the tribe.</td><td data-col="Collective" class="misfit"><span class="fit-tag">Vague</span>No character to track in a committee; judged by outcomes, it collapses into consequentialism.</td><td data-col="Civilisational" class="unset" aria-label="Not discussed">&ndash;</td></tr>
-              </tbody>
-              </table>
-              <figcaption>each theory at its native scale, and the problems of applying it at the wrong one</figcaption>
-              </figure>
-            </section>
-
-            <section class="dg-item" id="concentric-ethics">
-              <h2><a class="heading-link" href="#concentric-ethics">Concentric Ethics</a></h2>
-              <p class="dg-meta">In the article: <a href="../#figure-rings">Part III</a></p>
-              <p>Virtue ethics within deontology within consequentialism: the three theories as one nested system, each grown around the last.</p>
-
-              <figure class="article-figure" id="figure-rings">
-              <svg class="fig-svg fig-rings" data-figure="rings" viewBox="150 90 900 900" role="img" aria-labelledby="fig-rings-title">
-              <title id="fig-rings-title">Three concentric circles: Virtue Ethics at the centre, Deontology around it, Consequentialism around both, growing outward in turn</title>
-              <g class="fig-stage"><circle class="ring-disc" cx="600" cy="540" r="436.0" fill="#eaa528" fill-opacity="0.232" stroke="#eab650" stroke-opacity="1.00"/><circle class="ring-disc" cx="600" cy="540" r="256.0" fill="#f7c85a" fill-opacity="0.300" stroke="#efc04a" stroke-opacity="1.00"/><circle class="ring-disc" cx="600" cy="540" r="122.0" fill="#fad76e" fill-opacity="0.300" stroke="#f2c64f" stroke-opacity="1.00"/><text class="fig-label fig-label-ring" x="600" y="549" opacity="1.00">Virtue Ethics</text><text class="fig-label fig-label-ring" x="600" y="365" opacity="1.00">Deontology</text><text class="fig-label fig-label-ring" x="600" y="207" opacity="1.00">Consequentialism</text></g>
-              </svg>
-              <figcaption>concentric cultural evolution of major ethical theories as a holistic nested system</figcaption>
-              </figure>
-            </section>
-          </div>
+                    <path class="dg-backing" d="M50,430 L50,446 A250,125 0 0 0 550,446 L550,430 A250,125 0 0 1 50,430 Z M50,430 A250,125 0 1 0 550,430 A250,125 0 1 0 50,430 Z"/>
+                    <path d="M50,430 L50,446 A250,125 0 0 0 550,446 L550,430 A250,125 0 0 1 50,430 Z" fill="#eaa528" fill-opacity="0.57" stroke="#eab650" stroke-width="1.5" stroke-linejoin="round"/>
+                    <ellipse cx="300" cy="430" rx="250" ry="125" fill="#eaa528" fill-opacity="0.30" stroke="#eab650" stroke-width="1.5"/>
+                    <path class="dg-backing" d="M153,262 L153,278 A147,73.5 0 0 0 447,278 L447,262 A147,73.5 0 0 1 153,262 Z M153,262 A147,73.5 0 1 0 447,262 A147,73.5 0 1 0 153,262 Z"/>
+                    <path d="M153,262 L153,278 A147,73.5 0 0 0 447,278 L447,262 A147,73.5 0 0 1 153,262 Z" fill="#f7c85a" fill-opacity="0.80" stroke="#efc04a" stroke-width="1.5" stroke-linejoin="round"/>
+                    <ellipse cx="300" cy="262" rx="147" ry="73.5" fill="#f7c85a" fill-opacity="0.42" stroke="#efc04a" stroke-width="1.5"/>
+                    <path class="dg-backing" d="M230,110 L230,126 A70,35 0 0 0 370,126 L370,110 A70,35 0 0 1 230,110 Z M230,110 A70,35 0 1 0 370,110 A70,35 0 1 0 230,110 Z"/>
+                    <path d="M230,110 L230,126 A70,35 0 0 0 370,126 L370,110 A70,35 0 0 1 230,110 Z" fill="#fad76e" fill-opacity="1.00" stroke="#f2c64f" stroke-width="1.5" stroke-linejoin="round"/>
+                    <ellipse cx="300" cy="110" rx="70" ry="35" fill="#fad76e" fill-opacity="0.55" stroke="#f2c64f" stroke-width="1.5"/>
+                    <polyline class="dg-leader" points="560,438 586,438"/>
+                    <text class="dg-label" x="600" y="435">Consequentialism</text>
+                    <text class="dg-sub" x="600" y="458">the civilisational &middot; the state</text>
+                    <polyline class="dg-leader" points="457,270 586,270"/>
+                    <text class="dg-label" x="600" y="267">Deontology</text>
+                    <text class="dg-sub" x="600" y="290">the collective &middot; the city</text>
+                    <polyline class="dg-leader" points="380,118 586,118"/>
+                    <text class="dg-label" x="600" y="115">Virtue</text>
+                    <text class="dg-sub" x="600" y="138">the individual &middot; the tribe</text>
+                    </svg>
+                    <figcaption>the ethics of civilisation as a hybrid ethics stack</figcaption>
+                    </figure>
+                  </div></div>
+                  <span class="dg-card-title">The Hybrid Ethics Stack</span>
+                  <span class="dg-card-desc">The concentric rings lifted apart into a stack: consequentialism the broadest layer, deontology within it and virtue at the core, each at the scale it was adapted to.</span>
+                </a>
+              </li>
+              <li class="dg-card">
+                <a href="agency-across-scales/">
+                  <div class="dg-thumb" data-kind="diagram" aria-hidden="true"><div class="dg-thumb-inner article-body">
+                    <figure class="article-figure">
+                    <svg class="fig-svg" data-figure="scales" viewBox="250 95 780 550" role="img">
+                  
+                    <g class="fig-stage"><polygon fill="#eac859" points="478.0,134.0 510.0,150.0 510.0,160.0 478.0,144.0"/><polygon fill="#c89a28" points="510.0,150.0 542.0,134.0 542.0,144.0 510.0,160.0"/><polygon fill="#fce278" points="510.0,118.0 542.0,134.0 510.0,150.0 478.0,134.0"/><text class="fig-label" x="632" y="143">Individual</text><polygon fill="#eac859" points="478.0,234.0 510.0,250.0 510.0,260.0 478.0,244.0"/><polygon fill="#c89a28" points="510.0,250.0 542.0,234.0 542.0,244.0 510.0,260.0"/><polygon fill="#fce278" points="510.0,218.0 542.0,234.0 510.0,250.0 478.0,234.0"/><polygon fill="#eac859" points="438.0,254.0 470.0,270.0 470.0,280.0 438.0,264.0"/><polygon fill="#c89a28" points="470.0,270.0 502.0,254.0 502.0,264.0 470.0,280.0"/><polygon fill="#fce278" points="470.0,238.0 502.0,254.0 470.0,270.0 438.0,254.0"/><polygon fill="#eac859" points="518.0,254.0 550.0,270.0 550.0,280.0 518.0,264.0"/><polygon fill="#c89a28" points="550.0,270.0 582.0,254.0 582.0,264.0 550.0,280.0"/><polygon fill="#fce278" points="550.0,238.0 582.0,254.0 550.0,270.0 518.0,254.0"/><polygon fill="#eac859" points="398.0,274.0 430.0,290.0 430.0,300.0 398.0,284.0"/><polygon fill="#c89a28" points="430.0,290.0 462.0,274.0 462.0,284.0 430.0,300.0"/><polygon fill="#fce278" points="430.0,258.0 462.0,274.0 430.0,290.0 398.0,274.0"/><polygon fill="#eac859" points="478.0,274.0 510.0,290.0 510.0,300.0 478.0,284.0"/><polygon fill="#c89a28" points="510.0,290.0 542.0,274.0 542.0,284.0 510.0,300.0"/><polygon fill="#fce278" points="510.0,258.0 542.0,274.0 510.0,290.0 478.0,274.0"/><polygon fill="#eac859" points="558.0,274.0 590.0,290.0 590.0,300.0 558.0,284.0"/><polygon fill="#c89a28" points="590.0,290.0 622.0,274.0 622.0,284.0 590.0,300.0"/><polygon fill="#fce278" points="590.0,258.0 622.0,274.0 590.0,290.0 558.0,274.0"/><polygon fill="#eac859" points="438.0,294.0 470.0,310.0 470.0,320.0 438.0,304.0"/><polygon fill="#c89a28" points="470.0,310.0 502.0,294.0 502.0,304.0 470.0,320.0"/><polygon fill="#fce278" points="470.0,278.0 502.0,294.0 470.0,310.0 438.0,294.0"/><polygon fill="#eac859" points="518.0,294.0 550.0,310.0 550.0,320.0 518.0,304.0"/><polygon fill="#c89a28" points="550.0,310.0 582.0,294.0 582.0,304.0 550.0,320.0"/><polygon fill="#fce278" points="550.0,278.0 582.0,294.0 550.0,310.0 518.0,294.0"/><polygon fill="#eac859" points="478.0,314.0 510.0,330.0 510.0,340.0 478.0,324.0"/><polygon fill="#c89a28" points="510.0,330.0 542.0,314.0 542.0,324.0 510.0,340.0"/><polygon fill="#fce278" points="510.0,298.0 542.0,314.0 510.0,330.0 478.0,314.0"/><text class="fig-label" x="712" y="283">Collective</text><polygon fill="#d69e18" points="433.0,408.5 510.0,447.0 510.0,457.0 433.0,418.5"/><polygon fill="#a5750e" points="510.0,447.0 587.0,408.5 587.0,418.5 510.0,457.0"/><polygon fill="#f5be28" points="510.0,370.0 587.0,408.5 510.0,447.0 433.0,408.5"/><polygon fill="#d69e18" points="346.0,452.0 423.0,490.5 423.0,500.5 346.0,462.0"/><polygon fill="#a5750e" points="423.0,490.5 500.0,452.0 500.0,462.0 423.0,500.5"/><polygon fill="#f5be28" points="423.0,413.5 500.0,452.0 423.0,490.5 346.0,452.0"/><polygon fill="#d69e18" points="520.0,452.0 597.0,490.5 597.0,500.5 520.0,462.0"/><polygon fill="#a5750e" points="597.0,490.5 674.0,452.0 674.0,462.0 597.0,500.5"/><polygon fill="#f5be28" points="597.0,413.5 674.0,452.0 597.0,490.5 520.0,452.0"/><polygon fill="#d69e18" points="259.0,495.5 336.0,534.0 336.0,544.0 259.0,505.5"/><polygon fill="#a5750e" points="336.0,534.0 413.0,495.5 413.0,505.5 336.0,544.0"/><polygon fill="#f5be28" points="336.0,457.0 413.0,495.5 336.0,534.0 259.0,495.5"/><polygon fill="#d69e18" points="433.0,495.5 510.0,534.0 510.0,544.0 433.0,505.5"/><polygon fill="#a5750e" points="510.0,534.0 587.0,495.5 587.0,505.5 510.0,544.0"/><polygon fill="#f5be28" points="510.0,457.0 587.0,495.5 510.0,534.0 433.0,495.5"/><polygon fill="#d69e18" points="607.0,495.5 684.0,534.0 684.0,544.0 607.0,505.5"/><polygon fill="#a5750e" points="684.0,534.0 761.0,495.5 761.0,505.5 684.0,544.0"/><polygon fill="#f5be28" points="684.0,457.0 761.0,495.5 684.0,534.0 607.0,495.5"/><polygon fill="#d69e18" points="346.0,539.0 423.0,577.5 423.0,587.5 346.0,549.0"/><polygon fill="#a5750e" points="423.0,577.5 500.0,539.0 500.0,549.0 423.0,587.5"/><polygon fill="#f5be28" points="423.0,500.5 500.0,539.0 423.0,577.5 346.0,539.0"/><polygon fill="#d69e18" points="520.0,539.0 597.0,577.5 597.0,587.5 520.0,549.0"/><polygon fill="#a5750e" points="597.0,577.5 674.0,539.0 674.0,549.0 597.0,587.5"/><polygon fill="#f5be28" points="597.0,500.5 674.0,539.0 597.0,577.5 520.0,539.0"/><polygon fill="#d69e18" points="433.0,582.5 510.0,621.0 510.0,631.0 433.0,592.5"/><polygon fill="#a5750e" points="510.0,621.0 587.0,582.5 587.0,592.5 510.0,631.0"/><polygon fill="#f5be28" points="510.0,544.0 587.0,582.5 510.0,621.0 433.0,582.5"/><text class="fig-label" x="851" y="504.5">Civilisational</text></g>
+                    </svg>
+                    <figcaption>decomposition and emergence of agency across scales</figcaption>
+                    </figure>
+                  </div></div>
+                  <span class="dg-card-title">Agency across Scales</span>
+                  <span class="dg-card-desc">The individual, the collective and the civilisational: each larger scale decomposes into the one below it, and emerges from it again.</span>
+                </a>
+              </li>
+              <li class="dg-card">
+                <a href="concentric-ethics/">
+                  <div class="dg-thumb" data-kind="diagram" aria-hidden="true"><div class="dg-thumb-inner article-body">
+                    <figure class="article-figure">
+                    <svg class="fig-svg fig-rings" data-figure="rings" viewBox="150 90 900 900" role="img">
+                  
+                    <g class="fig-stage"><circle class="ring-disc" cx="600" cy="540" r="436.0" fill="#eaa528" fill-opacity="0.232" stroke="#eab650" stroke-opacity="1.00"/><circle class="ring-disc" cx="600" cy="540" r="256.0" fill="#f7c85a" fill-opacity="0.300" stroke="#efc04a" stroke-opacity="1.00"/><circle class="ring-disc" cx="600" cy="540" r="122.0" fill="#fad76e" fill-opacity="0.300" stroke="#f2c64f" stroke-opacity="1.00"/><text class="fig-label fig-label-ring" x="600" y="549" opacity="1.00">Virtue Ethics</text><text class="fig-label fig-label-ring" x="600" y="365" opacity="1.00">Deontology</text><text class="fig-label fig-label-ring" x="600" y="207" opacity="1.00">Consequentialism</text></g>
+                    </svg>
+                    <figcaption>concentric cultural evolution of major ethical theories as a holistic nested system</figcaption>
+                    </figure>
+                  </div></div>
+                  <span class="dg-card-title">Concentric Ethics</span>
+                  <span class="dg-card-desc">Virtue ethics within deontology within consequentialism: the three theories as one nested system, each grown around the last.</span>
+                </a>
+              </li>
+            </ul>
+          </section>
+          <section class="dg-group" aria-labelledby="group-table" id="group-table">
+            <h2 class="dg-group-title">Tables</h2>
+            <ul class="dg-cards">
+              <li class="dg-card">
+                <a href="three-theories/">
+                  <div class="dg-thumb" data-kind="table" aria-hidden="true"><div class="dg-thumb-inner article-body">
+                    <figure class="article-figure figure-table">
+                    <table class="theories-table">
+                    <thead>
+                    <tr><th scope="col">Theory</th><th scope="col">Core idea</th><th scope="col">Key theory or tradition</th></tr>
+                    </thead>
+                    <tbody>
+                    <tr class="t-consequentialism">
+                    <th scope="row"><span class="t-name">Consequentialism</span><span class="t-focus">Focus on Outcomes</span></th>
+                    <td>An action is morally right if it produces the best overall consequences or outcomes.</td>
+                    <td><strong>Utilitarianism</strong> (associated with thinkers like Jeremy Bentham and John Stuart Mill), which argues for actions that maximize happiness or well-being for the greatest number of people.</td>
+                    </tr>
+                    <tr class="t-deontology">
+                    <th scope="row"><span class="t-name">Deontology</span><span class="t-focus">Focus on Duties and Rules</span></th>
+                    <td>An action is morally right if it conforms to an inherent moral duty, rule, or obligation, regardless of the consequences.</td>
+                    <td><strong>Kantian ethics</strong> (associated with Immanuel Kant), which emphasizes the Categorical Imperative&mdash;treating people as ends in themselves rather than mere means, and acting only on rules you would will to be universal laws.</td>
+                    </tr>
+                    <tr class="t-virtue">
+                    <th scope="row"><span class="t-name">Virtue Ethics</span><span class="t-focus">Focus on Character</span></th>
+                    <td>Morality is not primarily about following rules or calculating outcomes, but about developing a good moral character and cultivating virtues (such as honesty, courage, and compassion).</td>
+                    <td>Rooted in ancient philosophers like <strong>Aristotle</strong>, asking not just &ldquo;What should I do?&rdquo; but &ldquo;What kind of person should I be?&rdquo;</td>
+                    </tr>
+                    </tbody>
+                    </table>
+                    </figure>
+                  </div></div>
+                  <span class="dg-card-title">The Three Theories</span>
+                  <span class="dg-card-desc">Consequentialism, deontology and virtue ethics: the core idea of each, and the tradition it comes from.</span>
+                </a>
+              </li>
+              <li class="dg-card">
+                <a href="scale-profiles/">
+                  <div class="dg-thumb" data-kind="table" aria-hidden="true"><div class="dg-thumb-inner article-body">
+                    <figure class="article-figure figure-table dg-matrix">
+                    <table class="theories-table profiles-table">
+                    <thead><tr><th scope="col">Scale</th><th scope="col">Population</th><th scope="col">How trust works</th><th scope="col">Ethic</th><th scope="col">Where it strains</th></tr></thead>
+                    <tbody>
+                    <tr class="s-tribe"><th scope="row"><span class="t-name">Tribe</span></th><td data-col="Population">Up to ~150 (Dunbar&rsquo;s number)</td><td data-col="How trust works">Reputation and gossip: a shared ledger of character</td><td data-col="Ethic"><strong>Virtue</strong></td><td data-col="Where it strains">Beyond 150 no one can track everyone, and vice goes unseen</td></tr>
+                    <tr class="s-city"><th scope="row"><span class="t-name">City</span></th><td data-col="Population">Hundreds to thousands, and beyond</td><td data-col="How trust works">Shared conventions &ndash; manners, commandments &ndash; among strangers</td><td data-col="Ethic"><strong>Deontology</strong></td><td data-col="Where it strains">Absolute rules are inflexible as complexity grows</td></tr>
+                    <tr class="s-state"><th scope="row"><span class="t-name">State</span></th><td data-col="Population">Networks of cities: nations and empires</td><td data-col="How trust works">System-wide optimisation of aggregate welfare</td><td data-col="Ethic"><strong>Consequentialism</strong></td><td data-col="Where it strains">The tyranny of the majority, overriding principles and virtues</td></tr>
+                    <tr class="s-civilisation"><th scope="row"><span class="t-name">Civilisation</span></th><td data-col="Population">Global</td><td data-col="How trust works">Each theory at its own scale, in a hybrid ethics stack</td><td data-col="Ethic"><strong>All three, as a stack</strong></td><td data-col="Where it strains">Conflicts between classes of agent; the multipolar trap</td></tr>
+                    </tbody>
+                    </table>
+                    <figcaption>the scales of human society: how each coordinates, and where it gives way</figcaption>
+                    </figure>
+                  </div></div>
+                  <span class="dg-card-title">Scale Profiles</span>
+                  <span class="dg-card-desc">For each scale of society: how many people, how they come to trust one another, the ethic that suits it, and where that ethic strains.</span>
+                </a>
+              </li>
+              <li class="dg-card">
+                <a href="wrong-scales/">
+                  <div class="dg-thumb" data-kind="table" aria-hidden="true"><div class="dg-thumb-inner article-body">
+                    <figure class="article-figure figure-table dg-matrix">
+                    <table class="theories-table fit-table">
+                    <thead><tr><th scope="col">Theory</th><th scope="col">Individual</th><th scope="col">Collective</th><th scope="col">Civilisational</th></tr></thead>
+                    <tbody>
+                    <tr class="t-consequentialism"><th scope="row"><span class="t-name">Consequentialism</span></th><td data-col="Individual" class="misfit"><span class="fit-tag">Alienating</span>The impartial calculus estranges a person from their own attachments.</td><td data-col="Collective" class="unset" aria-label="Not discussed">&ndash;</td><td data-col="Civilisational" class="fit t-consequentialism"><span class="fit-tag">Native</span>System-wide optimisation: the ethics of the state.</td></tr>
+                    <tr class="t-deontology"><th scope="row"><span class="t-name">Deontology</span></th><td data-col="Individual" class="unset" aria-label="Not discussed">&ndash;</td><td data-col="Collective" class="fit t-deontology"><span class="fit-tag">Native</span>Shared rules let strangers trust one another: the ethics of the city.</td><td data-col="Civilisational" class="misfit"><span class="fit-tag">Complicated</span>Rules multiply but cannot keep pace with a complex, adaptive system.</td></tr>
+                    <tr class="t-virtue"><th scope="row"><span class="t-name">Virtue Ethics</span></th><td data-col="Individual" class="fit t-virtue"><span class="fit-tag">Native</span>Character known first-hand: the ethics of the tribe.</td><td data-col="Collective" class="misfit"><span class="fit-tag">Vague</span>No character to track in a committee; judged by outcomes, it collapses into consequentialism.</td><td data-col="Civilisational" class="unset" aria-label="Not discussed">&ndash;</td></tr>
+                    </tbody>
+                    </table>
+                    <figcaption>each theory at its native scale, and the problems of applying it at the wrong one</figcaption>
+                    </figure>
+                  </div></div>
+                  <span class="dg-card-title">Theories at the Wrong Scales</span>
+                  <span class="dg-card-desc">Each theory against each scale: native where it was adapted, and alienating, vague or complicated where it was not.</span>
+                </a>
+              </li>
+            </ul>
+          </section>
         </article>
       </main>
     </div>
@@ -2620,7 +2709,7 @@
       <nav class="footer-sitemap" aria-label="Sitemap">
         <ol>
           <li><a href="../">Article</a></li>
-          <li><a href="./">Diagrams</a></li>
+          <li><a href="../diagrams/">Diagrams</a></li>
           <li><a href="../pdf/">PDF</a></li>
           <li><a class="footer-contact" href="mailto:maxjosephholly@outlook.com" data-email="maxjosephholly@outlook.com">Contact</a></li>
         </ol>
@@ -2629,8 +2718,32 @@
     </footer>
   </div>
 
-  <script src="../assets/figures.js?v=2"></script>
-  <script src="../assets/tools.js?v=308bcf55"></script>
+  <script>
+    // each card's figure scaled from the article's width down to the card:
+    // a diagram whole and centred, a table to the card's width from its top
+    (function () {
+      var thumbs = Array.prototype.slice.call(document.querySelectorAll('.dg-thumb'));
+      function fit() {
+        thumbs.forEach(function (t) {
+          var inner = t.firstElementChild, ih = inner.offsetHeight;
+          var s = t.clientWidth / 760, top;
+          if (t.dataset.kind === 'diagram') {
+            s = Math.min(s * 0.9, t.clientHeight * 0.86 / ih);
+            top = (t.clientHeight - ih * s) / 2;
+          } else {
+            s = s * 0.9;
+            top = Math.max(t.clientWidth * 0.05, (t.clientHeight - ih * s) / 2);
+          }
+          var left = (t.clientWidth - 760 * s) / 2;
+          inner.style.transform = 'translate(' + left + 'px,' + top + 'px) scale(' + s + ')';
+        });
+      }
+      fit();
+      window.addEventListener('resize', fit);
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+    })();
+  </script>
+  <script src="../assets/tools.js?v=cf55c400"></script>
   <script>
     // the up arrow, once the first screen has scrolled by
     (function () {

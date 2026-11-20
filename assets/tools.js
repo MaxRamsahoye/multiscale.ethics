@@ -76,7 +76,8 @@
       var url = new URL(pg[1], base);
       a.href = url.pathname;
       a.textContent = pg[0];
-      if (url.pathname === location.pathname) a.setAttribute('aria-current', 'page');
+      // (a page's section counts too: Diagrams stays marked on each diagram's own page)
+      if (url.pathname === location.pathname || (pg[1] && location.pathname.indexOf(url.pathname) === 0)) a.setAttribute('aria-current', 'page');
       nav.appendChild(a);
     });
     document.body.insertBefore(nav, document.body.firstChild);
