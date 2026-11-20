@@ -28,15 +28,16 @@ def figure(fid, svg, caption, extra=''):
 # (the 2.5D style of the scales diagram): consequentialism the broadest layer at
 # the base, deontology above it, virtue the smallest at the top. Seen from
 # directly above, the three discs would close back into the concentric rings.
-# Each disc in the rings' own translucent gold, its edge a little deeper.
+# Each disc in the rings' own translucent gold, its edge a little deeper;
+# each rests partly over the top of the one beneath it, by the same amount.
 def ethics_stack():
     cx, t = 300, 16
     layers = [   # from the base up, drawn in that order: radius, centre height
         ('Consequentialism', 'the civilisational &middot; the state', 250, 430, '#eaa528', 0.30, '#eab650'),
         ('Deontology', 'the collective &middot; the city', 147, 262, '#f7c85a', 0.42, '#efc04a'),
-        ('Virtue', 'the individual &middot; the tribe', 70, 110, '#fad76e', 0.55, '#f2c64f'),
+        ('Virtue', 'the individual &middot; the tribe', 70, 184, '#fad76e', 0.55, '#f2c64f'),
     ]
-    s = ['<svg class="fig-svg dg-svg" viewBox="0 30 760 590" role="img" aria-labelledby="fig-stack-title">',
+    s = ['<svg class="fig-svg dg-svg" viewBox="0 125 760 470" role="img" aria-labelledby="fig-stack-title">',
          '<title id="fig-stack-title">The ethics of civilisation as a hybrid stack: three gold discs, one above another, '
          'the concentric rings lifted apart. Consequentialism, the civilisational scale and the state, is the broadest, at the base; '
          'deontology, the collective and the city, above it; and virtue, the individual and the tribe, the smallest, at the top.</title>']
