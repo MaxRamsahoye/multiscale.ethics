@@ -114,7 +114,7 @@
     // (a page with its own bar across the top, the PDF viewer, goes without)
     if (script.hasAttribute('data-no-menu')) return;
     var base = new URL('../', script.src);
-    var pages = [['Article', ''], ['Diagrams', 'diagrams/']];
+    var pages = [['Article', ''], ['Diagrams', 'diagrams/'], ['Concepts', 'concepts/']];
     var nav = document.createElement('nav');
     nav.className = 'top-nav';
     nav.setAttribute('aria-label', 'Pages');
