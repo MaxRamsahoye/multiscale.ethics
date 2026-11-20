@@ -24,8 +24,15 @@
   function pts(list) { return list.map(function (p) { return p[0].toFixed(1) + ',' + p[1].toFixed(1); }).join(' '); }
 
   // ---- Scales -------------------------------------------------------------
-  var SCALES_LOOP = 6150;
+  // one round of splitting and closing up (as in the original animation), then
+  // the tiles turn over (the civilisational to the top, the individual to the
+  // bottom) and the same round plays from there, then they turn back
+  var PHASE = 6150, FLIP = 1300;
+  var SCALES_LOOP = 2 * (PHASE + FLIP);
   var CX = 510, THICK = 10;
+  // the stack turns over about its middle (between the individual's top and
+  // the civilisational's foot)
+  var MID = (118 + 621) / 2;
   var PALETTE = {
     ind: { top: '#fce278', left: '#eac859', right: '#c89a28' },
     col: { top: '#f5be28', left: '#d69e18', right: '#a5750e' },
@@ -37,8 +44,11 @@
     { key: 'civ', w: 231, cy: 495.5, label: 'Civilisational', lx: 851, sub: 'col', gap: 10 }
   ];
 
-  function tile(cx, cy, w, c, seam) {
-    var h = w / 2, t = THICK;
+  // k: the tile's depth as seen (1 as usual; less while the stack is turning
+  // edge-on to the eye)
+  function tile(cx, cy, w, c, seam, k) {
+    k = k == null ? 1 : k;
+    var h = w / 2 * k, t = THICK * k;
     var s = '<polygon fill="' + c.left + '" points="' + pts([[cx - w, cy], [cx, cy + h], [cx, cy + h + t], [cx - w, cy + t]]) + '"/>' +
       '<polygon fill="' + c.right + '" points="' + pts([[cx, cy + h], [cx + w, cy], [cx + w, cy + t], [cx, cy + h + t]]) + '"/>' +
       '<polygon fill="' + c.top + '" points="' + pts([[cx, cy - h], [cx + w, cy], [cx, cy + h], [cx - w, cy]]) + '"';
@@ -46,10 +56,18 @@
     return s + '/>';
   }
 
-  // how far each of the two larger tiles has split (seams and colour) and spread
+  // how far each of the two larger tiles has split (seams and colour) and
+  // spread, and how far the three have turned over (0 as first set out, 1 the
+  // other way up)
   function scalesState(t) {
     t = ((t % SCALES_LOOP) + SCALES_LOOP) % SCALES_LOOP;
+    var flip;
+    if (t < PHASE) { flip = 0; }
+    else if (t < PHASE + FLIP) { flip = ease((t - PHASE) / FLIP); t = 0; }
+    else if (t < 2 * PHASE + FLIP) { flip = 1; t -= PHASE + FLIP; }
+    else { flip = 1 - ease((t - 2 * PHASE - FLIP) / FLIP); t = 0; }
     return {
+      flip: flip,
       col: { split: ramp(t, 1100, 1460) * (1 - ramp(t, 5410, 5590)), spread: ramp(t, 1460, 1820) * (1 - ramp(t, 5230, 5410)) },
       civ: { split: ramp(t, 2530, 2890) * (1 - ramp(t, 5770, 5950)), spread: ramp(t, 2890, 3210) * (1 - ramp(t, 5590, 5770)) }
     };
@@ -57,23 +75,32 @@
 
   function drawScales(t) {
     var st = scalesState(t), out = '';
-    TILES.forEach(function (T) {
+    // the turn: heights mirrored about the middle as the stack rotates, each
+    // tile flattening towards edge-on halfway and opening out again the right
+    // way up; the higher drawn first, the lower covering it
+    var c = Math.cos(Math.PI * st.flip), k = Math.max(Math.abs(c), 0.03);
+    var placed = TILES.map(function (T) {
+      return { T: T, cy: MID + (T.cy - MID) * c };
+    }).sort(function (a, b) { return a.cy - b.cy; });
+    placed.forEach(function (P) {
+      var T = P.T, cy = P.cy;
       var s = st[T.key];
       if (!s || s.split <= 0) {
-        out += tile(CX, T.cy, T.w, PALETTE[T.key], 0);
+        out += tile(CX, cy, T.w, PALETTE[T.key], 0, k);
       } else {
         var from = PALETTE[T.key], to = PALETTE[T.sub];
-        var c = { top: mix(from.top, to.top, s.split), left: mix(from.left, to.left, s.split), right: mix(from.right, to.right, s.split) };
+        var col = { top: mix(from.top, to.top, s.split), left: mix(from.left, to.left, s.split), right: mix(from.right, to.right, s.split) };
         var sw = T.w / 3, step = sw + T.gap * s.spread;
         var cells = [];
         for (var i = -1; i <= 1; i++) for (var j = -1; j <= 1; j++) cells.push([i, j]);
         // back to front, so the nearer tiles cover the sides of those behind
         cells.sort(function (a, b) { return (a[0] + a[1]) - (b[0] + b[1]); });
         cells.forEach(function (ij) {
-          out += tile(CX + (ij[0] - ij[1]) * step, T.cy + (ij[0] + ij[1]) * step / 2, sw, c, s.split * (1 - s.spread));
+          out += tile(CX + (ij[0] - ij[1]) * step, cy + (ij[0] + ij[1]) * step / 2 * k, sw, col, s.split * (1 - s.spread), k);
         });
       }
-      out += '<text class="fig-label" x="' + T.lx + '" y="' + (T.cy + 9) + '">' + T.label + '</text>';
+      // (the labels fade as the stack turns edge-on, and return with it)
+      out += '<text class="fig-label" x="' + T.lx + '" y="' + (cy + 9).toFixed(1) + '"' + (k < 1 ? ' opacity="' + Math.pow(k, 1.5).toFixed(2) + '"' : '') + '>' + T.label + '</text>';
     });
     return out;
   }
