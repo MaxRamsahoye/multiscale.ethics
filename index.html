@@ -804,6 +804,16 @@
       color: var(--frame-accent);
     }
 
+    /* on phones and narrow windows, where the text runs nearly to the edges,
+       the reading ring and the site's name in the corner would sit over the
+       text: neither is shown (the menu's site name, at the top, still is) */
+    @media (max-width: 899px) {
+      .progress-ring,
+      .canvas-title {
+        display: none !important;
+      }
+    }
+
     body.past-overview:not(.footer-in-view) .canvas-title {
       opacity: 1;
       visibility: visible;
