@@ -48,10 +48,8 @@ TERMS = {
 # (a term, or a term with the terms nested under it, as deep as need be)
 CURATED = [
     ('Multi-Scale Ethics', ['Scale-Sensitivity', 'Ethical Adaptive System', 'Hybrid Ethics Stack', 'Classes of Agent', 'Complicated and Complex']),
-    ('Metanormative Ethics', [
-        ('Normative Ethics', ['Consequentialism', 'Utilitarianism', 'Deontology', 'Categorical Imperative', 'Virtue Ethics', 'Alienation']),
-        'Meta-Ethics',
-    ]),
+    ('Metanormative Ethics', ['Normative Ethics', 'Meta-Ethics']),
+    ('Normative Ethics', ['Consequentialism', 'Utilitarianism', 'Deontology', 'Categorical Imperative', 'Virtue Ethics', 'Alienation']),
     ('Cultural Evolution', ['Macrohistory', 'Memetic Adaptation', 'Multilevel Selection', 'Dunbar&rsquo;s Number', 'Convergent Cultural Evolution']),
     ('Moral Convergence', ['Singleton', 'Holarchy', 'Autopoiesis', 'Autopoethics']),
     ('Multipolar Trap', ['Leviathan', 'Seeing Like a State']),
@@ -69,7 +67,8 @@ def walk(items, depth=0):
 
 
 listed = [t for t, d in walk(CURATED)]
-assert sorted(listed) == sorted(TERMS), set(TERMS) ^ set(listed)
+# (a term may appear more than once, as Normative Ethics does)
+assert set(listed) == set(TERMS), set(TERMS) ^ set(listed)
 
 
 def slug(name):
@@ -87,7 +86,16 @@ def term(name, prefix, depth=0):
             % (cls, sid, sid, name, TERMS[name]))
 
 
-curated = ''.join(term(t, 'curated-', d) for t, d in walk(CURATED))
+# a term shown twice (Normative Ethics: in brief under Metanormative Ethics,
+# and as a main term with its theories) is linked to as the main term; the
+# brief, nested one gets an id of its own
+mains = {t for t, d in walk(CURATED) if d == 0}
+curated = ''
+for t, d in walk(CURATED):
+    entry = term(t, 'curated-', d)
+    if d and t in mains:
+        entry = entry.replace('curated-%s"' % slug(t), 'curated-%s-in-brief"' % slug(t))
+    curated += entry
 
 az_names = sorted(TERMS, key=lambda n: plain(n).lower())
 az, letter = '', None
