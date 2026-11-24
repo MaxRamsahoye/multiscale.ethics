@@ -114,7 +114,7 @@ const CSS = `
   blockquote.article-quote p { margin: 0; font-style: italic; }
   blockquote.article-quote footer { margin-top: 8pt; font-size: 11pt; color: #777; }
   blockquote.article-quote footer a { color: inherit; }
-  blockquote.article-quote + h3 { margin-top: 0; }
+  blockquote.article-quote + h2, blockquote.article-quote + h3 { margin-top: 0; }
   /* the notes, numbered, after the article */
   sup.note-ref { font-family: 'IBM Plex Sans', sans-serif; font-size: 0.6em; line-height: 0; margin-left: 1pt; color: #8a6100; }
   .notes { break-before: page; }
