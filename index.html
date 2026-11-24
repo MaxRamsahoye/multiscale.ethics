@@ -1444,6 +1444,19 @@
       padding-top: 96px;
     }
 
+    /* the Notes band: a short note, so a tighter band */
+    .article-body section#notes.in-band {
+      padding-top: 40px;
+      padding-bottom: 34px;
+    }
+
+    /* the Contents band's links in black, not the band's white */
+    html .article-body section#contents.in-band a:not(.heading-link),
+    html.band-gold:not([data-theme]) .article-body section#contents.in-band a:not(.heading-link),
+    html[data-theme] .article-body section#contents.in-band a:not(.heading-link) {
+      color: #000000;
+    }
+
     html.overview-lines :is(#overview, .in-band).band-alt {
       --canvas-bg: var(--frame-bg);
     }
