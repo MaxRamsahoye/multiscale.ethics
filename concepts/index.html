@@ -1447,6 +1447,14 @@
       padding-bottom: 34px;
     }
 
+    /* the Overview's keywords: links to the Concepts page, in black */
+    html .article-body #overview .overview-keywords a,
+    html.band-gold:not([data-theme]) .article-body #overview .overview-keywords a,
+    html[data-theme] .article-body #overview .overview-keywords a {
+      color: #000000;
+      font-weight: 400;
+    }
+
     /* the Contents band's links in black, not the band's white */
     html .article-body section#contents.in-band a:not(.heading-link),
     html.band-gold:not([data-theme]) .article-body section#contents.in-band a:not(.heading-link),
@@ -2457,6 +2465,7 @@
 
     /* (in the curated view, the terms under a main term set in from it) */
     .term-sub { padding-left: 32px; }
+    .term-depth-2 { padding-left: 64px; }
     .term-sub dt { font-weight: 400; font-style: italic; -webkit-text-stroke: 0.35px currentColor; }
 
     .term:target dd,
@@ -2480,6 +2489,7 @@
       .cp-title { font-size: 38px; }
       .cp-intro { font-size: 20px; }
       .term-sub { padding-left: 18px; }
+      .term-depth-2 { padding-left: 36px; }
     }
   </style>
 </head>
@@ -2504,7 +2514,7 @@
           <div class="cp-top">
             <h1 class="cp-title">Concepts</h1>
             <p class="cp-intro">Key terms used in <a href="../"><em>Multi-Scale Ethics</em></a>.</p>
-            <p class="cp-count">28 concepts</p>
+            <p class="cp-count">29 concepts</p>
             <h2 class="cp-sub">Keywords</h2>
             <ul class="cp-index cp-keywords" aria-label="Keywords">
               <li><a href="#metanormative-ethics">Metanormative Ethics</a></li>
@@ -2532,6 +2542,7 @@
         <li><a href="#leviathan">Leviathan</a></li>
         <li><a href="#macrohistory">Macrohistory</a></li>
         <li><a href="#memetic-adaptation">Memetic Adaptation</a></li>
+        <li><a href="#meta-ethics">Meta-Ethics</a></li>
         <li><a href="#metanormative-ethics">Metanormative Ethics</a></li>
         <li><a href="#moral-convergence">Moral Convergence</a></li>
         <li><a href="#multi-scale-ethics">Multi-Scale Ethics</a></li>
@@ -2556,79 +2567,83 @@
           <dt><a href="#curated-multi-scale-ethics">Multi-Scale Ethics</a></dt>
           <dd>The paradigm the article proposes: rethinking ethics for the grand dimensions of global civilisation, by asking how normative theories interact <em>across scales</em> &ndash; from the individual, through the collective, to civilisation as a whole.</dd>
         </div>
-        <div class="term term-sub" id="curated-metanormative-ethics">
-          <dt><a href="#curated-metanormative-ethics">Metanormative Ethics</a></dt>
-          <dd>Ethics one level above the normative theories: not which theory is correct, but how the theories relate, where each applies and how they fit together. In the article, the move from choosing a theory to matching each theory to the scale it suits.</dd>
-        </div>
-        <div class="term term-sub" id="curated-scale-sensitivity">
+        <div class="term term-sub term-depth-1" id="curated-scale-sensitivity">
           <dt><a href="#curated-scale-sensitivity">Scale-Sensitivity</a></dt>
           <dd>The principle that how well an ethical theory works depends on the scale at which it is applied: each fits the scale it was adapted to, and strains at the others &ndash; alienating, vague or complicated.</dd>
         </div>
-        <div class="term term-sub" id="curated-ethical-adaptive-system">
+        <div class="term term-sub term-depth-1" id="curated-ethical-adaptive-system">
           <dt><a href="#curated-ethical-adaptive-system">Ethical Adaptive System</a></dt>
           <dd>Ethics seen as a complex adaptive system: the three theories as interacting parts that evolve with the societies they regulate &ndash; all deeply necessary, none sufficient alone.</dd>
         </div>
-        <div class="term term-sub" id="curated-hybrid-ethics-stack">
+        <div class="term term-sub term-depth-1" id="curated-hybrid-ethics-stack">
           <dt><a href="#curated-hybrid-ethics-stack">Hybrid Ethics Stack</a></dt>
           <dd>The article&rsquo;s synthesis: the ethics of civilisation as layered theories, each operating at its own scale, together producing a higher-order ethical synergy that none could achieve alone.</dd>
         </div>
-        <div class="term term-sub" id="curated-classes-of-agent">
+        <div class="term term-sub term-depth-1" id="curated-classes-of-agent">
           <dt><a href="#curated-classes-of-agent">Classes of Agent</a></dt>
           <dd>The individual, the collective and the civilisational: kinds of agent, each with its own characteristic ethics, whose meeting points give rise to many of our hardest moral conflicts.</dd>
         </div>
-        <div class="term term-sub" id="curated-complicated-and-complex">
+        <div class="term term-sub term-depth-1" id="curated-complicated-and-complex">
           <dt><a href="#curated-complicated-and-complex">Complicated and Complex</a></dt>
           <dd>A complicated system has many parts but can, with enough effort, be fully specified; a complex system is adaptive, non-linear and emergent, changing in response to the very rules applied to it.</dd>
         </div>
-        <div class="term" id="curated-normative-ethics">
+        <div class="term" id="curated-metanormative-ethics">
+          <dt><a href="#curated-metanormative-ethics">Metanormative Ethics</a></dt>
+          <dd>Ethics one level above the normative theories: not which theory is correct, but how the theories relate, where each applies and how they fit together. In the article, the move from choosing a theory to matching each theory to the scale it suits.</dd>
+        </div>
+        <div class="term term-sub term-depth-1" id="curated-normative-ethics">
           <dt><a href="#curated-normative-ethics">Normative Ethics</a></dt>
           <dd>The branch of moral philosophy concerned with how we ought to act. Its three major theories are consequentialism, deontology and virtue ethics.</dd>
         </div>
-        <div class="term term-sub" id="curated-consequentialism">
+        <div class="term term-sub term-depth-2" id="curated-consequentialism">
           <dt><a href="#curated-consequentialism">Consequentialism</a></dt>
           <dd>The theory that an action is right if it produces the best overall consequences. In the article, the ethics of the state: system-wide optimisation of aggregate welfare.</dd>
         </div>
-        <div class="term term-sub" id="curated-utilitarianism">
+        <div class="term term-sub term-depth-2" id="curated-utilitarianism">
           <dt><a href="#curated-utilitarianism">Utilitarianism</a></dt>
           <dd>The best-known form of consequentialism, associated with Jeremy Bentham and John Stuart Mill: act so as to bring about the greatest happiness or well-being of the greatest number.</dd>
         </div>
-        <div class="term term-sub" id="curated-deontology">
+        <div class="term term-sub term-depth-2" id="curated-deontology">
           <dt><a href="#curated-deontology">Deontology</a></dt>
           <dd>The theory that an action is right if it conforms to a moral duty or rule, regardless of its consequences. In the article, the ethics of the city: shared rules that let strangers trust one another.</dd>
         </div>
-        <div class="term term-sub" id="curated-categorical-imperative">
+        <div class="term term-sub term-depth-2" id="curated-categorical-imperative">
           <dt><a href="#curated-categorical-imperative">Categorical Imperative</a></dt>
           <dd>Kant&rsquo;s principle of duty: act only on rules you could will to be universal laws, and treat people always as ends in themselves, never merely as means.</dd>
         </div>
-        <div class="term term-sub" id="curated-virtue-ethics">
+        <div class="term term-sub term-depth-2" id="curated-virtue-ethics">
           <dt><a href="#curated-virtue-ethics">Virtue Ethics</a></dt>
           <dd>The theory, rooted in Aristotle, that morality is a matter of cultivating good character rather than following rules or calculating outcomes. In the article, the ethics of the tribe, where character can be known first-hand.</dd>
         </div>
-        <div class="term term-sub" id="curated-alienation">
+        <div class="term term-sub term-depth-2" id="curated-alienation">
           <dt><a href="#curated-alienation">Alienation</a></dt>
           <dd>The objection, pressed by Bernard Williams and Peter Railton, that impartial calculation estranges a person from their own relationships and commitments &ndash; consequentialism applied at the scale of the individual.</dd>
+        </div>
+        <div class="term term-sub term-depth-1" id="curated-meta-ethics">
+          <dt><a href="#curated-meta-ethics">Meta-Ethics</a></dt>
+          <dd>The branch of moral philosophy that asks what morality itself is &ndash; what moral terms mean, whether moral claims can be true, and how they could be known &ndash; rather than how we ought to act.</dd>
         </div>
         <div class="term" id="curated-cultural-evolution">
           <dt><a href="#curated-cultural-evolution">Cultural Evolution</a></dt>
           <dd>Change in a population&rsquo;s beliefs, norms and practices over time through variation, transmission and selection, much as in biological evolution.</dd>
         </div>
-        <div class="term term-sub" id="curated-macrohistory">
+        <div class="term term-sub term-depth-1" id="curated-macrohistory">
           <dt><a href="#curated-macrohistory">Macrohistory</a></dt>
           <dd>The study of history at its largest scales &ndash; the long-run patterns of societies and civilisations. In the article, the lens through which the moral philosopher descends from abstraction into the cultural evolution of civilisation.</dd>
         </div>
-        <div class="term term-sub" id="curated-memetic-adaptation">
+        <div class="term term-sub term-depth-1" id="curated-memetic-adaptation">
           <dt><a href="#curated-memetic-adaptation">Memetic Adaptation</a></dt>
           <dd>An idea &ndash; here a normative one &ndash; that spreads and persists because it confers an advantage in a particular environment. The article reads each ethical theory as a memetic adaptation to a scale of society.</dd>
         </div>
-        <div class="term term-sub" id="curated-multilevel-selection">
+        <div class="term term-sub term-depth-1" id="curated-multilevel-selection">
           <dt><a href="#curated-multilevel-selection">Multilevel Selection</a></dt>
           <dd>The view that selection acts at several levels at once &ndash; on individuals within groups, and on groups themselves &ndash; summed up by David Sloan Wilson and E. O. Wilson: &lsquo;Selfishness beats altruism within groups. Altruistic groups beat selfish groups.&rsquo;</dd>
         </div>
-        <div class="term term-sub" id="curated-dunbars-number">
+        <div class="term term-sub term-depth-1" id="curated-dunbars-number">
           <dt><a href="#curated-dunbars-number">Dunbar&rsquo;s Number</a></dt>
           <dd>The cognitive limit of roughly 150 people with whom one person can maintain stable relationships; in the article, the threshold beyond which virtue alone can no longer regulate a society.</dd>
         </div>
-        <div class="term term-sub" id="curated-convergent-cultural-evolution">
+        <div class="term term-sub term-depth-1" id="curated-convergent-cultural-evolution">
           <dt><a href="#curated-convergent-cultural-evolution">Convergent Cultural Evolution</a></dt>
           <dd>The tendency, as civilisation integrates, for different cultures and their ethics to arrive at shared values; in the article, the route by which an aligned Singleton could emerge.</dd>
         </div>
@@ -2636,19 +2651,19 @@
           <dt><a href="#curated-moral-convergence">Moral Convergence</a></dt>
           <dd>The argument that, as societies grow, virtue and duty increasingly answer to outcomes, and that the best versions of the major theories converge &ndash; what Derek Parfit called &lsquo;climbing the same mountain on different sides&rsquo;.</dd>
         </div>
-        <div class="term term-sub" id="curated-singleton">
+        <div class="term term-sub term-depth-1" id="curated-singleton">
           <dt><a href="#curated-singleton">Singleton</a></dt>
           <dd>Nick Bostrom&rsquo;s term for a world order with a single decision-making agency at the highest level. It need not be monolithic, and could be formed through convergent evolution rather than coercion.</dd>
         </div>
-        <div class="term term-sub" id="curated-holarchy">
+        <div class="term term-sub term-depth-1" id="curated-holarchy">
           <dt><a href="#curated-holarchy">Holarchy</a></dt>
           <dd>A hierarchy of holons &ndash; wholes that are at once parts of larger wholes. In the article, the nested, plural and adaptive structure of an aligned Singleton.</dd>
         </div>
-        <div class="term term-sub" id="curated-autopoiesis">
+        <div class="term term-sub term-depth-1" id="curated-autopoiesis">
           <dt><a href="#curated-autopoiesis">Autopoiesis</a></dt>
           <dd>The self-production and self-maintenance of a living or complex system &ndash; a body, a social body, a civilisation.</dd>
         </div>
-        <div class="term term-sub" id="curated-autopoethics">
+        <div class="term term-sub term-depth-1" id="curated-autopoethics">
           <dt><a href="#curated-autopoethics">Autopoethics</a></dt>
           <dd>Anna Riedl&rsquo;s portmanteau of <em>autopoiesis</em> and <em>ethics</em>: ethics understood as part of how a complex system reproduces itself.</dd>
         </div>
@@ -2656,11 +2671,11 @@
           <dt><a href="#curated-multipolar-trap">Multipolar Trap</a></dt>
           <dd>A situation in which many actors, each acting rationally or dutifully by its own lights, together produce an outcome that none of them would choose &ndash; what Scott Alexander called &lsquo;Moloch&rsquo;.</dd>
         </div>
-        <div class="term term-sub" id="curated-leviathan">
+        <div class="term term-sub term-depth-1" id="curated-leviathan">
           <dt><a href="#curated-leviathan">Leviathan</a></dt>
           <dd>Hobbes&rsquo;s image of the sovereign state; in the article, the moral outlook of governing at the scale of the state.</dd>
         </div>
-        <div class="term term-sub" id="curated-seeing-like-a-state">
+        <div class="term term-sub term-depth-1" id="curated-seeing-like-a-state">
           <dt><a href="#curated-seeing-like-a-state">Seeing Like a State</a></dt>
           <dd>James C. Scott&rsquo;s phrase for the simplifying, aggregate view that states take of the societies they govern.</dd>
         </div>
@@ -2754,6 +2769,10 @@
         <div class="term" id="memetic-adaptation">
           <dt><a href="#memetic-adaptation">Memetic Adaptation</a></dt>
           <dd>An idea &ndash; here a normative one &ndash; that spreads and persists because it confers an advantage in a particular environment. The article reads each ethical theory as a memetic adaptation to a scale of society.</dd>
+        </div>
+        <div class="term" id="meta-ethics">
+          <dt><a href="#meta-ethics">Meta-Ethics</a></dt>
+          <dd>The branch of moral philosophy that asks what morality itself is &ndash; what moral terms mean, whether moral claims can be true, and how they could be known &ndash; rather than how we ought to act.</dd>
         </div>
         <div class="term" id="metanormative-ethics">
           <dt><a href="#metanormative-ethics">Metanormative Ethics</a></dt>

@@ -40,18 +40,35 @@ TERMS = {
     'Macrohistory': 'The study of history at its largest scales &ndash; the long-run patterns of societies and civilisations. In the article, the lens through which the moral philosopher descends from abstraction into the cultural evolution of civilisation.',
     'Scale-Sensitivity': 'The principle that how well an ethical theory works depends on the scale at which it is applied: each fits the scale it was adapted to, and strains at the others &ndash; alienating, vague or complicated.',
     'Ethical Adaptive System': 'Ethics seen as a complex adaptive system: the three theories as interacting parts that evolve with the societies they regulate &ndash; all deeply necessary, none sufficient alone.',
+    'Meta-Ethics': 'The branch of moral philosophy that asks what morality itself is &ndash; what moral terms mean, whether moral claims can be true, and how they could be known &ndash; rather than how we ought to act.',
     'Holarchy': 'A hierarchy of holons &ndash; wholes that are at once parts of larger wholes. In the article, the nested, plural and adaptive structure of an aligned Singleton.',
 }
 
 # the curated view: each main term, with the terms that belong under it
+# (a term, or a term with the terms nested under it, as deep as need be)
 CURATED = [
-    ('Multi-Scale Ethics', ['Metanormative Ethics', 'Scale-Sensitivity', 'Ethical Adaptive System', 'Hybrid Ethics Stack', 'Classes of Agent', 'Complicated and Complex']),
-    ('Normative Ethics', ['Consequentialism', 'Utilitarianism', 'Deontology', 'Categorical Imperative', 'Virtue Ethics', 'Alienation']),
+    ('Multi-Scale Ethics', ['Scale-Sensitivity', 'Ethical Adaptive System', 'Hybrid Ethics Stack', 'Classes of Agent', 'Complicated and Complex']),
+    ('Metanormative Ethics', [
+        ('Normative Ethics', ['Consequentialism', 'Utilitarianism', 'Deontology', 'Categorical Imperative', 'Virtue Ethics', 'Alienation']),
+        'Meta-Ethics',
+    ]),
     ('Cultural Evolution', ['Macrohistory', 'Memetic Adaptation', 'Multilevel Selection', 'Dunbar&rsquo;s Number', 'Convergent Cultural Evolution']),
     ('Moral Convergence', ['Singleton', 'Holarchy', 'Autopoiesis', 'Autopoethics']),
     ('Multipolar Trap', ['Leviathan', 'Seeing Like a State']),
 ]
-listed = [t for main, subs in CURATED for t in [main] + subs]
+
+
+def walk(items, depth=0):
+    """Each term in the curated view, with how deeply it is nested."""
+    for item in items:
+        if isinstance(item, tuple):
+            yield item[0], depth
+            yield from walk(item[1], depth + 1)
+        else:
+            yield item, depth
+
+
+listed = [t for t, d in walk(CURATED)]
 assert sorted(listed) == sorted(TERMS), set(TERMS) ^ set(listed)
 
 
@@ -63,13 +80,14 @@ def plain(name):
     return html.unescape(name)
 
 
-def term(name, prefix, sub=False):
+def term(name, prefix, depth=0):
     sid = prefix + slug(name)
+    cls = ' term-sub term-depth-%d' % depth if depth else ''
     return ('        <div class="term%s" id="%s">\n          <dt><a href="#%s">%s</a></dt>\n          <dd>%s</dd>\n        </div>\n'
-            % (' term-sub' if sub else '', sid, sid, name, TERMS[name]))
+            % (cls, sid, sid, name, TERMS[name]))
 
 
-curated = ''.join(term(main, 'curated-') + ''.join(term(s, 'curated-', True) for s in subs) for main, subs in CURATED)
+curated = ''.join(term(t, 'curated-', d) for t, d in walk(CURATED))
 
 az_names = sorted(TERMS, key=lambda n: plain(n).lower())
 az, letter = '', None
@@ -240,6 +258,7 @@ style = '''
 
     /* (in the curated view, the terms under a main term set in from it) */
     .term-sub { padding-left: 32px; }
+    .term-depth-2 { padding-left: 64px; }
     .term-sub dt { font-weight: 400; font-style: italic; -webkit-text-stroke: 0.35px currentColor; }
 
     .term:target dd,
@@ -263,6 +282,7 @@ style = '''
       .cp-title { font-size: 38px; }
       .cp-intro { font-size: 20px; }
       .term-sub { padding-left: 18px; }
+      .term-depth-2 { padding-left: 36px; }
     }
   </style>
 '''
