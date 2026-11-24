@@ -280,17 +280,15 @@
       color: inherit;
     }
 
-    /* on the golden yellow band, every link is white */
+    /* on the golden yellow band, links in the text are white */
     html.band-gold:not([data-theme]) :is(#overview, .in-band) a:not(.heading-link),
-    html.band-gold:not([data-theme]) .site-footer a:not(.heading-link),
-    html[data-theme="dark"] :is(#overview, .in-band) a:not(.heading-link),
-    html[data-theme="dark"] .site-footer a:not(.heading-link) {
+    html[data-theme="dark"] :is(#overview, .in-band) a:not(.heading-link) {
       color: #ffffff;
     }
 
-    /* the footer's title in black on the golden band */
-    html.band-gold:not([data-theme]) .site-footer .footer-title a,
-    html[data-theme="dark"] .site-footer .footer-title a {
+    /* the footer's title and links in black on the golden band */
+    html.band-gold:not([data-theme]) .site-footer a,
+    html[data-theme="dark"] .site-footer a {
       color: #000000;
     }
 
