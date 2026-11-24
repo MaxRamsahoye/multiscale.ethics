@@ -36,14 +36,18 @@ TERMS = {
     'Autopoethics': 'Anna Riedl&rsquo;s portmanteau of <em>autopoiesis</em> and <em>ethics</em>: ethics understood as part of how a complex system reproduces itself.',
     'Moral Convergence': 'The argument that, as societies grow, virtue and duty increasingly answer to outcomes, and that the best versions of the major theories converge &ndash; what Derek Parfit called &lsquo;climbing the same mountain on different sides&rsquo;.',
     'Singleton': 'Nick Bostrom&rsquo;s term for a world order with a single decision-making agency at the highest level. It need not be monolithic, and could be formed through convergent evolution rather than coercion.',
+    'Metanormative Ethics': 'Ethics one level above the normative theories: not which theory is correct, but how the theories relate, where each applies and how they fit together. In the article, the move from choosing a theory to matching each theory to the scale it suits.',
+    'Macrohistory': 'The study of history at its largest scales &ndash; the long-run patterns of societies and civilisations. In the article, the lens through which the moral philosopher descends from abstraction into the cultural evolution of civilisation.',
+    'Scale-Sensitivity': 'The principle that how well an ethical theory works depends on the scale at which it is applied: each fits the scale it was adapted to, and strains at the others &ndash; alienating, vague or complicated.',
+    'Ethical Adaptive System': 'Ethics seen as a complex adaptive system: the three theories as interacting parts that evolve with the societies they regulate &ndash; all deeply necessary, none sufficient alone.',
     'Holarchy': 'A hierarchy of holons &ndash; wholes that are at once parts of larger wholes. In the article, the nested, plural and adaptive structure of an aligned Singleton.',
 }
 
 # the curated view: each main term, with the terms that belong under it
 CURATED = [
-    ('Multi-Scale Ethics', ['Hybrid Ethics Stack', 'Classes of Agent', 'Complicated and Complex']),
+    ('Multi-Scale Ethics', ['Metanormative Ethics', 'Scale-Sensitivity', 'Ethical Adaptive System', 'Hybrid Ethics Stack', 'Classes of Agent', 'Complicated and Complex']),
     ('Normative Ethics', ['Consequentialism', 'Utilitarianism', 'Deontology', 'Categorical Imperative', 'Virtue Ethics', 'Alienation']),
-    ('Cultural Evolution', ['Memetic Adaptation', 'Multilevel Selection', 'Dunbar&rsquo;s Number', 'Convergent Cultural Evolution']),
+    ('Cultural Evolution', ['Macrohistory', 'Memetic Adaptation', 'Multilevel Selection', 'Dunbar&rsquo;s Number', 'Convergent Cultural Evolution']),
     ('Moral Convergence', ['Singleton', 'Holarchy', 'Autopoiesis', 'Autopoethics']),
     ('Multipolar Trap', ['Leviathan', 'Seeing Like a State']),
 ]
@@ -78,6 +82,11 @@ for n in az_names:
         letter = l
     az += term(n, '')
 az += '      </dl>\n'
+
+# the article's keywords (as listed under its Overview), first on the page
+KEYWORDS = ['Metanormative Ethics', 'Macrohistory', 'Cultural Evolution', 'Scale-Sensitivity', 'Ethical Adaptive System']
+assert all(k in TERMS for k in KEYWORDS)
+keyword_links = '\n'.join('              <li><a href="#%s">%s</a></li>' % (slug(n), n) for n in KEYWORDS)
 
 index_links = '\n'.join('        <li><a href="#%s">%s</a></li>' % (slug(n), n) for n in az_names)
 
@@ -133,9 +142,38 @@ style = '''
       color: var(--muted);
     }
 
-    /* every term at a glance, linking down the page */
+    /* the article's keywords, then every term at a glance, each linking down the page */
+    .cp-sub {
+      margin: 36px 0 12px;
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .cp-index.cp-keywords {
+      margin-top: 0;
+      gap: 10px 12px;
+      font-size: 16px;
+    }
+
+    .cp-keywords a {
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: color-mix(in srgb, var(--inverse-bg) 22%, var(--canvas-bg));
+      color: var(--canvas-ink) !important;
+      transition: background-color 0.2s ease;
+    }
+
+    .cp-keywords a:hover {
+      background: color-mix(in srgb, var(--inverse-bg) 45%, var(--canvas-bg));
+    }
+
     .cp-index {
-      margin: 28px 0 0;
+      margin: 0;
       padding: 0;
       list-style: none;
       display: flex;
@@ -251,6 +289,11 @@ body = '''<body>
             <h1 class="cp-title">Concepts</h1>
             <p class="cp-intro">Key terms used in <a href="../"><em>Multi-Scale Ethics</em></a>.</p>
             <p class="cp-count">''' + str(len(TERMS)) + ''' concepts</p>
+            <h2 class="cp-sub">Keywords</h2>
+            <ul class="cp-index cp-keywords" aria-label="Keywords">
+''' + keyword_links + '''
+            </ul>
+            <h2 class="cp-sub">All concepts</h2>
             <ul class="cp-index" aria-label="All concepts">
 ''' + index_links + '''
             </ul>

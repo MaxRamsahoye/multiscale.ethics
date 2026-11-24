@@ -2359,9 +2359,38 @@
       color: var(--muted);
     }
 
-    /* every term at a glance, linking down the page */
+    /* the article's keywords, then every term at a glance, each linking down the page */
+    .cp-sub {
+      margin: 36px 0 12px;
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .cp-index.cp-keywords {
+      margin-top: 0;
+      gap: 10px 12px;
+      font-size: 16px;
+    }
+
+    .cp-keywords a {
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: color-mix(in srgb, var(--inverse-bg) 22%, var(--canvas-bg));
+      color: var(--canvas-ink) !important;
+      transition: background-color 0.2s ease;
+    }
+
+    .cp-keywords a:hover {
+      background: color-mix(in srgb, var(--inverse-bg) 45%, var(--canvas-bg));
+    }
+
     .cp-index {
-      margin: 28px 0 0;
+      margin: 0;
       padding: 0;
       list-style: none;
       display: flex;
@@ -2475,7 +2504,16 @@
           <div class="cp-top">
             <h1 class="cp-title">Concepts</h1>
             <p class="cp-intro">Key terms used in <a href="../"><em>Multi-Scale Ethics</em></a>.</p>
-            <p class="cp-count">24 concepts</p>
+            <p class="cp-count">28 concepts</p>
+            <h2 class="cp-sub">Keywords</h2>
+            <ul class="cp-index cp-keywords" aria-label="Keywords">
+              <li><a href="#metanormative-ethics">Metanormative Ethics</a></li>
+              <li><a href="#macrohistory">Macrohistory</a></li>
+              <li><a href="#cultural-evolution">Cultural Evolution</a></li>
+              <li><a href="#scale-sensitivity">Scale-Sensitivity</a></li>
+              <li><a href="#ethical-adaptive-system">Ethical Adaptive System</a></li>
+            </ul>
+            <h2 class="cp-sub">All concepts</h2>
             <ul class="cp-index" aria-label="All concepts">
         <li><a href="#alienation">Alienation</a></li>
         <li><a href="#autopoethics">Autopoethics</a></li>
@@ -2488,15 +2526,19 @@
         <li><a href="#cultural-evolution">Cultural Evolution</a></li>
         <li><a href="#deontology">Deontology</a></li>
         <li><a href="#dunbars-number">Dunbar&rsquo;s Number</a></li>
+        <li><a href="#ethical-adaptive-system">Ethical Adaptive System</a></li>
         <li><a href="#holarchy">Holarchy</a></li>
         <li><a href="#hybrid-ethics-stack">Hybrid Ethics Stack</a></li>
         <li><a href="#leviathan">Leviathan</a></li>
+        <li><a href="#macrohistory">Macrohistory</a></li>
         <li><a href="#memetic-adaptation">Memetic Adaptation</a></li>
+        <li><a href="#metanormative-ethics">Metanormative Ethics</a></li>
         <li><a href="#moral-convergence">Moral Convergence</a></li>
         <li><a href="#multi-scale-ethics">Multi-Scale Ethics</a></li>
         <li><a href="#multilevel-selection">Multilevel Selection</a></li>
         <li><a href="#multipolar-trap">Multipolar Trap</a></li>
         <li><a href="#normative-ethics">Normative Ethics</a></li>
+        <li><a href="#scale-sensitivity">Scale-Sensitivity</a></li>
         <li><a href="#seeing-like-a-state">Seeing Like a State</a></li>
         <li><a href="#singleton">Singleton</a></li>
         <li><a href="#utilitarianism">Utilitarianism</a></li>
@@ -2513,6 +2555,18 @@
         <div class="term" id="curated-multi-scale-ethics">
           <dt><a href="#curated-multi-scale-ethics">Multi-Scale Ethics</a></dt>
           <dd>The paradigm the article proposes: rethinking ethics for the grand dimensions of global civilisation, by asking how normative theories interact <em>across scales</em> &ndash; from the individual, through the collective, to civilisation as a whole.</dd>
+        </div>
+        <div class="term term-sub" id="curated-metanormative-ethics">
+          <dt><a href="#curated-metanormative-ethics">Metanormative Ethics</a></dt>
+          <dd>Ethics one level above the normative theories: not which theory is correct, but how the theories relate, where each applies and how they fit together. In the article, the move from choosing a theory to matching each theory to the scale it suits.</dd>
+        </div>
+        <div class="term term-sub" id="curated-scale-sensitivity">
+          <dt><a href="#curated-scale-sensitivity">Scale-Sensitivity</a></dt>
+          <dd>The principle that how well an ethical theory works depends on the scale at which it is applied: each fits the scale it was adapted to, and strains at the others &ndash; alienating, vague or complicated.</dd>
+        </div>
+        <div class="term term-sub" id="curated-ethical-adaptive-system">
+          <dt><a href="#curated-ethical-adaptive-system">Ethical Adaptive System</a></dt>
+          <dd>Ethics seen as a complex adaptive system: the three theories as interacting parts that evolve with the societies they regulate &ndash; all deeply necessary, none sufficient alone.</dd>
         </div>
         <div class="term term-sub" id="curated-hybrid-ethics-stack">
           <dt><a href="#curated-hybrid-ethics-stack">Hybrid Ethics Stack</a></dt>
@@ -2557,6 +2611,10 @@
         <div class="term" id="curated-cultural-evolution">
           <dt><a href="#curated-cultural-evolution">Cultural Evolution</a></dt>
           <dd>Change in a population&rsquo;s beliefs, norms and practices over time through variation, transmission and selection, much as in biological evolution.</dd>
+        </div>
+        <div class="term term-sub" id="curated-macrohistory">
+          <dt><a href="#curated-macrohistory">Macrohistory</a></dt>
+          <dd>The study of history at its largest scales &ndash; the long-run patterns of societies and civilisations. In the article, the lens through which the moral philosopher descends from abstraction into the cultural evolution of civilisation.</dd>
         </div>
         <div class="term term-sub" id="curated-memetic-adaptation">
           <dt><a href="#curated-memetic-adaptation">Memetic Adaptation</a></dt>
@@ -2662,6 +2720,13 @@
           <dd>The cognitive limit of roughly 150 people with whom one person can maintain stable relationships; in the article, the threshold beyond which virtue alone can no longer regulate a society.</dd>
         </div>
       </dl>
+      <h2 class="concept-letter" id="letter-e">E</h2>
+      <dl class="concepts-list">
+        <div class="term" id="ethical-adaptive-system">
+          <dt><a href="#ethical-adaptive-system">Ethical Adaptive System</a></dt>
+          <dd>Ethics seen as a complex adaptive system: the three theories as interacting parts that evolve with the societies they regulate &ndash; all deeply necessary, none sufficient alone.</dd>
+        </div>
+      </dl>
       <h2 class="concept-letter" id="letter-h">H</h2>
       <dl class="concepts-list">
         <div class="term" id="holarchy">
@@ -2682,9 +2747,17 @@
       </dl>
       <h2 class="concept-letter" id="letter-m">M</h2>
       <dl class="concepts-list">
+        <div class="term" id="macrohistory">
+          <dt><a href="#macrohistory">Macrohistory</a></dt>
+          <dd>The study of history at its largest scales &ndash; the long-run patterns of societies and civilisations. In the article, the lens through which the moral philosopher descends from abstraction into the cultural evolution of civilisation.</dd>
+        </div>
         <div class="term" id="memetic-adaptation">
           <dt><a href="#memetic-adaptation">Memetic Adaptation</a></dt>
           <dd>An idea &ndash; here a normative one &ndash; that spreads and persists because it confers an advantage in a particular environment. The article reads each ethical theory as a memetic adaptation to a scale of society.</dd>
+        </div>
+        <div class="term" id="metanormative-ethics">
+          <dt><a href="#metanormative-ethics">Metanormative Ethics</a></dt>
+          <dd>Ethics one level above the normative theories: not which theory is correct, but how the theories relate, where each applies and how they fit together. In the article, the move from choosing a theory to matching each theory to the scale it suits.</dd>
         </div>
         <div class="term" id="moral-convergence">
           <dt><a href="#moral-convergence">Moral Convergence</a></dt>
@@ -2712,6 +2785,10 @@
       </dl>
       <h2 class="concept-letter" id="letter-s">S</h2>
       <dl class="concepts-list">
+        <div class="term" id="scale-sensitivity">
+          <dt><a href="#scale-sensitivity">Scale-Sensitivity</a></dt>
+          <dd>The principle that how well an ethical theory works depends on the scale at which it is applied: each fits the scale it was adapted to, and strains at the others &ndash; alienating, vague or complicated.</dd>
+        </div>
         <div class="term" id="seeing-like-a-state">
           <dt><a href="#seeing-like-a-state">Seeing Like a State</a></dt>
           <dd>James C. Scott&rsquo;s phrase for the simplifying, aggregate view that states take of the societies they govern.</dd>
