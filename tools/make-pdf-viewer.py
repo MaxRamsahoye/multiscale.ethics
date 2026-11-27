@@ -68,7 +68,14 @@ style = '''
       background: color-mix(in srgb, var(--inverse-bg) 20%, transparent);
     }
 
+    /* (the article's own progress bar shares these names: here the bar is
+       always shown, and filled by its height) */
+    .pv-progress { opacity: 1; visibility: visible; transition: none; }
+    .pv-progress::before, .pv-progress-fill { width: 6px; }
+
     .pv-progress-fill {
+      transform: none;
+      bottom: auto;
       height: 0;
       background: var(--inverse-bg);
     }

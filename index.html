@@ -726,6 +726,58 @@
       display: none;
     }
 
+    /* the progress bar down the right-hand edge, in the golden accent (as in
+       the PDF viewer); wider to the touch than it looks */
+    .pv-progress {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 18px;
+      z-index: 9000;
+      cursor: pointer;
+      touch-action: none;
+      /* only over the article's canvas: not the top section, the bands
+         or the footer */
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.4s ease, visibility 0s linear 0.4s;
+    }
+
+    .pv-progress.pv-shown {
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 0.4s ease, visibility 0s;
+    }
+
+    .pv-progress::before,
+    .pv-progress-fill {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 6px;
+      transition: width 0.15s ease;
+    }
+
+    .pv-progress::before {
+      background: color-mix(in srgb, var(--inverse-bg) 22%, transparent);
+    }
+
+    .pv-progress-fill {
+      background: var(--inverse-bg);
+      transform: scaleY(0);
+      transform-origin: top;
+    }
+
+    .pv-progress:hover::before,
+    .pv-progress:hover .pv-progress-fill,
+    .pv-progress.pv-dragging::before,
+    .pv-progress.pv-dragging .pv-progress-fill {
+      width: 10px;
+    }
+
     .progress-ring {
       position: fixed;
       /* vertically centred on the theme toggle */
@@ -1748,7 +1800,10 @@
       margin-top: 96px;
       padding: 80px 24px 64px;
       background: var(--inverse-bg);
-      color: var(--inverse-ink);
+      color: var(--inverse-ink);      /* in front of the progress bar (z-index 9000), so the footer covers it
+         however fast the page is scrolled, without waiting on its script */
+      position: relative;
+      z-index: 9001;
     }
 
     .site-footer p {
@@ -2549,6 +2604,48 @@
   </svg>
 
   <a class="canvas-title title-top" href="#" aria-label="Multi-Scale Ethics: back to the top">Multi-<br>Scale<br>Ethics</a>
+
+  <!-- the progress through the article: a bar down the right-hand edge of
+       the window in the golden accent, in place of the browser's scrollbar (which
+       the page hides); it can be clicked or dragged to move through it -->
+  <div class="pv-progress" aria-hidden="true"><div class="pv-progress-fill"></div></div>
+  <script>
+    (function () {
+      var bar = document.querySelector('.pv-progress'), fill = bar.firstElementChild, dragging = false;
+      // the canvas: from the end of the last band at the top to the footer
+      function range() {
+        var footer = document.querySelector('.site-footer');
+        var bands = document.querySelectorAll('.article-header, #overview, .in-band'), top = 0;
+        Array.prototype.forEach.call(bands, function (b) { top = Math.max(top, b.getBoundingClientRect().bottom + window.scrollY); });
+        var bottom = footer ? footer.getBoundingClientRect().top + window.scrollY : document.documentElement.scrollHeight;
+        // empty as the canvas's top reaches the top of the window, full as
+        // its bottom reaches the bottom
+        return { top: top, bottom: bottom, span: Math.max(1, bottom - top - window.innerHeight) };
+      }
+      function update() {
+        var r = range(), y = window.scrollY;
+        fill.style.transform = 'scaleY(' + Math.min(1, Math.max(0, (y - r.top) / r.span)) + ')';
+        // drawn only beside the canvas: cut off above it (the bands) and
+        // below it (the footer)
+        var vh = window.innerHeight;
+        var cutTop = Math.min(vh, Math.max(0, r.top - y));
+        var cutBottom = Math.min(vh, Math.max(0, y + vh - r.bottom));
+        bar.style.clipPath = 'inset(' + cutTop + 'px 0 ' + cutBottom + 'px 0)';
+        bar.classList.toggle('pv-shown', dragging || cutTop + cutBottom < vh - 4);
+      }
+      function seek(y) {
+        var b = bar.getBoundingClientRect(), r = range();
+        window.scrollTo({ top: r.top + Math.min(1, Math.max(0, (y - b.top) / b.height)) * r.span, behavior: 'instant' });
+      }
+      bar.addEventListener('pointerdown', function (e) { dragging = true; bar.setPointerCapture(e.pointerId); bar.classList.add('pv-dragging'); seek(e.clientY); });
+      bar.addEventListener('pointermove', function (e) { if (dragging) seek(e.clientY); });
+      ['pointerup', 'pointercancel'].forEach(function (t) { bar.addEventListener(t, function () { dragging = false; bar.classList.remove('pv-dragging'); }); });
+      window.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update);
+      if (window.ResizeObserver) new ResizeObserver(update).observe(document.body);
+      update();
+    })();
+  </script>
 
   <button class="scroll-top-btn" type="button" aria-label="Scroll to top">
     <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1" stroke-linejoin="round">

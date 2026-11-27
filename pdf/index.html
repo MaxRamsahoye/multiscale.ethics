@@ -725,6 +725,58 @@
       display: none;
     }
 
+    /* the progress bar down the right-hand edge, in the golden accent (as in
+       the PDF viewer); wider to the touch than it looks */
+    .pv-progress {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 18px;
+      z-index: 9000;
+      cursor: pointer;
+      touch-action: none;
+      /* only over the article's canvas: not the top section, the bands
+         or the footer */
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.4s ease, visibility 0s linear 0.4s;
+    }
+
+    .pv-progress.pv-shown {
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 0.4s ease, visibility 0s;
+    }
+
+    .pv-progress::before,
+    .pv-progress-fill {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 6px;
+      transition: width 0.15s ease;
+    }
+
+    .pv-progress::before {
+      background: color-mix(in srgb, var(--inverse-bg) 22%, transparent);
+    }
+
+    .pv-progress-fill {
+      background: var(--inverse-bg);
+      transform: scaleY(0);
+      transform-origin: top;
+    }
+
+    .pv-progress:hover::before,
+    .pv-progress:hover .pv-progress-fill,
+    .pv-progress.pv-dragging::before,
+    .pv-progress.pv-dragging .pv-progress-fill {
+      width: 10px;
+    }
+
     .progress-ring {
       position: fixed;
       /* vertically centred on the theme toggle */
@@ -1747,7 +1799,10 @@
       margin-top: 96px;
       padding: 80px 24px 64px;
       background: var(--inverse-bg);
-      color: var(--inverse-ink);
+      color: var(--inverse-ink);      /* in front of the progress bar (z-index 9000), so the footer covers it
+         however fast the page is scrolled, without waiting on its script */
+      position: relative;
+      z-index: 9001;
     }
 
     .site-footer p {
@@ -2379,7 +2434,14 @@
       background: color-mix(in srgb, var(--inverse-bg) 20%, transparent);
     }
 
+    /* (the article's own progress bar shares these names: here the bar is
+       always shown, and filled by its height) */
+    .pv-progress { opacity: 1; visibility: visible; transition: none; }
+    .pv-progress::before, .pv-progress-fill { width: 6px; }
+
     .pv-progress-fill {
+      transform: none;
+      bottom: auto;
       height: 0;
       background: var(--inverse-bg);
     }
